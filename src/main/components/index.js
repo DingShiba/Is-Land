@@ -4,7 +4,6 @@
  * @LastEditTime: 2023-08-04 11:34:17
  * @Description: 
  */
-import lesCarPlateInput from './carPlate/index.vue';
 import lang from "./lang/index.vue";
 import shiro from "./shiro/shiro.vue";
 import disabled from "./shiro/disabled.vue";
@@ -13,7 +12,6 @@ const component = {
     Vue.component('les-lang',lang);
     Vue.component('shiro-hasPermission',shiro);
     Vue.component('shiro-hasDisabled',disabled);
-    Vue.component('les-car-plate-input',lesCarPlateInput);
   }
 };
 // 导出该组件

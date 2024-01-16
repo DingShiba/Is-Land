@@ -1,15 +1,17 @@
-const { defineConfig } = require('@vue/cli-service')
+const {defineConfig} = require('@vue/cli-service')
 const path = require('path');
 const resolve = dir => {
-  return path.join(__dirname, dir)
+    return path.join(__dirname, dir)
 };
 const debug = process.env.NODE_ENV === 'development';
 const BASE_URL = !debug ?
     '/dist/' :
     '/';
 module.exports = defineConfig({
-  transpileDependencies: true,
-  publicPath: BASE_URL,
+    transpileDependencies: true,
+    publicPath: '', //基本路径
+    outputDir:'dist', //输出文件目录,默认dist
+    assetsDir:"static", //设置放置打包生成的静态资源 (js、css、img、fonts) 的目录,注意： 该目录是相对于 outputDir 。
     lintOnSave: false,
     chainWebpack: config => {
         config.resolve.alias
@@ -24,7 +26,7 @@ module.exports = defineConfig({
                 return args
             })
     },
-	productionSourceMap: false,
+    productionSourceMap: false,
     devServer: {
         host: "0.0.0.0",
         port: "8000",

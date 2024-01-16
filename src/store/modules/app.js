@@ -15,9 +15,6 @@ export default {
   state: {
     avatar: GlobalConfig.logo ||  avatar,
     title: GlobalConfig.title || lang[GlobalConfig.lang || 'zh']["title"],
-    theme: themeIndex != -1?GlobalConfig.skinTheme:[],
-    themeIndex: themeIndex,
-    currentTheme: themeIndex>=0?GlobalConfig.skinTheme[themeIndex]:{},
     lang: GlobalConfig.lang || 'zh',
     isBreadcrumb: !!GlobalConfig.isBreadcrumb,
     breadrumbHeight: 42,
