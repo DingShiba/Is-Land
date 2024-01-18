@@ -1,15 +1,33 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/page0/index.vue'
-
+import { createRouter, createWebHistory,createWebHashHistory } from 'vue-router'
+// import HomeView from '../views/isLand.vue'
+import HomeView from '../views/isLand.vue'
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(),
+  scrollBehavior(to,from,savedPosition){
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { top: 0 }
+    }
+  },
   routes: [
     {
       path: '/',
       name: 'home',
-      component: HomeView
-    },
+      redirect:"index"
+
+    },{
+      path: '/index',
+      name: 'index',
+      component:HomeView
+    }
   ]
 })
+router.afterEach(to => {
+  window.scrollTo(0, 0);
+});
+router.$addRoutes = (params) => {
+  router.addRoutes(params)
+};
 
 export default router

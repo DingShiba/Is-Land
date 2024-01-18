@@ -2,6 +2,21 @@ body{
     margin: 0 !important;
 
 }
+/*body::-webkit-scrollbar{
+    width: 0px;
+}
 html::-webkit-scrollbar{
-    /*width: 0px;*/
+    width: 0px;
+}*/
+@font-face {
+    font-family: 思源黑体-EL;
+    src:url("../fonts/思源黑体SourceHanSansCN-ExtraLight.otf");
+}
+@font-face {
+    font-family: Rany-Bold;
+    src:url("../fonts/Rany-Bold.otf");
+}
+@font-face {
+    font-family: Rany-normal;
+    src:url("../fonts/Rany.otf");
 }
