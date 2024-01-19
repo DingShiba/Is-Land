@@ -15,13 +15,13 @@ export default {
     }
   },
   mounted() {
-    /*    gsap.to(window, {
-          scrollTo: ".page-0",
-          duration: 0.5
-        })
-        document.body.style.setProperty('overflow', 'hidden')
-        document.addEventListener('wheel', this.handleWeel)*/
-    this.createTTs()
+    gsap.to(window, {
+      scrollTo: ".page-0",
+      duration: 0.5
+    })
+    document.body.style.setProperty('overflow', 'hidden')
+    document.addEventListener('wheel', this.handleWeel)
+    // this.createTTs()
 
   },
   methods: {
@@ -238,8 +238,33 @@ export default {
         start: "top top",
         end: 'bottom top',
         scrub: true,
-        /*  animation:gsap.timeline()
-              .to('.')*/
+        markers: true,
+        onEnter: () => {
+          gsap.to('.area-5 .list-video', {
+            opacity: 1,
+            onStart: () => {
+              document.querySelector('.area-5 .list-video').play()
+            }
+          })
+        },
+        animation: gsap.timeline()
+            .to('.area-5-2', {
+              x: 500,
+            })
+            .set('.move-container .gifs-arr', {
+              opacity: 1
+            })
+            .to('.area-5-2', {
+              x: 1800,
+            }, '<')
+            .fromTo('.area-5 .list-video', {
+              opacity: 1,
+            }, {
+              opacity: 0,
+            }, "<")
+            .to(".move-container", {
+              x: -460,
+            })
       })
     },
     handleVideoEnd() {
@@ -390,23 +415,33 @@ export default {
         <span style="display:block;width: 40vw">{{ $t('page0.area5.describe') }}</span>
       </div>
       <div class="area-5-movies">
-        <div class="area-5-1">
-          <video refs="area5Video" preload autoplay>
-            <source src="./img/area-5-1.mov">
-          </video>
-        </div>
         <div class="area-5-2">
           <img src="./img/area-5-2.webp" width="100%" height="100%" alt="">
         </div>
         <div class="area-5-3">
           <div class="move-container">
-            <img src="./img/area5/area5-1.gif">
-            <!--            <img src="img/area5/2.gif">
-                        <img src="img/area5/3.gif">
-                        <img src="img/area5/4.gif">-->
+            <img class="movies-index movies-item" src="./img/area-5-movies-index.webp" alt="">
+            <div class="gifs-arr">
+              <img class="movies-item" src="./img/area5/0-10a.webp">
+              <img class="movies-item" src="./img/area5/0-10a.webp">
+              <img class="movies-item" src="./img/area5/0-10a.webp">
+              <img class="movies-item" src="./img/area5/0-10a.webp">
+            </div>
+
+            <!--            <img src="img/area5/area5-2.gif">
+                        <img src="img/area5/area5-3.gif">
+                        <img src="img/area5/area5-4.gif">-->
           </div>
         </div>
       </div>
+      <video class="list-video"
+             refs="area5Video"
+             preload>
+        <source src="./img/area-5-1.mp4">
+      </video>
+    </section>
+    <section class="footer">
+
     </section>
   </div>
 </template>
@@ -456,9 +491,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-  //padding: 14px 0px; width: 100%; letter-spacing: 2px;
-    font-size: 16px;
-    position: absolute;
+  //padding: 14px 0px; width: 100%; letter-spacing: 2px; font-size: 16px; position: absolute;
     z-index: 9999999;
     left: 0;
     top: 0;
@@ -568,7 +601,7 @@ export default {
       width: 600px;
       left: 5vw;
       overflow: hidden;
-      top: calc(100vh - 267px);
+      top: calc(100vh - 355px);
 
       .text-item {
         margin: 40px 20px;
@@ -583,7 +616,7 @@ export default {
       width: 600px;
       height: 247px;
       left: 5vw;
-      top: calc(100vh - 267px);
+      top: calc(100vh - 355px);
       background-color: #171717;
       backdrop-filter: blur(5px);
     }
@@ -708,9 +741,22 @@ export default {
   }
 
   .area-5 {
+    height: 100vh;
+    background-color: #f0f0f0;
+
+    .list-video {
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+      z-index: 11;
+      mix-blend-mode: screen;
+    }
+
     .area-5-title {
       width: 90vw;
-      margin: 8vh auto 0px;
+      margin: auto;
+      padding-top: 10vh;
       font-family: Rany-Bold;
       font-size: 30px;
 
@@ -730,7 +776,7 @@ export default {
     .area-5-1 {
       position: absolute;
       z-index: 8;
-      left: 0;
+      right: 10vw;
       top: 0;
     }
 
@@ -749,11 +795,30 @@ export default {
       height: 750px;
       width: 100vw;
       overflow: hidden;
-      .move-container{
+
+      .move-container {
+        height: 100%;
+        display: flex;
         transform: translateX(10vw);
+
+        .gifs-arr {
+          opacity: 0;
+          display: flex;
+        }
+
+        .movies-item {
+          height: 100%;
+        }
       }
 
     }
+
+  }
+
+  .footer {
+
+    height: 600px;
+    background-color: #232323;
   }
 
 }
