@@ -21,5 +21,15 @@ export default {
         area5:{
             describe:"This series originates from the designer's observations of the balance between the ama and the buoyancy system, integrating the concepts of \"buoyancy\" and \"symbiosis\" into the design. The work focuses on the current situation of the ama, offering a new interpretation of this ancient yet fading traditional way of life."
         }
+    },
+    page1:{
+        describe1:"The traditional hunting practices of the ama determine that they are engaged in one of the most ocean-friendly professions. To prevent overfishing, the ama strictly adhere to regulations regarding underwater hunting and refrain from capturing immature marine life.",
+        describe2:"This harmonious way of life alongside the ocean may have continued for thousands of years, but it remains challenging to pinpoint the specific origins of the ama, especially when it comes to determining the professionalization of their occupation.",
+        describe3:"The distinct gender orientation of the ama profession has different theories about its origins. One widely accepted explanation is that, due to women's generally inherent meticulousness and higher subcutaneous fat content, they were more suitable for diving operations before the application of advanced diving suits. It's also suggested that prolonged historical wars led to a decrease in male labor force, causing women to gradually take on more production work. Additionally, ancient Korea once implemented an unfair tax system, resulting in heavier taxes for male labor, thus making it more of a burden for men to work outside the home. Each of these arguments has its merits, and it is difficult to determine which factor is decisive. Nonetheless, over time, the unique professional identity of \"ama\" emerged in the coastal regions of Asia.",
+        area3:{
+            title:"Drifting in the air, floating on the water.",
+            describe1:"The design process for this apparel piece's core section was an intricate and iterative journey. The designer aimed for these sections to serve as focal points, providing a visually striking \"floating\" sensation and forming a visual equilibrium with the rest of the garment as a whole.",
+            describe2:"After chronic testing, a commonly used aluminum-plated film, often employed for food packaging, was ultimately chosen. This composite aluminum film, more flexible and resilient than typical aluminum film, exhibits significant tear resistance. It allows for sealing using a small electric iron with cotton cloth, offering excellent airtightness. This material is also compatible with UV printing, resulting in a matte texture with a granular appearance after coloring. Injecting helium into the aluminum foil enhances its buoyancy, giving it even the ability to truly float."
+        }
     }
 }

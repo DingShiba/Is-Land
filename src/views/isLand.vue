@@ -1,6 +1,6 @@
 <script>
 import Page0 from "@/views/page0/index.vue";
-import {selector} from "gsap/gsap-core";
+import Page1 from "@/views/page1/index.vue";
 export default {
   name: "isLand",
   methods: {
@@ -10,11 +10,12 @@ export default {
   },
   data(){
     return{
-      current:0
+      current:1
     }
   },
   components:{
-    Page0
+    Page0,
+    Page1
   },
   mounted() {
 
@@ -46,6 +47,7 @@ export default {
     </div>
   </div>
   <page0 v-if="current==0"></page0>
+  <page1 v-if="current==1"></page1>
 </div>
 </template>
 

@@ -1,13 +1,13 @@
 body{
     margin: 0 !important;
-
+    scroll-behavior: smooth;
 }
-/*body::-webkit-scrollbar{
+body::-webkit-scrollbar{
     width: 0px;
 }
 html::-webkit-scrollbar{
     width: 0px;
-}*/
+}
 @font-face {
     font-family: 思源黑体-EL;
     src:url("../fonts/思源黑体SourceHanSansCN-ExtraLight.otf");
@@ -19,4 +19,20 @@ html::-webkit-scrollbar{
 @font-face {
     font-family: Rany-normal;
     src:url("../fonts/Rany.otf");
+}
+@font-face {
+    font-family: MS-Regular;
+    src:url("../fonts/MontaguSlab16pt-Regular.otf");
+}
+@font-face {
+    font-family: MS-Bold;
+    src:url("../fonts/MontaguSlab16pt-Bold.otf");
+}
+@font-face {
+    font-family: MS-EL;
+    src:url("../fonts/MontaguSlab16pt-ExtraLight.otf");
+}
+@font-face {
+    font-family: 思源宋;
+    src:url("../fonts/思源宋体SC-Regular.otf");
 }
