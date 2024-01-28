@@ -22,7 +22,6 @@ export default {
     document.body.style.setProperty('overflow', 'hidden')
     document.addEventListener('wheel', this.handleWeel)
     // this.createTTs()
-
   },
   methods: {
     createTTs() {
