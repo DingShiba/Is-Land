@@ -18,6 +18,8 @@ export default {
       this.createT1()
       this.createT3()
       this.createT4()
+      this.createT5()
+      this.createT6()
     },
     createT1() {
       ScrollTrigger.create({
@@ -65,11 +67,6 @@ export default {
     },
     createT4() {
 
-      /*  const _imgFirstWidth=document.querySelector('.page-1-area-4 .img-first').offsetWidth
-        console.log("_imgFirstWidth",_imgFirstWidth)
-        document.querySelector('.page-1-area-4').style.setProperty("--imgFirstWidth",_imgFirstWidth+"px")
-         */
-
       ScrollTrigger.create({
         trigger: ".page-1-area-4",
         pin: true,
@@ -93,16 +90,16 @@ export default {
             _pageArea4.classList.remove("second-step")
           }
           if (self.progress > 0.75) {
-            const _thirdImgWidth=document.querySelector('.page-1-area-4 .third-container img').offsetWidth
-            document.querySelector(".page-1-area-4 .img-third .third-container").style.setProperty('width',_thirdImgWidth+'px')
+            const _thirdImgWidth = document.querySelector('.page-1-area-4 .third-container img').offsetWidth
+            document.querySelector(".page-1-area-4 .img-third .third-container").style.setProperty('width', _thirdImgWidth + 'px')
             _pageArea4.classList.add("third-step")
           } else {
-            document.querySelector(".page-1-area-4 .img-third .third-container").style.setProperty('width','600px')
+            document.querySelector(".page-1-area-4 .img-third .third-container").style.setProperty('width', '600px')
             _pageArea4.classList.remove("third-step")
           }
-          if (self.progress ==1) {
+          if (self.progress == 1) {
             _pageArea4.classList.add("leave-step")
-          }else {
+          } else {
             _pageArea4.classList.remove("leave-step")
           }
         }
@@ -110,14 +107,63 @@ export default {
 
 
     },
-    handleSelectFloat(index){
-      const _dom=document.querySelectorAll('.page-1-area-4 .dot-item img')[index]
+    createT5() {
+      ScrollTrigger.create({
+        trigger: ".page-1-area-5",
+        pin: true,
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+        toggleClass: "active",
+        animation: gsap.timeline()
+            .to(".area-5-container .back-img", {
+              scale: 1.25
+            })
+            .fromTo(".area-5-container .first-describe", {
+              opacity: 0,
+              y: 300
+            }, {
+              opacity: 1,
+              y: 0
+            }, "<")
+            .to(".area-5-container .back-img", {
+              scale: 1
+            })
+            .fromTo(".area-5-container .second-describe", {
+              opacity: 0,
+              y: 300
+            }, {
+              opacity: 1,
+              y: 0
+            }, "<")
+
+      })
+    },
+    createT6() {
+      const _dom=document.querySelector('.page-1-area-6')
+      ScrollTrigger.create({
+        trigger: ".page-1-area-6",
+        pin: true,
+        start: "top top",
+        end: "+=300",
+        scrub: true,
+        onEnter:()=>{
+          _dom.classList.add("active")
+        },
+        onLeaveBack:()=>{
+          _dom.classList.remove("active")
+        },
+
+      })
+    },
+    handleSelectFloat(index) {
+      const _dom = document.querySelectorAll('.page-1-area-4 .dot-item img')[index]
       gsap.timeline()
-          .to(_dom,{
-            scale:0.5
+          .to(_dom, {
+            scale: 0.5
           })
-          .to(_dom,{
-            scale:1
+          .to(_dom, {
+            scale: 1
           })
     },
     handleArea1Scroll() {
@@ -130,6 +176,9 @@ export default {
       const _url = new URL(`./img/area3-${index}.webp`, import.meta.url)
       return _url.pathname
     }
+  },
+  unmounted() {
+    ScrollTrigger.killAll()
   }
 }
 </script>
@@ -211,18 +260,57 @@ export default {
             <div class="dot-item" @click="handleSelectFloat(0)">
               <img src="./img/area4-5.webp" width="300" alt="">
             </div>
-            <div class="dot-item"  @click="handleSelectFloat(1)">
+            <div class="dot-item" @click="handleSelectFloat(1)">
               <img src="./img/area4-6.webp" width="200" alt="">
             </div>
-            <div class="dot-item"  @click="handleSelectFloat(2)">
+            <div class="dot-item" @click="handleSelectFloat(2)">
               <img src="./img/area4-7.webp" width="400" alt="">
             </div>
-            <div class="dot-item"  @click="handleSelectFloat(3)">
+            <div class="dot-item" @click="handleSelectFloat(3)">
               <img src="./img/area4-8.webp" width="200" alt="">
             </div>
           </div>
         </div>
       </div>
+    </section>
+    <section class="page-1-area-5 screen">
+      <div class="area-5-container">
+        <div class="left-img-area">
+          <div class="img-container">
+            <img class="left-img view-img" src="./img/area5-1.webp" alt="">
+            <img class="left-img back-img" src="./img/area5-2.webp" alt="">
+          </div>
+
+        </div>
+        <div class="text-describe-container">
+          <div class="text-area">
+            <div class="first-describe">
+              <span>{{ $t('page1.area5.describe1') }}</span>
+            </div>
+            <div class="second-describe">
+              <span>{{ $t('page1.area5.describe2') }}</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <section class="page-1-area-6 screen">
+      <div class="container">
+        <img class="bg-img" src="./img/area6-1.webp" width="100%" alt="">
+        <div class="text-area">
+          <div v-for="item in 6" class="text-item">
+            <span>{{ $t(`page1.area6.text${item}`) }}</span>
+          </div>
+        </div>
+        <div class="white-area">
+          <img src="./img/area6-2.webp" width="60%" alt="">
+        </div>
+      </div>
+    </section>
+    <section class="page-1-area-7">
+      <span>{{$t('page1.area7.text')}}</span>
     </section>
   </div>
 </template>
@@ -238,7 +326,6 @@ export default {
   color: #171717;
   background-color: #fafafa;
   font-family: var(--base-font-family);
-  height: 1000vh;
   /* scroll-snap-type: y mandatory;
    overflow: scroll;
    height: 100vh;*/
@@ -401,7 +488,7 @@ export default {
       }
 
       .img-first {
-        transform: scale(1.03) translateX(640px);
+        transform: scale(1.03) translateX(42vw);
         z-index: 5;
         transition: all 0.5s ease-in-out;
 
@@ -433,6 +520,7 @@ export default {
           width: 600px;
           overflow: hidden;
           transition: all 0.5s ease-in-out;
+
           img {
             transition: all 0.5s ease-in-out;
             -webkit-clip-path: inset(0% 10% 0% 35%);
@@ -440,117 +528,124 @@ export default {
             transform: translateX(-35%) translateY(100vh);
           }
         }
-        .float-dot{
+
+        .float-dot {
           position: absolute;
           width: 100%;
           height: 100%;
-          top:0;
-          left:0;
+          top: 0;
+          left: 0;
           z-index: 6;
           transition: all 0.5s ease-in-out;
-          .dot-item{
+
+          .dot-item {
             cursor: pointer;
             opacity: 0;
             //transition: all 0.5s ease-in-out;
           }
-          @keyframes fudong1{
-            0%{
-              transform: translateX(0px)  ;
+
+          @keyframes fudong1 {
+            0% {
+              transform: translateX(0px);
             }
-            25%{
-              transform: translateX(5px)  ;
+            25% {
+              transform: translateX(5px);
             }
-            50%{
-              transform: translateX(0px) ;
+            50% {
+              transform: translateX(0px);
             }
-            75%{
-              transform: translateX(-5px)  ;
+            75% {
+              transform: translateX(-5px);
             }
-            100%{
-              transform: translateX(0px)  ;
+            100% {
+              transform: translateX(0px);
             }
           }
-          @keyframes fudong2{
-            0%{
-              transform: translateY(0px)  scale(1);
-            }
-            25%{
-              transform: translateY(5px)  scale(0.98);
-            }
-            50%{
+          @keyframes fudong2 {
+            0% {
               transform: translateY(0px) scale(1);
             }
-            75%{
-              transform: translateY(-5px)  scale(1.02);
+            25% {
+              transform: translateY(5px) scale(0.98);
             }
-            100%{
-              transform: translateY(0px)  scale(1);
+            50% {
+              transform: translateY(0px) scale(1);
+            }
+            75% {
+              transform: translateY(-5px) scale(1.02);
+            }
+            100% {
+              transform: translateY(0px) scale(1);
             }
           }
-          @keyframes fudong3{
-            0%{
-              transform: translateX(0px)  scale(1);
-            }
-            25%{
-              transform: translateX(-5px)  scale(1.02);
-
-            }
-            50%{
+          @keyframes fudong3 {
+            0% {
               transform: translateX(0px) scale(1);
             }
-            75%{
-              transform: translateX(5px)  scale(0.98);
-            }
-            100%{
-              transform: translateX(0px)  scale(1);
-            }
-          }
-          @keyframes fudong4{
-            0%{
-              transform: translateY(0px)  scale(1);
-            }
-            25%{
-              transform: translateY(-5px)  scale(1.02);
+            25% {
+              transform: translateX(-5px) scale(1.02);
 
             }
-            50%{
+            50% {
+              transform: translateX(0px) scale(1);
+            }
+            75% {
+              transform: translateX(5px) scale(0.98);
+            }
+            100% {
+              transform: translateX(0px) scale(1);
+            }
+          }
+          @keyframes fudong4 {
+            0% {
               transform: translateY(0px) scale(1);
             }
-            75%{
-              transform: translateY(5px)  scale(0.98);
+            25% {
+              transform: translateY(-5px) scale(1.02);
 
             }
-            100%{
-              transform: translateY(0px)  scale(1);
+            50% {
+              transform: translateY(0px) scale(1);
+            }
+            75% {
+              transform: translateY(5px) scale(0.98);
+
+            }
+            100% {
+              transform: translateY(0px) scale(1);
             }
           }
-          .dot-item:nth-child(1){
+
+          .dot-item:nth-child(1) {
             position: absolute;
-            left:45%;
+            left: 45%;
             bottom: 46px;
             z-index: 6;
             animation: fudong1 4s linear infinite;
             transition: all 0.5s ease-in-out;
           }
-          .dot-item:nth-child(2){
+
+          .dot-item:nth-child(2) {
             position: absolute;
-            left:30%;
+            left: 30%;
             bottom: 80px;
             z-index: 5;
             animation: fudong2 4s linear infinite;
             transition: all 0.5s ease-in-out 0.2s;
           }
-          .dot-item:nth-child(3){
+
+          .dot-item:nth-child(3) {
             position: absolute;
-            left:-100px;
+            left: -100px;
             bottom: 150px;
             z-index: 5;
             animation: fudong3 4s linear infinite;
             transition: all 0.5s ease-in-out 0.4s;
           }
-          .dot-item:nth-child(4){
+
+          .dot-item:nth-child(4) {
             position: absolute;
-            left:200px;
+            left: 200px;
             top: 45%;
             z-index: 5;
             animation: fudong4 4s linear infinite;
@@ -565,7 +660,7 @@ export default {
 
   .page-1-area-4.active {
     .img-first {
-      transform: translateX(650px) scale(1);
+      transform: translateX(42vw) scale(1);
     }
   }
 
@@ -621,7 +716,8 @@ export default {
       opacity: 1;
       transform: scale(1);
       animation: imgSecondIn 1s ease-in-out;
-      .third-container{
+
+      .third-container {
         img {
           transform: translateX(-35%) translateY(0px);
           transition: all 0.5s ease-in-out;
@@ -638,6 +734,7 @@ export default {
 
     .img-third {
       padding-right: 0px;
+
       .third-container {
         //width: 1500px;
 
@@ -646,9 +743,11 @@ export default {
           transform: translateX(0px);
         }
       }
-      .float-dot{
+
+      .float-dot {
         opacity: 1;
-        .dot-item{
+
+        .dot-item {
           opacity: 1;
           transition: opacity 0.5s ease-in-out;
         }
@@ -658,9 +757,10 @@ export default {
 
 
   }
+
   .page-1-area-4.leave-step {
-    .img-third{
-      .float-dot{
+    .img-third {
+      .float-dot {
         opacity: 0;
       }
     }
@@ -686,5 +786,134 @@ export default {
     opacity: 1;
   }
 
+}
+
+.page-1-area-5 {
+  .area-5-container {
+
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+
+    .left-img-area {
+      width: 50vw;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-start;
+      padding: 46px 20px 0px 0px;
+      position: relative;
+      border-right: 2px solid #232323;
+      border-left: 2px solid #232323;
+
+      .img-container {
+        width: 100%;
+        overflow: hidden;
+
+      }
+
+      .left-img {
+        width: 100%;
+        //transform: scale(1.8);
+        //height: calc(100vh - 46px);
+      }
+
+      .back-img {
+        transform: scale(1.5);
+      }
+
+      .view-img {
+        position: absolute;
+        z-index: 5;
+        left: 0;
+        top: 46px;
+        width: 120%;
+        transform: translateX(-30%) translateY(-5%);
+      }
+    }
+
+    .text-describe-container {
+      width: 50vw;
+      padding: 0px 8vw;
+      display: flex;
+      align-items: center;
+
+      .text-area {
+        .first-describe, .second-describe {
+          text-align: center;
+          margin: 10vh auto;
+          opacity: 0;
+        }
+      }
+
+    }
+  }
+}
+
+.page-1-area-6 {
+  .container {
+    padding-top: 92px;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+
+    .bg-img {
+      transform: scale(1.03);
+      transition: all 0.5s ease-in-out;
+      //height: calc(100vh - 92px);
+    }
+
+    .text-area {
+      position: absolute;
+      right: 92px;
+      bottom: 92px;
+      z-index: 5;
+      .text-item {
+        text-align: right;
+        margin: 10px 0px;
+      }
+    }
+    .white-area{
+      display: flex;
+      align-items: center;
+      position: absolute;
+      right:0px;
+      top:92px;
+      background-color: #fafafa;
+      z-index: 3;
+      height: calc(100vh - 92px);
+      border-top: 2px solid #7F583F;
+      width: max-content;
+      padding: 0px 92px;
+      transform: translateX(100%);
+      transition: all 0.5s ease-in-out;
+      img{
+        margin: auto;
+        opacity: 0;
+        transition: all 0.5s ease-in;
+        transform: translateY(-100px);
+      }
+    }
+  }
+}
+.page-1-area-6.active{
+  .container{
+    .bg-img{
+      transform: scale(1);
+    }
+    .white-area{
+      transform: translateY(0px);
+      img{
+        opacity: 1;
+      }
+    }
+  }
+
+}
+.page-1-area-7{
+  background-color: #171717;
+  height: 46px;
+  color: #fafafa;
+  text-align: center;
+  line-height: 46px;
 }
 </style>

@@ -272,11 +272,9 @@ export default {
       this.$refs.area1Video.removeEventListener('ended', this.handleVideoEnd)
       this.createTTs()
     },
-
-
   },
   unmounted() {
-    // ScrollTrigger.killAll()
+    ScrollTrigger.killAll()
   }
 }
 </script>

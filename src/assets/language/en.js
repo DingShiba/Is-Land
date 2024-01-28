@@ -30,6 +30,22 @@ export default {
             title:"Drifting in the air, floating on the water.",
             describe1:"The design process for this apparel piece's core section was an intricate and iterative journey. The designer aimed for these sections to serve as focal points, providing a visually striking \"floating\" sensation and forming a visual equilibrium with the rest of the garment as a whole.",
             describe2:"After chronic testing, a commonly used aluminum-plated film, often employed for food packaging, was ultimately chosen. This composite aluminum film, more flexible and resilient than typical aluminum film, exhibits significant tear resistance. It allows for sealing using a small electric iron with cotton cloth, offering excellent airtightness. This material is also compatible with UV printing, resulting in a matte texture with a granular appearance after coloring. Injecting helium into the aluminum foil enhances its buoyancy, giving it even the ability to truly float."
+        },
+        area5:{
+            describe1:"Many ama suffer from various occupational diseases, commonly affecting the waist, legs, or the cardiopulmonary region. Nevertheless, the honed physique developed over the years also contributes to the ama's longer life expectancy compared to the average person. Ama culture emphasizes an independent and strong female spirit, praising friendships among women, thus fostering a strong sense of community.",
+            describe2:"The ama fear neither winds and waves nor fierce beasts, nor do they fear invaders. Since 1932, the ama of Jeju Island in South Korea have led hundreds of struggles against Japanese colonial aggression, constituting the largest female-led anti-Japanese salvation movement in Korean history. Subsequently, at the starting point of this movement, the South Korean government constructed the Ama Resistance Memorial Park and Ama Museum at 3204-1, Old Joe-ri, Geumdo-myeon, Jeju Island, to commemorate the resistance of the ama against Japanese colonialism."
+        },
+        area6:{
+            text1:"\"I am fortunate. My children all passed away before me.\"\n",
+            text2:"\"After my husband passed, my three children also left with him.\"",
+            text3:"\"I am a lucky old lady, still living in this world.\"",
+            text4:"\"I need to die sooner.\"",
+            text5:"\"But once the Thanatos comes, I will run away.\"",
+            text6:"\"I will make an effort to escape.\""
+
+        },
+        area7:{
+            text:"Continue to swipe down to the next page"
         }
     }
 }

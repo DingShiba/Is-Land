@@ -2,7 +2,7 @@ import { createRouter, createWebHistory,createWebHashHistory } from 'vue-router'
 // import HomeView from '../views/isLand.vue'
 import HomeView from '../views/isLand.vue'
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(import.meta.env.VITE_PUBLIC_PATH),
   scrollBehavior(to,from,savedPosition){
     if (savedPosition) {
       return savedPosition

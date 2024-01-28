@@ -18,9 +18,6 @@ export default {
     Page1
   },
   mounted() {
-
-    this.$nextTick(()=>{
-    })
   },
 }
 </script>
