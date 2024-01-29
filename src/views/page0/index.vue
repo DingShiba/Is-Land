@@ -72,9 +72,11 @@ export default {
                 scrollTo: '.header-title-container',
                 duration: 0.5
               })
-              .to('.deep-second-img', {
+              .fromTo('.deep-second-img', {
+                scale: 0.8
+              }, {
                 scale: 1
-              }, '<')
+              },'<')
 
         },
 
@@ -95,10 +97,6 @@ export default {
         start: 'top top',
         end: '+=427',
         onUpdate: (self) => {
-          console.log(self.progress)
-
-          document.querySelector('.deep-second .move-area').style
-              .setProperty("paddingTop", "")
         },
         onEnter: () => {
           gsap.timeline()
@@ -465,7 +463,6 @@ export default {
 
 .page-0 {
   width: 100vw;
-  height: 5000vh;
   position: relative;
   color: #232323;
   font-size: 16px;
