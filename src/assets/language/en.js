@@ -47,5 +47,10 @@ export default {
         area7:{
             text:"Continue to swipe down to the next page"
         }
+    },
+    page2:{
+        describe1:"On July 20, 1969, humans set foot on the moon for the first time. Astronaut Buzz Aldrin described it as \"magnificent desolation.\" As astronauts worked outside the spacecraft, a short tether connected them to the space station. They floated in the darkness, surrounded by a profound silence.",
+        describe2:"And back on Earth, one of the most relatable figures to astronauts is probably the ama. In the ebb and flow of the ocean waves, the only companions for the ama are their small buoys.",
+        describe3:"Viewed from the water's surface, the world appears divided by color, becoming deceptively simple. The sight is composed solely of the sky's cerulean blue above and the ocean's azure blue below. The ama, tethered to their buoys, resemble an iceberg, with only a portion visible above the sea's surface, while the more crucial part extends deeply beneath the water. The ama shuttle back and forth between their \"island\" and the seabed, placing the precious marine harvest into their surface-level nets. If encountering any unforeseen circumstance in the sea, the ama can swiftly return along the direction of the safety rope. For the ama, the floating island on the sea's surface is the comforting land that puts their hearts at ease."
     }
 }
