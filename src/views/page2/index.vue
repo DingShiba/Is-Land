@@ -13,6 +13,10 @@ export default {
   mounted() {
     this.createTTS()
   },
+  unmounted() {
+    ScrollTrigger.killAll()
+  },
+
   methods: {
     createTTS() {
       this.createT1()

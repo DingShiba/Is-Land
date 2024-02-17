@@ -166,7 +166,11 @@ export default {
             })
       })
     }
+  },
+  unmounted() {
+    ScrollTrigger.killAll()
   }
+
 }
 </script>
 
