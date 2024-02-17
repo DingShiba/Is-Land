@@ -2,6 +2,7 @@
 import Page0 from "@/views/page0/index.vue";
 import Page1 from "@/views/page1/index.vue";
 import Page2 from "@/views/page2/index.vue";
+import Page3 from "@/views/page3/index.vue";
 export default {
   name: "isLand",
   methods: {
@@ -11,13 +12,14 @@ export default {
   },
   data(){
     return{
-      current:2
+      current:3
     }
   },
   components:{
     Page0,
     Page1,
-    Page2
+    Page2,
+    Page3
   },
   mounted() {
   },
@@ -48,6 +50,7 @@ export default {
   <page0 v-if="current==0"></page0>
   <page1 v-if="current==1"></page1>
   <page2 v-if="current==2"></page2>
+  <page3 v-if="current==3"></page3>
 </div>
 </template>
 

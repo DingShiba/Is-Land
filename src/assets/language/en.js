@@ -52,5 +52,16 @@ export default {
         describe1:"On July 20, 1969, humans set foot on the moon for the first time. Astronaut Buzz Aldrin described it as \"magnificent desolation.\" As astronauts worked outside the spacecraft, a short tether connected them to the space station. They floated in the darkness, surrounded by a profound silence.",
         describe2:"And back on Earth, one of the most relatable figures to astronauts is probably the ama. In the ebb and flow of the ocean waves, the only companions for the ama are their small buoys.",
         describe3:"Viewed from the water's surface, the world appears divided by color, becoming deceptively simple. The sight is composed solely of the sky's cerulean blue above and the ocean's azure blue below. The ama, tethered to their buoys, resemble an iceberg, with only a portion visible above the sea's surface, while the more crucial part extends deeply beneath the water. The ama shuttle back and forth between their \"island\" and the seabed, placing the precious marine harvest into their surface-level nets. If encountering any unforeseen circumstance in the sea, the ama can swiftly return along the direction of the safety rope. For the ama, the floating island on the sea's surface is the comforting land that puts their hearts at ease."
+    },
+    page3:{
+        describe1:"\"Present yourself nicely. Then the conch will say, \n" +
+            "'This grandma is so pretty,' and it will go with you.\"\n" +
+            "\"I have done that, but I still don't look very good.\"\n" +
+            "\"Even if I'm not pretty, I'm still very popular.”",
+        area3:{
+            title:"ISLAND: comes from Continent",
+            firstDescribe:"\"Is Land\" (originally \"Island\") is a series of clothing designs that began fermenting in January 2019 and was completed, including shooting and packaging, by January 2020. The \"floating sensation\" reflected in the clothing and the macroscopic \"sense of balance\" are the exclusive interpretations offered by the designer as a tribute to the ama.",
+            secondDescribe:"This is a conceptual clothing piece where the concept outweighs practical wearability. The designer invested more time in preliminary research and mid-term experimentation. Initially, some experiments on the concepts of \"floating\" and \"balance\" were conducted to define the concept. This was followed by long-term material experiments to achieve the desired effect. Additionally, the designer deconstructed the wetsuit, refined its crucial structural lines, and applied them as elements in the clothing design."
+        }
     }
 }
