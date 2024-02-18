@@ -7,23 +7,22 @@ gsap.registerPlugin(ScrollToPlugin, ScrollTrigger);
 export default {
   name: "index",
   data() {
-    return {
-
-    }
+    return {}
   },
   mounted() {
-    document.body.style.setProperty('overflow', 'hidden')
-    document.addEventListener('wheel', this.handleWeel)
-    // this.createTTs()
+ /*   document.body.style.setProperty('overflow', 'hidden')
+    document.addEventListener('wheel', this.handleWeel)*/
+    this.createTTs()
   },
   methods: {
     createTTs() {
-      ScrollTrigger.create({
-        trigger: ".menu-header",
-        scrub: true,
-        pin: true,
-        end: "+=999999",
-      })
+      /*  ScrollTrigger.create({
+          trigger: ".menu-header",
+          scrub: true,
+          pin: true,
+          end: "+=999999",
+        })*/
+      // this.createT0()
       this.createT1()
       this.createT2()
       this.createT4()
@@ -31,97 +30,166 @@ export default {
     },
     handleWeel() {
       document.removeEventListener('wheel', this.handleWeel)
-      gsap.fromTo('.area-1-video-title', {
+      gsap.fromTo('.ruchang-back', {
+        opacity: 0,
+      }, {
+        opacity: 0.3,
+        duration: 2,
+        ease: "power1.inOut"
+      })
+      gsap.fromTo('.area-1-video-2', {
         opacity: 0,
       }, {
         opacity: 1,
+        duration: 2,
+        ease: "power1.inOut"
       })
-      this.$refs.area1Video.play()
-      this.$refs.area1Video.addEventListener('ended', this.handleVideoEnd)
+      this.$refs.biaotiVideo.play()
+      this.$refs.biaotiVideo.addEventListener('ended', this.handleVideoEnd)
+    },
+    createT0() {
+      let st0 = ScrollTrigger.create({
+        trigger: ".in-sce",
+        scrub: true,
+        start: "top top",
+        end: "bottom top",
+        onLeave: () => {
+          st0.kill()
+          document.querySelector(".ru-chang").style.display = 'none'
+          window.scroll(0, 0)
+        },
+        onUpdate: () => {
+          const _top = document.querySelector('.in-sce').getBoundingClientRect().top
+          this.$refs.biaotiVideo.style.setProperty("transform", `translateY(${-_top}px)`)
+        },
+        animation: gsap.to(".area-1-video-2", {
+          opacity: 0
+        })
+
+      })
     },
     createT1() {
-      ScrollTrigger.create({
-        trigger: ".mobilization",
+      let st1=ScrollTrigger.create({
+        trigger: ".page-0-area-1",
         start: "top top",
-        end: "bottom center",
+        end: "+=2000",
         scrub: true,
+        pin: true,
         onUpdate: () => {
-          const _top = document.querySelector('.mobilization').getBoundingClientRect().top
-          this.$refs.area1Video.style.setProperty("transform", `translateY(${-_top}px)`)
-        },
-        animation: gsap.to('.area-1-video-title', {
-          opacity: 0,
-        })
-      })
-      ScrollTrigger.create({
-        trigger: '.header-title',
-        start: 'top center',
-        end: "+=400",
-        scrub: true,
-        toggleClass: "active",
-        onEnter: () => {
-          gsap.timeline()
-              .to(window, {
-                scrollTo: '.header-title-container',
-                duration: 0.5
-              })
-              .fromTo('.deep-second-img', {
-                scale: 0.8
-              }, {
-                scale: 1
-              },'<')
-
-        },
-
-      })
-      /*固定deep-2*/
-      ScrollTrigger.create({
-        trigger: '.deep-second',
-        pin: true,
-        start: "top top",
-        end: "+=1400",
-        scrub: true,
-      })
-      /*固定header-title*/
-      ScrollTrigger.create({
-        trigger: '.header-title-container',
-        pin: true,
-        scrub: true,
-        start: 'top top',
-        end: '+=427',
-        onUpdate: (self) => {
-        },
-        onEnter: () => {
-          gsap.timeline()
-              .to('.area2texts', {
-                opacity: 1,
-                height: 280
-              })
-              .to('.deep-second .move-area', {
-                paddingTop: 440
-              }, '<')
+          const _top = document.querySelector('.in-sce').getBoundingClientRect().top
+          this.$refs.biaotiVideo.style.setProperty("transform", `translateY(${-_top}px)`)
         },
         animation: gsap.timeline()
-            .fromTo('.header-title-body', {
-              opacity: 1,
-              height: 320
-            }, {
-              height: 0,
-              opacity: 0
+            .to('.ru-chang', {
+              y: '-100vh',
             })
-            .to('.deep-second .move-area', {
-              y: -350
-            }, '<')
-            .to('.header-title .title', {
-              fontSize: 16
-            }, '<')
-            .to('.header-title', {
-              paddingBottom: 0
+            .to(".area-1-video-2", {
+              opacity: 0
             }, "<")
-            .set('.menu-header', {
-              opacity: 1
-            }, ">")
+            .to(".page-0-area-1 .deep-second",{
+              scale:1
+            },"<")
+            .fromTo(".area2texts", {
+              height: 0
+            }, {
+              height: 230
+            })
+            .to(".page-0-area-1 .deep-second .move-area",{
+              paddingTop:420
+            },"<")
+            .to(".page-0-area-1 .header-title-body .area2texts", {
+              opacity: 0,
+              height: 0
+            })
+            .to(".page-0-area-1 .header-title-body .descripe", {
+              opacity: 0,
+              height: 0
+            },"<")
+            .to(".page-0-area-1 .title",{
+              fontSize:26,
+              letterSpacing:0,
+              height:46
+            },"<")
+            .to(".header-title-container",{
+              padding:0
+            },"<")
+            .to(".page-0-area-1 .deep-second .move-area",{
+              paddingTop:66,
+            },"<")
+            .set(".page-0 .page-header",{
+              opacity:1
+            })
+
       })
+      /* ScrollTrigger.create({
+         trigger: '.header-title',
+         start: 'top center',
+         end: "+=400",
+         scrub: true,
+         toggleClass: "active",
+         onEnter: () => {
+           gsap.timeline()
+               .to(window, {
+                 scrollTo: '.header-title-container',
+                 duration: 0.5
+               })
+               .fromTo('.deep-second-img', {
+                 scale: 0.8
+               }, {
+                 scale: 1
+               }, '<')
+
+         },
+
+       })
+       /!*固定deep-2*!/
+       ScrollTrigger.create({
+         trigger: '.deep-second',
+         pin: true,
+         start: "top top",
+         end: "+=1400",
+         scrub: true,
+       })
+       /!*固定header-title*!/
+       ScrollTrigger.create({
+         trigger: '.header-title-container',
+         pin: true,
+         scrub: true,
+         start: 'top top',
+         end: '+=427',
+         onUpdate: (self) => {
+         },
+         onEnter: () => {
+           gsap.timeline()
+               .to('.area2texts', {
+                 opacity: 1,
+                 height: 280
+               })
+               .to('.deep-second .move-area', {
+                 paddingTop: 440
+               }, '<')
+         },
+         animation: gsap.timeline()
+             .fromTo('.header-title-body', {
+               opacity: 1,
+               height: 320
+             }, {
+               height: 0,
+               opacity: 0
+             })
+             .to('.deep-second .move-area', {
+               y: -350
+             }, '<')
+             .to('.header-title .title', {
+               fontSize: 16
+             }, '<')
+             .to('.header-title', {
+               paddingBottom: 0
+             }, "<")
+             .set('.menu-header', {
+               opacity: 1
+             }, ">")
+       })*/
 
     },
     createT2() {
@@ -131,39 +199,42 @@ export default {
         start: "top top",
         end: "bottom top",
         scrub: true,
+        markers:true,
         animation: gsap.timeline()
-            .to('.area-2-1 img', {
+            .to('.area-2-1', {
               scale: 1.2,
               x: -100
             })
             .to(".area-2-2", {
               y: '-50vh'
             }, "<")
-            .to(".area-2-2", {
-              y: '-50vh'
-            }, "<")
             .to(".area-2-3", {
-              height: 0
-            }, ">")
-            .to(".area-2-4", {
-              height: '70vh'
-            }, ">")
-            .to(".area-2-1", {
+              clipPath:"inset(0px 0px 100% 0px)"
+            })
+            .fromTo(".area-2-1", {
+              opacity:1
+            },{
               opacity: 0
-            }, "<")
+            },"<")
+            .to(".area-2-4", {
+              y: -50
+            })
+
             .to(".area-2-footer-bg", {
-              height: 0
-            }, "<")
+              clipPath:"inset(0px 0px 100% 0px)"
+            })
             .to(".area-2-footer-text", {
-              height: 0
+              clipPath:"inset(0px 0px 100% 0px)"
             }, "<")
+            .to(".area-2-4", {
+              y: -300
+            },"<")
       })
       ScrollTrigger.create({
         trigger: ".area-2",
         start: "top bottom",
         end: "+=1080",
         scrub: true,
-        markers: true,
         animation: gsap.timeline()
             .fromTo('.area-2-1', {
               opacity: 0
@@ -171,6 +242,12 @@ export default {
               duration: 1,
               opacity: 1
             })
+            .fromTo('.area-2-2 .text-describe', {
+              opacity: 0
+            }, {
+              duration: 1,
+              opacity: 1
+            },"<")
             .fromTo('.area-2-footer-text', {
               opacity: 0
             }, {
@@ -178,24 +255,17 @@ export default {
             }, '>')
       })
     },
+    createT3(){
+      ScrollTrigger.create({
+        trigger:".area-3",
+        scrub:true,
+
+      })
+    },
     createT4() {
-      /*  const _res=document.querySelector('.area-4 .cao-img-item')
-        _res.forEach(item=>{
-          gsap.to(item,{
-            opacity:1,
-            scrollTrigger:{
-              trigger:".area-4",
-              start:"top bottom",
-              end:'+=600',
-              scrub:true,
-              markers:true
-            }
-          })
-        })*/
       ScrollTrigger.create({
         trigger: ".area-4",
         scrub: true,
-        markers: true,
         start: 'top center+=100',
         end: "+=500",
         animation: gsap.timeline()
@@ -228,7 +298,6 @@ export default {
         start: "top top",
         end: 'bottom top',
         scrub: true,
-        markers: true,
         onEnter: () => {
           gsap.to('.area-5 .list-video', {
             opacity: 1,
@@ -259,30 +328,37 @@ export default {
     },
     handleVideoEnd() {
       document.body.style.setProperty("overflow", "auto")
-      this.$refs.area1Video.removeEventListener('ended', this.handleVideoEnd)
+      this.$refs.biaotiVideo.removeEventListener('ended', this.handleVideoEnd)
       this.createTTs()
     },
   },
   unmounted() {
     ScrollTrigger.killAll()
+    document.removeEventListener('wheel', this.handleWeel)
   }
 }
 </script>
 
 <template>
   <div class="page-0" ref="page0">
-    <div class="menu-header">
-      CeL24
+
+    <div class="page-header">
+      <span>CeL24</span>
     </div>
-    <section class="area-1 screen">
-      <div class="deep-first">
-        <div class="mobilization">
-          <img class="area-img-1"
-               src="./img/initTitle.webp"
-               height="100%"
-               width="100%" alt="">
-          <video ref="area1Video"
-                 class="area-1-video-title"
+
+    <section class="page-0-area-1">
+      <div class="ru-chang">
+        <div class="in-sce">
+          <video class="area-1-video-1"
+                 autoplay
+                 loop
+                 preload>
+            <source src="./img/backvideo.webm">
+          </video>
+          <img src="./img/ruchangBack.jpg" class="ruchang-back" alt="">
+          <video class="area-1-video-2"
+                 ref="biaotiVideo"
+                 @click="handleWeel"
                  preload>
             <source src="./img/biaoti.mp4">
           </video>
@@ -290,7 +366,8 @@ export default {
         <div class="header-title-container">
           <div class="header-title" id="cel24">
             <div class="title">CeL24</div>
-            <div class="header-title-body" style="overflow: hidden;">
+            <div class="header-title-body"
+                 style="overflow: hidden;">
               <div class="flex area2texts"
                    style="padding:0px 24px;align-items: flex-start;justify-content: space-between;">
                 <div class="date-time">2019/2020</div>
@@ -309,13 +386,13 @@ export default {
           </div>
         </div>
       </div>
-
       <div class="deep-second">
         <div class="move-area">
           <img class="deep-second-img" src="./img/area3Img1.webp" alt="">
-          <div class="flex" style="justify-content: flex-end">
+          <div class="flex" style="justify-content: flex-end;margin-top: 12px">
             <div class="describe">
               <div class="right-1 describe-item">{{ $t('page0.footer1') }}</div>
+              <div class="right-2 describe-item">{{ $t('page0.footer2') }}</div>
               <div class="right-2 describe-item">{{ $t('page0.footer2') }}</div>
             </div>
           </div>
@@ -328,10 +405,7 @@ export default {
             </div>
           </div>
         </div>
-
-
       </div>
-
     </section>
     <section class="area-2 screen">
       <div class="area-2-footer-text">
@@ -383,6 +457,9 @@ export default {
           <img src="./img/area-2-4.webp" width="100%" alt="">
         </div>
       </div>
+    </section>
+    <section class="area-3 screen">
+
     </section>
     <section class="area-4">
       <div class="area-4-title">
@@ -438,7 +515,23 @@ export default {
 /*.page-0::-webkit-scrollbar{
   display: none;
 }*/
+.page-header {
+  font-family: var(--base-title-fontfamilly);
+  font-size: 26px;
+  height: 46px;
+  border-bottom: 1px solid #171717;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 999;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+  opacity: 0;
 
+}
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -457,15 +550,120 @@ export default {
 .page-0 {
   width: 100vw;
   position: relative;
+  word-break: break-all;
   color: #232323;
   font-size: 16px;
   --Rany-font-family: #7F583F;
   --base-width: 90vw;
+  background-color: var(--content-bkcolor);
+  font-family: var(--base-content-fontfamilly);
+
 
   .screen {
     width: 100%;
     height: 100vh;
-    background-color: #f0f0f0;
+    background-color: var(--content-bkcolor);
+  }
+
+  .page-0-area-1 {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+
+    .ru-chang {
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 5;
+
+      .in-sce {
+        width: 100vw;
+        height: 100vh;
+        position: relative;
+        overflow: hidden;
+
+        .area-1-video-1, .ruchang-back, .area-1-video-2 {
+          width: 100%;
+          height: 100%;
+        }
+
+        .ruchang-back {
+          position: absolute;
+          left: 0;
+          top: 0;
+          z-index: 5;
+          opacity: 0;
+        }
+
+        .area-1-video-2 {
+          position: absolute;
+          left: 0;
+          top: 0;
+          z-index: 10;
+          opacity: 0;
+          mix-blend-mode: screen;
+        }
+      }
+
+      .header-title-container {
+        background-color: var(--title-bkcolor);
+        padding: 20px 0px;
+        font-family: var(--ruchang-describe-fontfamilly);
+        border-bottom: 1px solid #171717;
+        .title {
+          font-family: var(--base-title-fontfamilly);
+          font-size: 79px;
+          letter-spacing: 6px;
+          text-align: center;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+        }
+
+        .area2texts {
+          height: 0;
+          overflow: hidden;
+
+          .text-label {
+            width: 505px;
+          }
+        }
+
+        .descripe {
+          width: 505px;
+          margin: auto;
+        }
+      }
+
+
+    }
+
+    .deep-second {
+      height: 100vh;
+      width: 90%;
+      margin: auto;
+      transform: scale(0.6);
+
+      .move-area {
+        padding-top: 190px;
+      }
+
+      .deep-second-img {
+        display: block;
+        margin: auto;
+        width: 100%;
+      }
+
+      .describe {
+        width: 610px;
+        text-align: right;
+      }
+
+      .left-area {
+        width: 702px;
+      }
+    }
   }
 
   .menu-header {
@@ -478,109 +676,15 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-  //padding: 14px 0px; width: 100%; letter-spacing: 2px; font-size: 16px; position: absolute;
-    z-index: 9999999;
-    left: 0;
-    top: 0;
+  //padding: 14px 0px; width: 100%; letter-spacing: 2px; font-size: 16px; position: absolute; z-index: 9999999; left: 0; top: 0;
   }
 
-  .area-1 {
-    position: relative;
-
-    .deep-first {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 15;
-
-      .mobilization {
-        width: 100%;
-        height: 100vh;
-        overflow: hidden;
-        position: relative;
-      }
-
-      .header-title {
-        border-bottom: 2px solid #232323;
-        background-color: #fafafa;
-        padding-bottom: 14px;
-
-        .title {
-          font-family: Rany-Bold;
-          font-size: 60px;
-          font-weight: normal;
-          letter-spacing: 2px;
-          text-align: center;
-          padding: 14px 0px;
-        }
-
-        .area2texts {
-          font-family: 思源黑体-EL;
-          font-size: 16px;
-          height: 0;
-          overflow: hidden;
-          white-space: normal;
-          opacity: 0;
-
-          .text-label {
-            width: 530px;
-          }
-        }
-
-        .descripe {
-          margin: auto;
-          width: 530px;
-        }
-      }
-
-      .area-1-video-title {
-        position: absolute;
-        left: 0;
-        top: 0;
-        z-index: 2;
-        opacity: 0;
-        width: 100%;
-        height: 100vh;
-        mix-blend-mode: screen;
-      }
-    }
-
-    .deep-second {
-      height: 100vh;
-      width: 90%;
-      margin: auto;
-
-      .move-area {
-        padding-top: 164px;
-      }
-
-      .deep-second-img {
-        display: block;
-        margin: auto;
-        width: 100%;
-        transform: scale(.8);
-      }
-
-      .describe {
-        width: 600px;
-        text-align: right;
-      }
-
-      .left-area {
-        width: 60%;
-        font-family: Rany-normal;
-      }
-    }
-
-
-  }
 
   .area-2 {
-    height: 100vh;
-    border-top: 2px solid #232323;
+    height:100vh;
+    border-top: 1px solid #171717;
     position: relative;
-    margin-top: 150vh;
+
 
     .area-2-footer-text {
       position: absolute;
@@ -588,7 +692,7 @@ export default {
       width: 600px;
       left: 5vw;
       overflow: hidden;
-      top: calc(100vh - 355px);
+      bottom:50px;
 
       .text-item {
         margin: 40px 20px;
@@ -603,7 +707,7 @@ export default {
       width: 600px;
       height: 247px;
       left: 5vw;
-      top: calc(100vh - 355px);
+      bottom:50px;
       background-color: #171717;
       backdrop-filter: blur(5px);
     }
@@ -613,7 +717,7 @@ export default {
       z-index: 4;
       width: 600px;
       left: 5vw;
-      bottom: 0;
+      bottom:50px;
 
       .text-item {
         margin: 40px 20px;
@@ -625,7 +729,7 @@ export default {
     .area-2-item {
       position: absolute;
       left: 0;
-      top: 0;
+      top: 100px;
     }
 
     .area-2-1 {
@@ -644,15 +748,13 @@ export default {
     }
 
     .area-2-2 {
-      font-family: Rany-normal;
-      border-bottom: 2px solid #232323;
       z-index: 9;
       width: 100%;
       background-color: #fafafa;
 
       .kongbai {
         height: 60px;
-        border-top: 2px solid #232323;
+        border-top: 1px solid #232323;
       }
 
       .text-describe {
@@ -701,7 +803,12 @@ export default {
       }
     }
   }
-
+.area-3{
+  width: 100vw;
+  height: 100vh;
+  background-color: #171717;
+  opacity: 1;
+}
   .area-4 {
     .area-4-title {
       height: 46px;

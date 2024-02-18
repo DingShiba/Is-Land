@@ -1,6 +1,13 @@
 body{
     margin: 0 !important;
     scroll-behavior: smooth;
+    --base-title-fontfamilly:Rany-normal;
+    --base-content-fontfamilly:MS-THIN;
+
+    --title-bkcolor:#f0f0f0;
+    --content-bkcolor:#fafafa;
+
+    --ruchang-describe-fontfamilly:Rany-normal;
 }
 body::-webkit-scrollbar{
     width: 0px;
@@ -35,4 +42,8 @@ html::-webkit-scrollbar{
 @font-face {
     font-family: 思源宋;
     src:url("../fonts/思源宋体SC-Regular.otf");
+}
+@font-face {
+    font-family: MS-THIN;
+    src:url("../fonts/MontaguSlab16pt-Thin.otf");
 }
