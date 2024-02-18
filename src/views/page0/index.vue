@@ -8,17 +8,10 @@ export default {
   name: "index",
   data() {
     return {
-      bodyHeight: 0,
-      areaVideoVisible: false,
-      fixHome: undefined,
-      hasInit: false
+
     }
   },
   mounted() {
-    gsap.to(window, {
-      scrollTo: ".page-0",
-      duration: 0.5
-    })
     document.body.style.setProperty('overflow', 'hidden')
     document.addEventListener('wheel', this.handleWeel)
     // this.createTTs()

@@ -6,11 +6,7 @@ import {ScrollToPlugin} from 'gsap/ScrollToPlugin.js'
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 export default {
   name: "index",
-  data() {
-
-  },
   mounted() {
-    window.scroll(0, 0)
     this.createTTs()
   },
   methods: {
@@ -66,7 +62,6 @@ export default {
       })
     },
     createT4() {
-
       ScrollTrigger.create({
         trigger: ".page-1-area-4",
         pin: true,
@@ -324,7 +319,7 @@ export default {
   --base-font-family: MS-EL;
   --title-family: MS-Bold;
   color: #171717;
-  background-color: #fafafa;
+  background-color: #f0f0f0;
   font-family: var(--base-font-family);
   /* scroll-snap-type: y mandatory;
    overflow: scroll;
@@ -344,7 +339,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f0f0f0;
+    background-color: #fafafa;
 
   }
 

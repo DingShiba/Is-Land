@@ -13,7 +13,7 @@ export default {
   },
   data(){
     return{
-      current:2
+      current:4
     }
   },
   watch:{
