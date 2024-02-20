@@ -83,15 +83,15 @@ export default {
       this.stArr.push(st432)
     },
     createT44() {
-      const st441=ScrollTrigger.create({
+      const st441 = ScrollTrigger.create({
         trigger: ".page-4-area-4 .top-area .text-area",
         pin: true,
         scrub: true,
         start: "center center",
-        end: "+=2500",
+        end: "+=2800",
       })
       this.stArr.push(st441)
-      const st442=ScrollTrigger.create({
+      const st442 = ScrollTrigger.create({
         trigger: ".page-4-area-4",
         scrub: true,
         start: "top+=200 bottom",
@@ -118,7 +118,7 @@ export default {
         })
       })
 
-      const st443=ScrollTrigger.create({
+      const st443 = ScrollTrigger.create({
         trigger: ".trans-move-vertical .end-describe",
         start: "top center+=300",
         end: "+=2000",
@@ -128,15 +128,35 @@ export default {
       this.stArr.push(st443)
     },
     createT45() {
-      const st45=ScrollTrigger.create({})
+      const st45 = ScrollTrigger.create({
+        trigger: ".page-4-area-5",
+        start: 'bottom bottom',
+        scrub: true,
+        onEnter: () => {
+          gsap.timeline()
+              .to(".page-4-area-5 .content-container", {
+                width: "100vw"
+              })
+              .to(".page-4-area-5 .content-container .base-video",{
+                opacity:1,
+                onStart:()=>{
+                  document.querySelector('.page-4-area-5 .content-container .base-video').play()
+                }
+              })
+              .to(".page-4-area-5 .content-container .float-video",{
+                opacity:1,
+                delay:8
+              })
+        }
+      })
       this.stArr.push(st45)
     }
   },
   unmounted() {
-    // ScrollTrigger.killAll()
-    this.stArr.forEach(item=>{
+    this.stArr.forEach(item => {
       item.kill()
     })
+    this.stArr=[]
   }
 }
 </script>
@@ -194,16 +214,15 @@ export default {
           <div class="first-describe">{{ $t('page4.describe3') }}</div>
           <div class="second-describe">{{ $t('page4.describe4') }}</div>
         </div>
-
       </div>
     </section>
     <section class="page-4-area-5">
       <div class="content-container">
         <img src="./img/area5-1.webp" width="100%" alt="">
-        <video preload class="base-video">
+        <video preload class="base-video" style="opacity: 0">
           <source src="./img/area5-2.mp4">
         </video>
-        <video preload class="float-video">
+        <video preload autoplay loop class="float-video" style="opacity: 0">
           <source src="./img/area5-3.mp4">
         </video>
       </div>
@@ -369,7 +388,7 @@ export default {
     justify-content: center;
 
     .text-area {
-      width: 666px;
+      width: 888px;
       margin-top: 100px;
       text-align: center;
       height: max-content;

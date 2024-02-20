@@ -5,6 +5,11 @@ import {ScrollTrigger} from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 export default {
   name: "index",
+  data(){
+    return{
+      stArr:[]
+    }
+  },
   mounted() {
     this.createTTs()
   },
@@ -15,7 +20,7 @@ export default {
       this.createT33()
     },
     createT31() {
-      ScrollTrigger.create({
+      const st31=ScrollTrigger.create({
         trigger: ".page-3-area-1",
         pin: true,
         scrub: true,
@@ -93,9 +98,10 @@ export default {
 
 
       })
+      this.stArr.push(st31)
     },
     createT32() {
-      ScrollTrigger.create({
+      const st32=ScrollTrigger.create({
         trigger: ".page-3-area-2",
         pin: true,
         scrub: true,
@@ -135,9 +141,10 @@ export default {
 
 
       })
+      this.stArr.push(st32)
     },
     createT33(){
-      ScrollTrigger.create({
+      const st33=ScrollTrigger.create({
         trigger:".page-3-area-3",
         scrub:true,
         start:"top +=650",
@@ -175,10 +182,14 @@ export default {
               backgroundColor:"rgba(0,0,0,1)"
             })
       })
+      this.stArr.push(st33)
     }
   },
   unmounted() {
-    ScrollTrigger.killAll()
+    this.stArr.forEach(item => {
+      item.kill()
+    })
+    this.stArr=[]
   }
 
 }

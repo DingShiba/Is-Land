@@ -7,7 +7,8 @@ export default {
   name: "index",
   data() {
     return {
-      colloseNum: 2
+      colloseNum: 2,
+      stArr:[]
     }
   },
   mounted() {
@@ -21,7 +22,7 @@ export default {
       this.createT3()
     },
     createT1() {
-      ScrollTrigger.create({
+      const st21=ScrollTrigger.create({
         trigger: ".page-2-area-1",
         pin: true,
         start: "top top",
@@ -191,9 +192,10 @@ export default {
             }, "<")
 
       })
+      this.stArr.push(st21)
     },
     createT2() {
-      ScrollTrigger.create({
+      const st221=ScrollTrigger.create({
         trigger: ".page-2-area-2",
         scrub: true,
         start: "top bottom",
@@ -221,15 +223,17 @@ export default {
 
 
       })
-      ScrollTrigger.create({
+      this.stArr.push(st221)
+      const st222=ScrollTrigger.create({
         trigger:".page-2-area-2 .text-area",
         scrub:true,
         start:"top bottom-=300",
         toggleClass:"active",
       })
+      this.stArr.push(st222)
     },
     createT3() {
-      ScrollTrigger.create({
+      const st23=ScrollTrigger.create({
         trigger: ".page-2-area-3",
         scrub: true,
         pin:true,
@@ -254,7 +258,14 @@ export default {
 
 
       })
+      this.stArr.push(st23)
     },
+  },
+  unmounted() {
+    this.stArr.forEach(item => {
+      item.kill()
+    })
+    this.stArr=[]
   }
 }
 </script>

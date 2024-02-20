@@ -6,6 +6,11 @@ import {ScrollToPlugin} from 'gsap/ScrollToPlugin.js'
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 export default {
   name: "index",
+  data(){
+    return{
+      stArr:[]
+    }
+  },
   mounted() {
     this.createTTs()
   },
@@ -18,7 +23,7 @@ export default {
       this.createT6()
     },
     createT1() {
-      ScrollTrigger.create({
+      const st11=ScrollTrigger.create({
         trigger: ".page-1-area-1",
         pin: true,
         start: "top top",
@@ -49,6 +54,7 @@ export default {
               scale:1
             })
       })
+      this.stArr.push(st11)
     },
     createT3() {
       const _boxs = document.querySelectorAll(".page-1-area-3 .imgs-container .imgs-item")
@@ -62,16 +68,17 @@ export default {
           delay: 0.2
         }, '<')
       })
-      ScrollTrigger.create({
+      const st13=ScrollTrigger.create({
         trigger: ".page-1-area-3 .imgs-container-deep",
         scrub: true,
         start: "+=80% bottom",
         end: "center center",
         animation: t3
       })
+      this.stArr.push(st13)
     },
     createT4() {
-      ScrollTrigger.create({
+      const st14=ScrollTrigger.create({
         trigger: ".page-1-area-4",
         pin: true,
         start: "top top",
@@ -108,11 +115,12 @@ export default {
           }
         }
       })
+      this.stArr.push(st14)
 
 
     },
     createT5() {
-      ScrollTrigger.create({
+      const st15=ScrollTrigger.create({
         trigger: ".page-1-area-5",
         pin: true,
         start: "top top",
@@ -142,10 +150,11 @@ export default {
             }, "<")
 
       })
+      this.stArr.push(st15)
     },
     createT6() {
       const _dom=document.querySelector('.page-1-area-6')
-      ScrollTrigger.create({
+      const st16=ScrollTrigger.create({
         trigger: ".page-1-area-6",
         pin: true,
         start: "top top",
@@ -159,6 +168,7 @@ export default {
         },
 
       })
+      this.stArr.push(st16)
     },
     handleSelectFloat(index) {
       const _dom = document.querySelectorAll('.page-1-area-4 .dot-item')[index]
@@ -182,7 +192,10 @@ export default {
     }
   },
   unmounted() {
-    ScrollTrigger.killAll()
+    this.stArr.forEach(item => {
+      item.kill()
+    })
+    this.stArr=[]
   }
 }
 </script>
