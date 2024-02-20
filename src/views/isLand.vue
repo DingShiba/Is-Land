@@ -13,7 +13,7 @@ export default {
   },
   data(){
     return{
-      current:4,
+      current:0,
       language:"en"
     }
   },

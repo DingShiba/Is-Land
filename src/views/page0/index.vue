@@ -8,12 +8,12 @@ export default {
   name: "index",
   props:["language"],
   data() {
-    return {}
+    return {
+      stArr:[]
+    }
   },
   mounted() {
-    document.body.style.setProperty('overflow', 'hidden')
-    document.addEventListener('wheel', this.handleWeel)
-    // this.createTTs()
+    this.createTTs()
   },
   methods: {
     createTTs() {
@@ -30,23 +30,17 @@ export default {
       this.createT5()
     },
     handleWeel() {
-      document.removeEventListener('wheel', this.handleWeel)
-      gsap.fromTo('.ruchang-back', {
-        opacity: 0,
-      }, {
+      gsap.to('.ruchang-back',  {
         opacity: 0.3,
         duration: 2,
         ease: "power1.inOut"
       })
-      gsap.fromTo('.area-1-video-2', {
-        opacity: 0,
-      }, {
+      gsap.to('.area-1-video-2',  {
         opacity: 1,
         duration: 2,
         ease: "power1.inOut"
       })
       this.$refs.biaotiVideo.play()
-      this.$refs.biaotiVideo.addEventListener('ended', this.handleVideoEnd)
     },
     createT0() {
       let st0 = ScrollTrigger.create({
@@ -70,7 +64,7 @@ export default {
       })
     },
     createT1() {
-      let st1=ScrollTrigger.create({
+      let st01=ScrollTrigger.create({
         trigger: ".page-0-area-1",
         start: "top top",
         end: "+=2000",
@@ -122,6 +116,7 @@ export default {
             })
 
       })
+      this.stArr.push(st01)
       /* ScrollTrigger.create({
          trigger: '.header-title',
          start: 'top center',
@@ -194,7 +189,7 @@ export default {
 
     },
     createT2() {
-      ScrollTrigger.create({
+      const st021=ScrollTrigger.create({
         trigger: ".area-2",
         pin: true,
         start: "top top",
@@ -233,7 +228,8 @@ export default {
               y: -350
             })
       })
-      ScrollTrigger.create({
+      this.stArr.push(st021)
+      const st022=ScrollTrigger.create({
         trigger: ".area-2",
         start: "top bottom",
         end: "+=1080",
@@ -257,16 +253,18 @@ export default {
               opacity: 1
             }, '>')
       })
+      this.stArr.push(st022)
     },
     createT3(){
-      ScrollTrigger.create({
+      const st03=ScrollTrigger.create({
         trigger:".area-3",
         scrub:true,
 
       })
+      this.stArr.push(st03)
     },
     createT4() {
-      ScrollTrigger.create({
+      const st04=ScrollTrigger.create({
         trigger: ".area-4",
         scrub: true,
         start: 'top center+=100',
@@ -292,10 +290,10 @@ export default {
               ease: "power1.in",
             }, "<")
       })
-
+      this.stArr.push(st04)
     },
     createT5() {
-      ScrollTrigger.create({
+      const st05=ScrollTrigger.create({
         trigger: ".area-5",
         pin: true,
         start: "top top",
@@ -328,27 +326,23 @@ export default {
               x: -460,
             })
       })
-    },
-    handleVideoEnd() {
-      document.body.style.setProperty("overflow", "auto")
-      this.$refs.biaotiVideo.removeEventListener('ended', this.handleVideoEnd)
-      this.createTTs()
+      this.stArr.push(st05)
     },
   },
   unmounted() {
-    ScrollTrigger.killAll()
-    document.removeEventListener('wheel', this.handleWeel)
+    this.stArr.forEach(item => {
+      item.kill()
+    })
+    this.stArr=[]
   }
 }
 </script>
 
 <template>
   <div class="page-0" ref="page0">
-
     <div class="page-header">
       <span>CeL24</span>
     </div>
-
     <section class="page-0-area-1">
       <div class="ru-chang">
         <div class="in-sce">
@@ -462,7 +456,6 @@ export default {
       </div>
     </section>
     <section class="area-3 screen">
-
     </section>
     <section class="area-4">
       <div class="area-4-title">
