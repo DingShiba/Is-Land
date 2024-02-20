@@ -5,6 +5,11 @@ import {ScrollTrigger} from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 export default {
   name: "index",
+  data() {
+    return {
+      stArr: []
+    }
+  },
   mounted() {
     this.createTTS()
   },
@@ -16,7 +21,7 @@ export default {
       this.createT45()
     },
     createT41() {
-      ScrollTrigger.create({
+      const st41 = ScrollTrigger.create({
         trigger: ".page-4-area-1",
         pin: true,
         start: "top top",
@@ -27,9 +32,10 @@ export default {
               clipPath: "inset(0px 0px 100% 0px)"
             })
       })
+      this.stArr.push(st41)
     },
     createT43() {
-      ScrollTrigger.create({
+      const st431 = ScrollTrigger.create({
         trigger: ".page-4-area-3 .trans-move",
         start: "top center",
         scrub: true,
@@ -54,7 +60,8 @@ export default {
           })
         }
       })
-      ScrollTrigger.create({
+      this.stArr.push(st431)
+      const st432 = ScrollTrigger.create({
         trigger: ".page-4-area-3",
         start: "top top",
         end: "bottom top",
@@ -73,17 +80,18 @@ export default {
               x: '-60vw'
             })
       })
+      this.stArr.push(st432)
     },
     createT44() {
-      ScrollTrigger.create({
+      const st441=ScrollTrigger.create({
         trigger: ".page-4-area-4 .top-area .text-area",
         pin: true,
         scrub: true,
         start: "center center",
         end: "+=2500",
-        markers: true
       })
-      ScrollTrigger.create({
+      this.stArr.push(st441)
+      const st442=ScrollTrigger.create({
         trigger: ".page-4-area-4",
         scrub: true,
         start: "top+=200 bottom",
@@ -92,41 +100,43 @@ export default {
             .to(".page-4-area-4 .top-area", {
               backgroundColor: "rgba(0,0,0,0)"
             })
-            .fromTo(".page-4-area-4 .top-area .text-area",{
-              opacity:0
-            },{
-              opacity:1
-            },"<")
+            .fromTo(".page-4-area-4 .top-area .text-area", {
+              opacity: 0
+            }, {
+              opacity: 1
+            }, "<")
       })
-      let _imgs=document.querySelectorAll('.trans-move-vertical .fade-in-img')
-      _imgs.forEach((dom,index)=>{
-          ScrollTrigger.create({
-            trigger:dom,
-            start:"top center+=200",
-            end:"+=2000",
-            toggleClass:"active",
-            scrub:true
-          })
-      })
-
-      ScrollTrigger.create({
-        trigger:".trans-move-vertical .end-describe",
-        start:"top center+=300",
-        end:"+=2000",
-        toggleClass:"active",
-        scrub:true
+      this.stArr.push(st442)
+      let _imgs = document.querySelectorAll('.trans-move-vertical .fade-in-img')
+      _imgs.forEach((dom, index) => {
+        ScrollTrigger.create({
+          trigger: dom,
+          start: "top center+=200",
+          end: "+=2000",
+          toggleClass: "active",
+          scrub: true
+        })
       })
 
+      const st443=ScrollTrigger.create({
+        trigger: ".trans-move-vertical .end-describe",
+        start: "top center+=300",
+        end: "+=2000",
+        toggleClass: "active",
+        scrub: true
+      })
+      this.stArr.push(st443)
     },
-    createT45(){
-      ScrollTrigger.create({
-
-      })
+    createT45() {
+      const st45=ScrollTrigger.create({})
+      this.stArr.push(st45)
     }
-
   },
   unmounted() {
-    ScrollTrigger.killAll()
+    // ScrollTrigger.killAll()
+    this.stArr.forEach(item=>{
+      item.kill()
+    })
   }
 }
 </script>
@@ -137,7 +147,6 @@ export default {
       <span>CeL24</span>
     </div>
     <section class="page-4-area-1">
-
       <div class="base-img">
         <img src="./img/area1-2.webp" width="100%" alt="">
       </div>
@@ -164,7 +173,7 @@ export default {
     </section>
     <section class="page-4-area-4">
       <div class="trans-move-vertical">
-        <img src="./img/area4-1.webp"  alt="">
+        <img src="./img/area4-1.webp" alt="">
         <img src="./img/area4-2.webp" alt="">
         <img src="./img/area4-3.webp" class="fade-in-img third" alt="">
         <img src="./img/area4-4.webp" class="fade-in-img forth" alt="">
@@ -172,12 +181,12 @@ export default {
         <img src="./img/area4-6.webp" class="fade-in-img six" alt="">
         <img src="./img/area4-7.webp" class="fade-in-img end-fade-in" alt="">
         <div class="zhanwei-fu">
-          
+
         </div>
         <img src="./img/area4-8.webp" style="margin-top: 50px" alt="">
         <div class="end-describe">
-          <div class="first-describe">{{$t('page4.describe5')}}</div>
-          <div class="second-describe">{{$t('page4.describe6')}}</div>
+          <div class="first-describe">{{ $t('page4.describe5') }}</div>
+          <div class="second-describe">{{ $t('page4.describe6') }}</div>
         </div>
       </div>
       <div class="top-area">
@@ -194,7 +203,7 @@ export default {
         <video preload class="base-video">
           <source src="./img/area5-2.mp4">
         </video>
-        <video preload class="float-video" >
+        <video preload class="float-video">
           <source src="./img/area5-3.mp4">
         </video>
       </div>
@@ -305,7 +314,7 @@ export default {
   position: relative;
 
   .trans-move-vertical {
-    width: 590px;
+    width: 670px;
     margin: 100px auto;
 
     img {
@@ -313,28 +322,35 @@ export default {
       display: block;
       margin-bottom: 46px;
     }
-    .end-fade-in{
+
+    .end-fade-in {
       width: 180%;
       transform: translateX(-20%);
     }
-    .fade-in-img{
+
+    .fade-in-img {
       opacity: 0;
     }
-    .fade-in-img.active{
+
+    .fade-in-img.active {
       opacity: 1;
       transition: opacity 0.5s linear;
     }
-    .zhanwei-fu{
+
+    .zhanwei-fu {
       height: 300px;
     }
-    .end-describe{
+
+    .end-describe {
       text-align: center;
       opacity: 0;
-      .second-describe{
+
+      .second-describe {
         margin-top: 46px;
       }
     }
-    .end-describe.active{
+
+    .end-describe.active {
       opacity: 1;
       transition: opacity 0.5s linear;
     }
@@ -364,15 +380,18 @@ export default {
     }
   }
 }
-.page-4-area-5{
+
+.page-4-area-5 {
   border-top: 1px solid #171717;
-  .content-container{
+
+  .content-container {
     width: 90vw;
-    margin:auto;
+    margin: auto;
     position: relative;
-    .base-video,.float-video{
+
+    .base-video, .float-video {
       position: absolute;
-      left:0;
+      left: 0;
       bottom: 0;
       width: 100%;
       z-index: 5;

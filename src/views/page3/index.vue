@@ -142,11 +142,15 @@ export default {
         scrub:true,
         start:"top +=650",
         end:"top top",
-        markers:true,
         onEnter:()=>{
           gsap.fromTo(".page-3-area-3 .text-area",{
             opacity:0,
-
+          },{
+            duration:1,
+            opacity:1
+          })
+          gsap.fromTo(".page-3-area-3 .left-video",{
+            opacity:0,
           },{
             duration:1,
             opacity:1
@@ -154,6 +158,12 @@ export default {
         },
         onLeaveBack:()=>{
           gsap.fromTo(".page-3-area-3 .text-area",{
+            opacity:1,
+          },{
+            duration:1,
+            opacity:0
+          })
+          gsap.fromTo(".page-3-area-3 .left-video",{
             opacity:1,
           },{
             duration:1,
@@ -221,8 +231,8 @@ export default {
     </section>
     <section class="page-3-area-3">
       <div class="container">
-        <video preload class="left-video">
-          <source src="./img/area3-1.mp4">
+        <video preload autoplay loop class="left-video">
+          <source src="./img/area3-1.webm">
         </video>
         <div class="text-area">
           <div class="title">{{$t('page3.area3.title')}}</div>

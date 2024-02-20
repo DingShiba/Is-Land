@@ -235,7 +235,6 @@ export default {
         pin:true,
         start: "top top",
         end: "bottom top",
-        markers: true,
         animation: gsap.timeline()
             .to(".page-2-area-3 .base-image",{
               y:-800

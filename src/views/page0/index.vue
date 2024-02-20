@@ -200,7 +200,6 @@ export default {
         start: "top top",
         end: "bottom top",
         scrub: true,
-        markers:true,
         animation: gsap.timeline()
             .to('.area-2-1', {
               scale: 1.2,
