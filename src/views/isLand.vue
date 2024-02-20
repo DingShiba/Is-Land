@@ -9,7 +9,20 @@ export default {
   methods: {
     selectCurrent(item){
       this.current=item-1
-    }
+    },
+    goToHeader(){
+      window.scroll(0,0)
+    },
+    handleToggleLanguage(){
+      if(this.language=='en'){
+        this.language='zh'
+        document.querySelector('.is-land').classList.add("zh")
+      }else {
+        this.language='en'
+        document.querySelector('.is-land').classList.remove("zh")
+      }
+      this.$i18n.locale=this.language
+    },
   },
   data(){
     return{
@@ -45,13 +58,17 @@ export default {
           {{item-1}}
         </div>
       </div>
-      <div class="zhi-ding">
-        <img src="@/assets/images/zhidingSwot.png"  alt="">
+      <div class="vertical-line"></div>
+      <div class="zhi-ding" @click="goToHeader">
+        <img src="@/assets/images/zhidingSwot.png" height="60" alt="">
       </div>
     </div>
     <div class="second">
       <div class="is-land-menu">
         <span>is land</span>
+      </div>
+      <div class="toggle-language" @click="handleToggleLanguage">
+        <span>{{ language=='en'?'汉':'En' }}</span>
       </div>
     </div>
   </div>
@@ -69,24 +86,24 @@ export default {
 }
 .menu-nav{
   width: 300px;
-  height: 120px;
+  height: 100px;
   position: fixed;
   left: 150px;
   top:calc(50vh - 100px);
   z-index: 999999999;
   background-color: #fafafa;
   border: 2px solid #232323;
-
-
+  font-family: MS-Regular;
+  opacity: 0;
   .first{
     display: flex;
     justify-content: space-between;
-    height: 80px;
+    height: 60px;
     border-bottom: 2px solid #232323;
     .number-page{
-      padding: 10px;
-      width: 80%;
-      border-right: 2px solid #232323;
+      //gap: 20px;
+      width: 256px;
+      padding: 0px 12px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -106,22 +123,29 @@ export default {
       }
     }
     .zhi-ding{
-      width: 39px;
-      height: 100%;
-      img {
-        width: 100%;
-        height: 100%;
-      }
-
+      width: 44px;
+      text-align: center;
+      cursor: pointer;
+    }
+    .vertical-line{
+      width: 2px;
+      height: 98px;
+      background-color: #232323;
     }
   }
   .second{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     .is-land-menu{
       padding: 10px;
-      width: 80%;
+      width: 256px;
       display: flex;
       align-items: center;
-      border-right: 2px solid #232323;
+    }
+    .toggle-language{
+      cursor: pointer;
+      width: 30px;
     }
   }
 }

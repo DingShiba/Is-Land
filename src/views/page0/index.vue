@@ -6,10 +6,10 @@ import {ScrollToPlugin} from 'gsap/ScrollToPlugin.js'
 gsap.registerPlugin(ScrollToPlugin, ScrollTrigger);
 export default {
   name: "index",
-  props:["language"],
+  props: ["language"],
   data() {
     return {
-      stArr:[]
+      stArr: []
     }
   },
   mounted() {
@@ -23,19 +23,19 @@ export default {
           pin: true,
           end: "+=999999",
         })*/
-      // this.createT0()
-      this.createT1()
+      this.createT0()
+      // this.createT1()
       this.createT2()
       this.createT4()
       this.createT5()
     },
     handleWeel() {
-      gsap.to('.ruchang-back',  {
+      gsap.to('.ruchang-back', {
         opacity: 0.3,
         duration: 2,
         ease: "power1.inOut"
       })
-      gsap.to('.area-1-video-2',  {
+      gsap.to('.area-1-video-2', {
         opacity: 1,
         duration: 2,
         ease: "power1.inOut"
@@ -43,28 +43,72 @@ export default {
       this.$refs.biaotiVideo.play()
     },
     createT0() {
-      let st0 = ScrollTrigger.create({
-        trigger: ".in-sce",
-        scrub: true,
+      const stg0 = ScrollTrigger.create({
+        trigger: ".init-container",
+        pin: true,
         start: "top top",
-        end: "bottom top",
-        onLeave: () => {
-          st0.kill()
-          document.querySelector(".ru-chang").style.display = 'none'
-          window.scroll(0, 0)
-        },
+        end: "+=1080",
+        scrub: true,
+        markers: true,
+        scroller: ".page-0-area-0",
         onUpdate: () => {
           const _top = document.querySelector('.in-sce').getBoundingClientRect().top
           this.$refs.biaotiVideo.style.setProperty("transform", `translateY(${-_top}px)`)
         },
-        animation: gsap.to(".area-1-video-2", {
-          opacity: 0
-        })
+        animation: gsap.timeline()
+            .to('.ru-chang', {
+              y: '-100vh',
+            })
+            .to(".area-1-video-2", {
+              opacity: 0
+            }, "<")
+            .to(".page-0-area-1 .deep-second", {
+              scale: 1
+            }, "<")
+            .fromTo(".area2texts", {
+              height: 0
+            }, {
+              height: 230
+            })
+            .to(".page-0-area-1 .deep-second .move-area", {
+              paddingTop: 420
+            }, "<")
+            .to(".page-0-area-0 .header-title-body .area2texts", {
+              opacity: 0,
+              height: 0
+            })
+            .to(".page-0-area-0 .header-title-body .descripe", {
+              opacity: 0,
+              height: 0
+            }, "<")
+            .to(".page-0-area-0 .title", {
+              fontSize: 26,
+              letterSpacing: 0,
+              height: 46
+            }, "<")
+            .to(".header-title-container", {
+              padding: 0
+            }, "<")
+            .to(".page-0-area-1 .deep-second .move-area", {
+              paddingTop: 66,
+            }, "<")
+            .set(".page-0 .page-header", {
+              opacity: 1
+            })
+            .set(".page-0-area-0", {
+              zIndex: -1,
+              onComplete: () => {
+                gsap.to(".menu-nav", {
+                  opacity: 1
+                })
+              }
+            })
 
       })
+      this.stArr.push(stg0)
     },
     createT1() {
-      let st01=ScrollTrigger.create({
+      let st01 = ScrollTrigger.create({
         trigger: ".page-0-area-1",
         start: "top top",
         end: "+=2000",
@@ -81,17 +125,17 @@ export default {
             .to(".area-1-video-2", {
               opacity: 0
             }, "<")
-            .to(".page-0-area-1 .deep-second",{
-              scale:1
-            },"<")
+            .to(".page-0-area-1 .deep-second", {
+              scale: 1
+            }, "<")
             .fromTo(".area2texts", {
               height: 0
             }, {
               height: 230
             })
-            .to(".page-0-area-1 .deep-second .move-area",{
-              paddingTop:420
-            },"<")
+            .to(".page-0-area-1 .deep-second .move-area", {
+              paddingTop: 420
+            }, "<")
             .to(".page-0-area-1 .header-title-body .area2texts", {
               opacity: 0,
               height: 0
@@ -99,20 +143,20 @@ export default {
             .to(".page-0-area-1 .header-title-body .descripe", {
               opacity: 0,
               height: 0
-            },"<")
-            .to(".page-0-area-1 .title",{
-              fontSize:26,
-              letterSpacing:0,
-              height:46
-            },"<")
-            .to(".header-title-container",{
-              padding:0
-            },"<")
-            .to(".page-0-area-1 .deep-second .move-area",{
-              paddingTop:66,
-            },"<")
-            .set(".page-0 .page-header",{
-              opacity:1
+            }, "<")
+            .to(".page-0-area-1 .title", {
+              fontSize: 26,
+              letterSpacing: 0,
+              height: 46
+            }, "<")
+            .to(".header-title-container", {
+              padding: 0
+            }, "<")
+            .to(".page-0-area-1 .deep-second .move-area", {
+              paddingTop: 66,
+            }, "<")
+            .set(".page-0 .page-header", {
+              opacity: 1
             })
 
       })
@@ -189,7 +233,7 @@ export default {
 
     },
     createT2() {
-      const st021=ScrollTrigger.create({
+      const st021 = ScrollTrigger.create({
         trigger: ".area-2",
         pin: true,
         start: "top top",
@@ -204,32 +248,32 @@ export default {
               y: '-50vh'
             }, "<")
             .to(".area-2-3", {
-              clipPath:"inset(0px 0px 100% 0px)"
+              clipPath: "inset(0px 0px 100% 0px)"
             })
             .fromTo(".area-2-1", {
-              opacity:1
-            },{
+              opacity: 1
+            }, {
               opacity: 0
-            },"<")
+            }, "<")
             .to(".area-2-4", {
               y: -50
             })
 
             .to(".area-2-footer-bg", {
-              clipPath:"inset(0px 0px 100% 0px)"
+              clipPath: "inset(0px 0px 100% 0px)"
             })
             .to(".area-2-footer-text", {
-              clipPath:"inset(0px 0px 100% 0px)"
+              clipPath: "inset(0px 0px 100% 0px)"
             }, "<")
             .to(".area-2-4", {
               y: -300
-            },"<")
+            }, "<")
             .to(".area-2-4", {
               y: -350
             })
       })
       this.stArr.push(st021)
-      const st022=ScrollTrigger.create({
+      const st022 = ScrollTrigger.create({
         trigger: ".area-2",
         start: "top bottom",
         end: "+=1080",
@@ -246,7 +290,7 @@ export default {
             }, {
               duration: 1,
               opacity: 1
-            },"<")
+            }, "<")
             .fromTo('.area-2-footer-text', {
               opacity: 0
             }, {
@@ -255,16 +299,16 @@ export default {
       })
       this.stArr.push(st022)
     },
-    createT3(){
-      const st03=ScrollTrigger.create({
-        trigger:".area-3",
-        scrub:true,
+    createT3() {
+      const st03 = ScrollTrigger.create({
+        trigger: ".area-3",
+        scrub: true,
 
       })
       this.stArr.push(st03)
     },
     createT4() {
-      const st04=ScrollTrigger.create({
+      const st04 = ScrollTrigger.create({
         trigger: ".area-4",
         scrub: true,
         start: 'top center+=100',
@@ -293,7 +337,7 @@ export default {
       this.stArr.push(st04)
     },
     createT5() {
-      const st05=ScrollTrigger.create({
+      const st05 = ScrollTrigger.create({
         trigger: ".area-5",
         pin: true,
         start: "top top",
@@ -333,7 +377,7 @@ export default {
     this.stArr.forEach(item => {
       item.kill()
     })
-    this.stArr=[]
+    this.stArr = []
   }
 }
 </script>
@@ -343,46 +387,50 @@ export default {
     <div class="page-header">
       <span>CeL24</span>
     </div>
-    <section class="page-0-area-1">
-      <div class="ru-chang">
-        <div class="in-sce">
-          <video class="area-1-video-1"
-                 autoplay
-                 loop
-                 preload>
-            <source src="./img/backvideo.webm">
-          </video>
-          <img src="./img/ruchangBack.jpg" class="ruchang-back" alt="">
-          <video class="area-1-video-2"
-                 ref="biaotiVideo"
-                 @click="handleWeel"
-                 preload>
-            <source src="./img/biaoti.mp4">
-          </video>
-        </div>
-        <div class="header-title-container">
-          <div class="header-title" id="cel24">
-            <div class="title">CeL24</div>
-            <div class="header-title-body"
-                 style="overflow: hidden;">
-              <div class="flex area2texts"
-                   style="padding:0px 24px;align-items: flex-start;justify-content: space-between;">
-                <div class="date-time">2019/2020</div>
-                <div class="text-label">
-                  {{ $t('page0.textArea') }}
+    <section class="page-0-area-0">
+      <div class="init-container">
+        <div class="ru-chang">
+          <div class="in-sce">
+            <video class="area-1-video-1"
+                   autoplay
+                   loop
+                   preload>
+              <source src="./img/backvideo.webm">
+            </video>
+            <img src="./img/ruchangBack.jpg" class="ruchang-back" alt="">
+            <video class="area-1-video-2"
+                   ref="biaotiVideo"
+                   @click="handleWeel"
+                   preload>
+              <source src="./img/biaoti.mp4">
+            </video>
+          </div>
+          <div class="header-title-container">
+            <div class="header-title" id="cel24">
+              <div class="title">CeL24</div>
+              <div class="header-title-body"
+                   style="overflow: hidden;">
+                <div class="flex area2texts"
+                     style="padding:0px 24px;align-items: flex-start;justify-content: space-between;">
+                  <div class="date-time">2019/2020</div>
+                  <div class="text-label">
+                    {{ $t('page0.textArea') }}
+                  </div>
+                  <div class="toggleLanguage">
+                    <a style="text-decoration: underline;">切换成中文</a>
+                  </div>
                 </div>
-                <div class="toggleLanguage">
-                  <a style="text-decoration: underline;">切换成中文</a>
+                <div class="descripe">
+                  <div class="descripe-item">{{ $t('page0.describe1') }}</div>
+                  <div class="descripe-item">{{ $t('page0.describe2') }}</div>
                 </div>
-              </div>
-              <div class="descripe">
-                <div class="descripe-item">{{ $t('page0.describe1') }}</div>
-                <div class="descripe-item">{{ $t('page0.describe2') }}</div>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </section>
+    <section class="page-0-area-1">
       <div class="deep-second">
         <div class="move-area">
           <img class="deep-second-img" src="./img/area3Img1.webp" alt="">
@@ -529,6 +577,7 @@ export default {
   opacity: 0;
 
 }
+
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -562,79 +611,94 @@ export default {
     background-color: var(--content-bkcolor);
   }
 
+  .page-0-area-0 {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 5;
+    width: 100vw;
+    height: 100vh;
+    overflow: scroll;
+
+    .init-container {
+      width: 100vw;
+
+      .ru-chang {
+        .in-sce {
+          width: 100vw;
+          height: 100vh;
+          position: relative;
+          overflow: hidden;
+
+          .area-1-video-1, .ruchang-back, .area-1-video-2 {
+            width: 100%;
+          }
+
+          .ruchang-back {
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 5;
+            opacity: 0;
+          }
+
+          .area-1-video-2 {
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 10;
+            opacity: 0;
+            mix-blend-mode: screen;
+          }
+        }
+
+        .header-title-container {
+          background-color: var(--title-bkcolor);
+          padding: 20px 0px;
+          font-family: var(--ruchang-describe-fontfamilly);
+          border-bottom: 1px solid #171717;
+          margin-bottom: 5000px;
+
+          .title {
+            font-family: var(--base-title-fontfamilly);
+            font-size: 79px;
+            letter-spacing: 6px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+          }
+
+          .area2texts {
+            height: 0;
+            overflow: hidden;
+
+            .text-label {
+              width: 505px;
+            }
+          }
+
+          .descripe {
+            width: 505px;
+            margin: auto;
+          }
+        }
+      }
+    }
+
+
+  }
+
+  .page-0-area-0::-webkit-scrollbar {
+    width: 0px;
+  }
+
   .page-0-area-1 {
     width: 100vw;
     height: 100vh;
     position: relative;
 
-    .ru-chang {
-      position: absolute;
-      left: 0;
-      top: 0;
-      z-index: 5;
-
-      .in-sce {
-        width: 100vw;
-        height: 100vh;
-        position: relative;
-        overflow: hidden;
-
-        .area-1-video-1, .ruchang-back, .area-1-video-2 {
-          width: 100%;
-          height: 100%;
-        }
-
-        .ruchang-back {
-          position: absolute;
-          left: 0;
-          top: 0;
-          z-index: 5;
-          opacity: 0;
-        }
-
-        .area-1-video-2 {
-          position: absolute;
-          left: 0;
-          top: 0;
-          z-index: 10;
-          opacity: 0;
-          mix-blend-mode: screen;
-        }
-      }
-
-      .header-title-container {
-        background-color: var(--title-bkcolor);
-        padding: 20px 0px;
-        font-family: var(--ruchang-describe-fontfamilly);
-        border-bottom: 1px solid #171717;
-        .title {
-          font-family: var(--base-title-fontfamilly);
-          font-size: 79px;
-          letter-spacing: 6px;
-          text-align: center;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-
-        }
-
-        .area2texts {
-          height: 0;
-          overflow: hidden;
-
-          .text-label {
-            width: 505px;
-          }
-        }
-
-        .descripe {
-          width: 505px;
-          margin: auto;
-        }
-      }
-
-
-    }
 
     .deep-second {
       height: 100vh;
@@ -653,7 +717,7 @@ export default {
       }
 
       .describe {
-        width: 610px;
+        width: 640px;
         text-align: right;
       }
 
@@ -678,7 +742,7 @@ export default {
 
 
   .area-2 {
-    height:100vh;
+    height: 100vh;
     border-top: 1px solid #171717;
     position: relative;
 
@@ -689,7 +753,7 @@ export default {
       width: 600px;
       left: 5vw;
       overflow: hidden;
-      bottom:50px;
+      bottom: 50px;
 
       .text-item {
         margin: 40px 20px;
@@ -704,7 +768,7 @@ export default {
       width: 600px;
       height: 247px;
       left: 5vw;
-      bottom:50px;
+      bottom: 50px;
       background-color: #171717;
       backdrop-filter: blur(5px);
     }
@@ -714,7 +778,7 @@ export default {
       z-index: 4;
       width: 600px;
       left: 5vw;
-      bottom:50px;
+      bottom: 50px;
 
       .text-item {
         margin: 40px 20px;
@@ -777,6 +841,7 @@ export default {
       top: 110px;
       overflow: hidden;
       height: calc(100vh - 110px);
+
       .ba-img {
         width: 90%;
         margin: auto;
@@ -790,7 +855,8 @@ export default {
       left: 0;
       top: 110px;
       overflow: hidden;
-height: calc(100vh - 110px);
+      height: calc(100vh - 110px);
+
       .ba-img {
         width: 90%;
         margin: auto;
@@ -798,12 +864,14 @@ height: calc(100vh - 110px);
       }
     }
   }
-.area-3{
-  width: 100vw;
-  height: 100vh;
-  background-color: #171717;
-  opacity: 1;
-}
+
+  .area-3 {
+    width: 100vw;
+    height: 100vh;
+    background-color: #171717;
+    opacity: 1;
+  }
+
   .area-4 {
     .area-4-title {
       height: 46px;

@@ -1,7 +1,16 @@
 body{
     margin: 0 !important;
-    word-break: break-all;
     scroll-behavior: smooth;
+
+}
+body::-webkit-scrollbar{
+    width: 0px;
+}
+html::-webkit-scrollbar{
+    width: 0px;
+}
+.is-land{
+    word-break: break-all;
     --base-title-fontfamilly:Rany-normal;
     --base-content-fontfamilly:MS-THIN;
     --title-bold-fontfamilly: MS-SB;
@@ -10,11 +19,14 @@ body{
 
     --ruchang-describe-fontfamilly:Rany-normal;
 }
-body::-webkit-scrollbar{
-    width: 0px;
-}
-html::-webkit-scrollbar{
-    width: 0px;
+.is-land.zh{
+    --base-title-fontfamilly:Rany-normal;
+    --base-content-fontfamilly:思源宋EL;
+    --title-bold-fontfamilly: MS-SB;
+    --title-bkcolor:#f0f0f0;
+    --content-bkcolor:#fafafa;
+
+    --ruchang-describe-fontfamilly:思源黑EL;
 }
 @font-face {
     font-family: 思源黑体-EL;
@@ -47,6 +59,14 @@ html::-webkit-scrollbar{
 @font-face {
     font-family: 思源宋;
     src:url("../fonts/思源宋体SC-Regular.otf");
+}
+@font-face {
+    font-family: 思源宋EL;
+    src:url("../fonts/思源宋体SC-ExtraLight.otf");
+}
+@font-face {
+    font-family: 思源黑EL;
+    src:url("../fonts/思源黑体SourceHanSansCN-ExtraLight.otf");
 }
 @font-face {
     font-family: MS-THIN;
