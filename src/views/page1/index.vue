@@ -27,17 +27,26 @@ export default {
         animation: gsap.timeline()
             .to('.page-1-area-1 .img-item-2', {
               opacity: 1,
-              height: "103vh"
             })
-            .to(".page-1-area-1 .img-item-2", {
-              height: "100vh"
+            .to('.page-1-area-1 .img-item-2 img', {
+              scale:1.03,
+              onComplete:()=>{
+                gsap.to(".page-1-area-1 .img-item-2 img",{
+                  scale:1
+                })
+              }
+            },"<")
+            .to('.page-1-area-1 .img-item-2 img', {
+              scale:1,
             })
             .to('.page-1-area-1 .img-item-3', {
               opacity: 1,
-              height: "103vh"
             })
-            .to(".page-1-area-1 .img-item-3", {
-              height: "100vh"
+            .to(".page-1-area-1 .img-item-3 img", {
+             scale:1.03
+            },"<")
+            .to(".page-1-area-1 .img-item-3 img", {
+              scale:1
             })
       })
     },
@@ -152,7 +161,7 @@ export default {
       })
     },
     handleSelectFloat(index) {
-      const _dom = document.querySelectorAll('.page-1-area-4 .dot-item img')[index]
+      const _dom = document.querySelectorAll('.page-1-area-4 .dot-item')[index]
       gsap.timeline()
           .to(_dom, {
             scale: 0.5
@@ -185,18 +194,24 @@ export default {
     </div>
     <section class="page-1-area-1 screen">
       <div class="img-container  img-item-1">
-        <div class="img-item">
-          <img src="./img/area1-1.webp" height="100%" alt="">
-        </div>
+          <div class="img-item">
+            <div class="fix-container">
+              <img src="./img/area1-1.webp" height="100%" alt="">
+            </div>
+          </div>
       </div>
       <div class="img-container img-item-2">
         <div class="img-item ">
-          <img src="./img/area1-2.webp" height="100%" alt="">
+          <div class="fix-container">
+            <img src="./img/area1-2.webp" height="100%" alt="">
+          </div>
         </div>
       </div>
       <div class="img-container img-item-3">
         <div class="img-item">
-          <img src="./img/area1-3.webp" height="100%" alt="">
+          <div class="fix-container">
+            <img src="./img/area1-3.webp" height="100%" alt="">
+          </div>
         </div>
       </div>
 
@@ -215,7 +230,7 @@ export default {
       </div>
 
     </section>
-    <section class="page-1-area-3 screen">
+    <section class="page-1-area-3">
       <div class="imgs-container">
         <div class="imgs-container-deep">
           <div v-for="item in 5" class="imgs-item">
@@ -254,15 +269,19 @@ export default {
           <div class="float-dot">
             <div class="dot-item" @click="handleSelectFloat(0)">
               <img src="./img/area4-5.webp" width="300" alt="">
+              <img src="./img/area4-5d.png" class="copy-d" width="300" alt="">
             </div>
             <div class="dot-item" @click="handleSelectFloat(1)">
               <img src="./img/area4-6.webp" width="200" alt="">
+              <img src="./img/area4-6d.png" class="copy-d" width="200" alt="">
             </div>
             <div class="dot-item" @click="handleSelectFloat(2)">
               <img src="./img/area4-7.webp" width="400" alt="">
+              <img src="./img/area4-7d.png" class="copy-d" width="400" alt="">
             </div>
             <div class="dot-item" @click="handleSelectFloat(3)">
               <img src="./img/area4-8.webp" width="200" alt="">
+              <img src="./img/area4-8d.png" class="copy-d" width="200" alt="">
             </div>
           </div>
         </div>
@@ -293,14 +312,18 @@ export default {
     </section>
     <section class="page-1-area-6 screen">
       <div class="container">
-        <img class="bg-img" src="./img/area6-1.webp" width="100%" alt="">
+        <div class="img-container">
+          <img class="bg-img" src="./img/area6-1.webp" width="100%" alt="">
+        </div>
         <div class="text-area">
-          <div v-for="item in 6" class="text-item">
+          <div class="title">island is land</div>
+          <div class="">The ama represent another potential image of women in East Asian society—full of strength, vitality, and robust health.</div>
+<!--          <div v-for="item in 6" class="text-item">
             <span>{{ $t(`page1.area6.text${item}`) }}</span>
-          </div>
+          </div>-->
         </div>
         <div class="white-area">
-          <img src="./img/area6-2.webp" width="60%" alt="">
+          <img src="./img/area6-2.webp" width="100%" alt="">
         </div>
       </div>
     </section>
@@ -316,21 +339,16 @@ export default {
 }
 
 .page-1 {
-  --base-font-family: MS-EL;
-  --title-family: MS-Bold;
+
   color: #171717;
-  background-color: #f0f0f0;
+  background-color: var(--content-bkcolor);
   font-family: var(--base-font-family);
-  /* scroll-snap-type: y mandatory;
-   overflow: scroll;
-   height: 100vh;*/
 
   .page-header {
-    font-family: Rany-normal;
-    font-size: 16px;
-    letter-spacing: 2px;
+    font-family: var(--base-title-fontfamilly);
+    font-size: 26px;
     height: 46px;
-    border-bottom: 2px solid #232323;
+    border-bottom: 1px solid #171717;
     position: fixed;
     left: 0;
     top: 0;
@@ -339,7 +357,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #fafafa;
+    background-color: #f0f0f0;
 
   }
 
@@ -347,7 +365,7 @@ export default {
     width: 100vw;
     height: 100vh;
     //scroll-snap-align: start;
-    border-bottom: 2px solid #232323;
+    border-bottom: 1px solid #171717;
     //padding-top: 46px;
   }
 
@@ -359,20 +377,25 @@ export default {
     .img-container {
       width: 100vw;
       height: 100vh;
+
       position: absolute;
       left: 0px;
       top: 0px;
 
       .img-item {
-        padding: 0 30px;
         width: max-content;
         background-color: #fafafa;
         height: 100%;
-        border-right: 2px solid #232323;
-        border-left: 2px solid #232323;
+        padding: 12px;
+        border-right: 1px solid #171717;
+        border-left: 1px solid #171717;
         margin: auto;
         display: flex;
         justify-content: center;
+        .fix-container{
+          height: 100%;
+          overflow: hidden;
+        }
       }
 
 
@@ -412,6 +435,7 @@ export default {
   }
 
   .page-1-area-3 {
+    border-bottom: 1px solid #171717;
     .imgs-container {
       width: 100vw;
       padding: 46px 0px;
@@ -431,31 +455,27 @@ export default {
     .drifting {
       width: 40vw;
       margin: auto;
-      text-align: center;
+
 
       .title {
         width: max-content;
         margin: auto;
-        font-family: var(--title-family);
-        height: 25px;
-        border-bottom: 1px solid #232323;
+        font-family: var(--title-bold-fontfamilly);
+        font-size: 30px;
+        border-bottom: 1px solid #171717;
       }
 
       .describe {
-        margin: 20px 0px;
+        margin: 20px 0px 46px 0px;
       }
     }
   }
 
   .page-1-area-4 {
-    --imgFirstWidth: 0px;
     height: 100vh;
     width: 100vw;
-    //background-color: red;
     overflow: hidden;
     position: relative;
-    //scroll-snap-align: start;
-
     .trans-move {
       position: absolute;
       right: 0px;
@@ -476,9 +496,9 @@ export default {
         transform: scale(1.03);
         display: flex;
         align-items: flex-end;
-        border-right: 2px solid #232323;
-        border-left: 2px solid #232323;
-        padding: 0px 20px 0px 20px;
+        border-right: 1px solid #171717;
+        border-left: 1px solid #171717;
+        padding: 12px 12px 0px 12px;
 
       }
 
@@ -536,7 +556,14 @@ export default {
           .dot-item {
             cursor: pointer;
             opacity: 0;
+            position: relative;
             //transition: all 0.5s ease-in-out;
+            .copy-d{
+              position: absolute;
+              z-index: -1;
+              left: -40px;
+              top:40px;
+            }
           }
 
           @keyframes fudong1 {
@@ -613,8 +640,8 @@ export default {
 
           .dot-item:nth-child(1) {
             position: absolute;
-            left: 45%;
-            bottom: 46px;
+            left: 30%;
+            bottom: 86px;
             z-index: 6;
             animation: fudong1 4s linear infinite;
             transition: all 0.5s ease-in-out;
@@ -622,8 +649,8 @@ export default {
 
           .dot-item:nth-child(2) {
             position: absolute;
-            left: 30%;
-            bottom: 80px;
+            left: 26%;
+            bottom: 180px;
             z-index: 5;
             animation: fudong2 4s linear infinite;
             transition: all 0.5s ease-in-out 0.2s;
@@ -641,7 +668,7 @@ export default {
           .dot-item:nth-child(4) {
             position: absolute;
             left: 200px;
-            top: 45%;
+            top: 50%;
             z-index: 5;
             animation: fudong4 4s linear infinite;
             transition: all 0.5s ease-in-out 0.6s;
@@ -797,8 +824,8 @@ export default {
       align-items: flex-start;
       padding: 46px 20px 0px 0px;
       position: relative;
-      border-right: 2px solid #232323;
-      border-left: 2px solid #232323;
+      border-right: 1px solid #232323;
+      border-left: 1px solid #232323;
 
       .img-container {
         width: 100%;
@@ -850,7 +877,11 @@ export default {
     width: 100%;
     height: 100vh;
     overflow: hidden;
-
+    .img-container{
+      width: 100vw;
+      height: calc(100vh - 92px);
+      overflow: hidden;
+    }
     .bg-img {
       transform: scale(1.03);
       transition: all 0.5s ease-in-out;
@@ -859,9 +890,17 @@ export default {
 
     .text-area {
       position: absolute;
-      right: 92px;
-      bottom: 92px;
+      right: 90px;
+      bottom: 120px;
       z-index: 5;
+
+      width: 250px;
+      .title{
+        text-align: right;
+        font-size: 26px;
+        font-family: var(--title-bold-fontfamilly);
+      }
+
       .text-item {
         text-align: right;
         margin: 10px 0px;
@@ -876,9 +915,9 @@ export default {
       background-color: #fafafa;
       z-index: 3;
       height: calc(100vh - 92px);
-      border-top: 2px solid #7F583F;
-      width: max-content;
-      padding: 0px 92px;
+      border-top: 1px solid #7F583F;
+      width: 500px;
+      padding: 0px 90px;
       transform: translateX(100%);
       transition: all 0.5s ease-in-out;
       img{

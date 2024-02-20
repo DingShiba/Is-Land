@@ -13,7 +13,8 @@ export default {
   },
   data(){
     return{
-      current:0
+      current:2,
+      language:"en"
     }
   },
   watch:{
@@ -54,11 +55,11 @@ export default {
       </div>
     </div>
   </div>
-  <page0 v-if="current==0"></page0>
-  <page1 v-if="current==1"></page1>
-  <page2 v-if="current==2"></page2>
-  <page3 v-if="current==3"></page3>
-  <page4 v-if="current==4"></page4>
+  <page0 v-if="current==0" :language="language"></page0>
+  <page1 v-if="current==1" :language="language"></page1>
+  <page2 v-if="current==2" :language="language"></page2>
+  <page3 v-if="current==3" :language="language"></page3>
+  <page4 v-if="current==4" :language="language"></page4>
 </div>
 </template>
 

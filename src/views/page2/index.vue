@@ -13,9 +13,6 @@ export default {
   mounted() {
     this.createTTS()
   },
-  unmounted() {
-    ScrollTrigger.killAll()
-  },
 
   methods: {
     createTTS() {
@@ -205,21 +202,30 @@ export default {
         /*    .to(".page-2-area-1 .base-img-area",{
               scale:0.5
             })*/
-            .fromTo(".page-2-area-1 .base-img-area",{
-              width: "100vw",
-            }, {
-              width: "50vw",
+            .to(".page-2-area-1 .find-love",{
+              scale:0.5,
+              y:'25vh'
             })
+            .to(".page-2-area-1 .vertical-line",{
+              scale:1.5
+            },"<")
+            .to(".page-2-area-1 .bottom-line",{
+              scale:1.5
+            },"<")
             .fromTo(".page-2-area-2 .img-text", {
               opacity: 0,
             }, {
               opacity: 1
             }, "<")
-            .to(".page-2-area-2 .text-area", {
-              opacity: 1
-            })
 
 
+
+      })
+      ScrollTrigger.create({
+        trigger:".page-2-area-2 .text-area",
+        scrub:true,
+        start:"top bottom-=300",
+        toggleClass:"active",
       })
     },
     createT3() {
@@ -382,7 +388,7 @@ export default {
     position: absolute;
     top: 0px;
     z-index: 5;
-    height: 300vh;
+    height: 400vh;
     width: 1px;
     background-color: #171717;
   }
@@ -539,6 +545,10 @@ export default {
         .describe-2 {
           margin: 23px 0px;
         }
+      }
+      .text-area.active{
+        opacity: 1;
+        transition: opacity 0.5s linear;
       }
     }
   }

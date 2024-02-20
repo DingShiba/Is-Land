@@ -1,9 +1,10 @@
 body{
     margin: 0 !important;
+    word-break: break-all;
     scroll-behavior: smooth;
     --base-title-fontfamilly:Rany-normal;
     --base-content-fontfamilly:MS-THIN;
-
+    --title-bold-fontfamilly: MS-SB;
     --title-bkcolor:#f0f0f0;
     --content-bkcolor:#fafafa;
 
@@ -34,6 +35,10 @@ html::-webkit-scrollbar{
 @font-face {
     font-family: MS-Bold;
     src:url("../fonts/MontaguSlab16pt-Bold.otf");
+}
+@font-face {
+    font-family: MS-SB;
+    src:url("../fonts/MontaguSlab16pt-SemiBold.otf");
 }
 @font-face {
     font-family: MS-EL;

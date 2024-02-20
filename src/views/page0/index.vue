@@ -6,6 +6,7 @@ import {ScrollToPlugin} from 'gsap/ScrollToPlugin.js'
 gsap.registerPlugin(ScrollToPlugin, ScrollTrigger);
 export default {
   name: "index",
+  props:["language"],
   data() {
     return {}
   },
@@ -229,6 +230,9 @@ export default {
             .to(".area-2-4", {
               y: -300
             },"<")
+            .to(".area-2-4", {
+              y: -350
+            })
       })
       ScrollTrigger.create({
         trigger: ".area-2",
@@ -501,8 +505,9 @@ export default {
       </div>
       <video class="list-video"
              refs="area5Video"
+             controls
              preload>
-        <source src="./img/area-5-1.mp4">
+        <source src="./img/list-en.webm">
       </video>
     </section>
     <section class="footer">
@@ -729,7 +734,7 @@ export default {
     .area-2-item {
       position: absolute;
       left: 0;
-      top: 100px;
+      top: 0px;
     }
 
     .area-2-1 {
@@ -777,10 +782,9 @@ export default {
       position: absolute;
       z-index: 8;
       left: 0;
-      top: 0;
+      top: 110px;
       overflow: hidden;
-      height: 100vh;
-
+      height: calc(100vh - 110px);
       .ba-img {
         width: 90%;
         margin: auto;
@@ -792,10 +796,9 @@ export default {
       position: absolute;
       z-index: 7;
       left: 0;
-      top: 0;
+      top: 110px;
       overflow: hidden;
-      height: 100vh;
-
+height: calc(100vh - 110px);
       .ba-img {
         width: 90%;
         margin: auto;
@@ -816,8 +819,8 @@ export default {
       text-align: center;
       width: 100vw;
       border-bottom: 2px solid #232323;
-      font-family: Rany-normal;
-      font-size: 16px;
+      font-size: 26px;
+      font-family: var(--base-title-fontfamilly);
     }
 
     .area-4-cao-imgs {
@@ -844,6 +847,7 @@ export default {
       top: 0;
       opacity: 0;
       z-index: 11;
+      width: 1920px;
       mix-blend-mode: screen;
     }
 
