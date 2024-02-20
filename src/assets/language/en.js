@@ -20,6 +20,20 @@ export default {
         },
         area5:{
             describe:"This series originates from the designer's observations of the balance between the ama and the buoyancy system, integrating the concepts of \"buoyancy\" and \"symbiosis\" into the design. The work focuses on the current situation of the ama, offering a new interpretation of this ancient yet fading traditional way of life."
+        },
+        footer:{
+            lianxi:"Contact me",
+            lianjie:"Relative Links",
+            fashionDesign:'Fashion Design',
+            fashionTutor:"Fashion Tutor",
+            Director:"Director",
+            Photographer:"Photographer",
+            MakeupArtist:"Makeup Artist",
+            Model:"Model",
+            WebDesign:"Web Design",
+            WebTechnology:"Web Technology",
+            ChineseEditing:"Chinese Editing",
+            Proofreading:"Proofreading"
         }
     },
     page1:{

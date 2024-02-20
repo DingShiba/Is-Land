@@ -9,7 +9,23 @@ export default {
   props: ["language"],
   data() {
     return {
-      stArr: []
+      stArr: [],
+      linksEn: "Yoshiyuki Iwase BachmannEckenstein Basel / Yoshiyuki Iwase - Japanese Master Photographer / Haenyeo - Seeing the Incredible Women Divers of Jeju Island - South Korea! - Dive O'Clock! / Ama Women Divers of Japan - Where to See & Explore this Culture - Dive O'Clock! / Culture of Jeju Haenyeo (women divers) - YouTube / Osatsu-kamado Ama Hut Experience ISESHIMA TOBA City / 海女（职业名称）_百度百科 / 这群韩国“海女”都七八十岁高龄了，还在下海捕捞 / 真实美人鱼，海女的历史与现状 / 海女的群像，那些在海里捡珍珠的人 / VisitJeju - 济州岛旅游综合信息网，济州岛自由行攻略 / 제주해녀박물관 ",
+      linksZh: "Yoshiyuki Iwase BachmannEckenstein Basel / Yoshiyuki Iwase - Japanese Master Photographer / Haenyeo - Seeing the Incredible Women Divers of Jeju Island - South Korea! - Dive O'Clock! / Ama Women Divers of Japan - Where to See & Explore this Culture - Dive O'Clock! / Culture of Jeju Haenyeo (women divers) - YouTube / Osatsu-kamado Ama Hut Experience ISESHIMA TOBA City / 海女（职业名称）_百度百科 / 这群韩国“海女”都七八十岁高龄了，还在下海捕捞 / 真实美人鱼，海女的历史与现状 / 海女的群像，那些在海里捡珍珠的人 / VisitJeju - 济州岛旅游综合信息网，济州岛自由行攻略 / 제주해녀박물관",
+      httpLinks: [
+        "http://1995-2015.undo.net/it/mostra/88438",
+          "http://yoshiyuki-iwase.blogspot.com/",
+          "https://www.diveoclock.com/destinations/Asia/South_Korea/Haenyeo/",
+          "https://www.diveoclock.com/destinations/Asia/Japan/Ama/",
+          "https://www.youtube.com/watch?v=lk7DQLMKBTE",
+          "https://osatsu.org/en/",
+          "https://baike.baidu.com/item/海女/71257",
+          "https://baijiahao.baidu.com/s?id=1720654313046941250&wfr=spider&for=pc",
+          "https://www.douban.com/note/691652759/?from=tag&_i=4530369HMV8gKP,8430195HMV8gKP",
+          "https://m.thepaper.cn/baijiahao_9306843",
+          "https://www.visitjeju.net/cn",
+          "http://www.jeju.go.kr/haenyeo/index.htm#english"
+      ]
     }
   },
   mounted() {
@@ -516,7 +532,7 @@ export default {
         <img class="cao-img-item cao-img-item4" src="./img/area-4-4.webp" alt="">
       </div>
     </section>
-    <section class="area-5">
+    <section class="area-5" style="overflow: hidden">
       <div class="area-5-title">
         <span>LOOK BOOK:</span>
       </div>
@@ -551,7 +567,80 @@ export default {
       </video>
     </section>
     <section class="footer">
-
+      <div class="lianxi">
+        <h2>{{ $t('page0.footer.lianxi') }}</h2>
+        <span>cellphone24@163.com</span>
+      </div>
+      <div class="lianjie">
+        <h2>{{ $t('page0.footer.lianjie') }}</h2>
+        <div class="links">
+          <span v-if="language=='en'">
+            <span v-for="(item,index) in linksEn.split('/')">
+              <a :href="httpLinks[index]"
+                class="link-item"
+                 target="_blank">{{item}}</a>
+            <span v-if="index<httpLinks.length-1">/</span>
+            </span>
+          </span>
+          <span v-else>
+            <span v-for="(item,index) in linksZh.split('/')">
+              <a :href="httpLinks[index]"
+                 class="link-item"
+                 target="_blank">{{item}}</a>
+            <span v-if="index<httpLinks.length-1">/</span>
+            </span>
+          </span>
+        </div>
+      </div>
+      <div class="introduce">
+        <div class="first-intro">
+          <div class="flex">
+            <div class="label">{{$t('page0.footer.fashionDesign')}}</div>
+            <div class="content">Cellphone24</div>
+          </div>
+          <div class="flex">
+            <div class="label">{{$t('page0.footer.fashionTutor')}}</div>
+            <div class="content">Meng Siyang</div>
+          </div>
+          <div class="flex">
+            <div class="label">{{$t('page0.footer.Director')}}</div>
+            <div class="content">Cellphone24</div>
+          </div>
+          <div class="flex">
+            <div class="label">{{$t('page0.footer.Photographer')}}</div>
+            <div class="content">Tan Yuxi</div>
+          </div>
+          <div class="flex">
+            <div class="label">{{$t('page0.footer.MakeupArtist')}}</div>
+            <div class="content">Tong Tong</div>
+          </div>
+          <div class="flex">
+            <div class="label">{{$t('page0.footer.Model')}}</div>
+            <div class="content">Hik</div>
+          </div>
+        </div>
+        <div class="second-intro">
+          <div class="flex">
+            <div class="label">{{$t('page0.footer.WebDesign')}}</div>
+            <div class="content">Cellphone24</div>
+          </div>
+          <div class="flex">
+            <div class="label">{{$t('page0.footer.WebTechnology')}}</div>
+            <div class="content">Ding Shiba</div>
+          </div>
+        </div>
+        <div class="third-intro">
+          <div class="flex">
+            <div class="label">{{$t('page0.footer.ChineseEditing')}}</div>
+            <div class="content">Cellphone24</div>
+          </div>
+          <div class="flex">
+            <div class="label">{{$t('page0.footer.Proofreading')}}</div>
+            <div class="content">Hailey G</div>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">Copyright:琼ICP备2024018151号-1</div>
     </section>
   </div>
 </template>
@@ -974,9 +1063,53 @@ export default {
   }
 
   .footer {
-
-    height: 600px;
+    color: #fafafa;
     background-color: #232323;
+
+    .lianxi {
+      padding: 80px 0px;
+      text-align: center;
+    }
+    .lianjie{
+      text-align: center;
+      .links{
+        width: 70vw;
+        margin: auto;
+        word-break: break-all;
+        line-height: 1.6;
+        text-align: left;
+        .link-item {
+          color: #fafafa;
+          text-decoration: none;
+          font-family: var(--base-content-fontfamilly);
+        }
+        .link-item:hover {
+          text-decoration: underline;
+          transition: all 0.5s linear;
+        }
+      }
+
+    }
+    .introduce{
+      width: 70vw;
+      margin: 80px auto;
+      word-break: break-all;
+      line-height: 1.6;
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+
+      .flex{
+        display: flex;
+        .label{
+          width: 150px;
+        }
+      }
+    }
+    .copyright{
+      text-align: center;
+      padding-bottom: 20px;
+    }
   }
 
 }
