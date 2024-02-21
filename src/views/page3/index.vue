@@ -5,22 +5,32 @@ import {ScrollTrigger} from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 export default {
   name: "index",
-  data(){
-    return{
-      stArr:[]
+  props: ["language"],
+  data() {
+    return {
+      stArr: [],
+      newsImg: [1, 2, 3, 4],
+      currentImg: 0,
+      pptVisible:false,
+      xNum:100,
+      moveDistance:0
     }
   },
   mounted() {
     this.createTTs()
   },
   methods: {
+    getImage(name) {
+      const _url = new URL(`./img/${name}`, import.meta.url)
+      return _url.pathname
+    },
     createTTs() {
       this.createT31()
       this.createT32()
       this.createT33()
     },
     createT31() {
-      const st31=ScrollTrigger.create({
+      const st31 = ScrollTrigger.create({
         trigger: ".page-3-area-1",
         pin: true,
         scrub: true,
@@ -101,7 +111,7 @@ export default {
       this.stArr.push(st31)
     },
     createT32() {
-      const st32=ScrollTrigger.create({
+      const st32 = ScrollTrigger.create({
         trigger: ".page-3-area-2",
         pin: true,
         scrub: true,
@@ -143,60 +153,114 @@ export default {
       })
       this.stArr.push(st32)
     },
-    createT33(){
-      const st33=ScrollTrigger.create({
-        trigger:".page-3-area-3",
-        scrub:true,
-        start:"top +=650",
-        end:"top top",
-        onEnter:()=>{
-          gsap.fromTo(".page-3-area-3 .text-area",{
-            opacity:0,
-          },{
-            duration:1,
-            opacity:1
+    createT33() {
+      const st33 = ScrollTrigger.create({
+        trigger: ".page-3-area-3",
+        scrub: true,
+        start: "top +=650",
+        end: "top top",
+        onEnter: () => {
+          gsap.fromTo(".page-3-area-3 .text-area", {
+            opacity: 0,
+          }, {
+            duration: 1,
+            opacity: 1
           })
-          gsap.fromTo(".page-3-area-3 .left-video",{
-            opacity:0,
-          },{
-            duration:1,
-            opacity:1
-          })
-        },
-        onLeaveBack:()=>{
-          gsap.fromTo(".page-3-area-3 .text-area",{
-            opacity:1,
-          },{
-            duration:1,
-            opacity:0
-          })
-          gsap.fromTo(".page-3-area-3 .left-video",{
-            opacity:1,
-          },{
-            duration:1,
-            opacity:0
+          gsap.fromTo(".page-3-area-3 .left-video", {
+            opacity: 0,
+          }, {
+            duration: 1,
+            opacity: 1
           })
         },
-        animation:gsap.timeline()
-            .to(".page-3-area-2 .zhezhao",{
-              backgroundColor:"rgba(0,0,0,1)"
+        onLeaveBack: () => {
+          gsap.fromTo(".page-3-area-3 .text-area", {
+            opacity: 1,
+          }, {
+            duration: 1,
+            opacity: 0
+          })
+          gsap.fromTo(".page-3-area-3 .left-video", {
+            opacity: 1,
+          }, {
+            duration: 1,
+            opacity: 0
+          })
+        },
+        animation: gsap.timeline()
+            .to(".page-3-area-2 .zhezhao", {
+              backgroundColor: "rgba(0,0,0,1)"
             })
       })
       this.stArr.push(st33)
+    },
+    handleOpenZhedie(){
+      if(!this.pptVisible){
+        gsap.to(".zhedie-area",{
+          height:"85vh",
+          onComplete:()=>{
+            this.pptVisible=true
+          }
+        })
+        gsap.set(".zhedie-area .trans-move-area",{
+          x:this.xNum,
+
+        })
+      }
+
+    },
+    handleCloseZhedie(){
+      gsap.to(".zhedie-area",{
+        height:0,
+        onComplete:()=>{
+          this.pptVisible=false
+          this.xNum=100
+        }
+      })
+    },
+    handleDragStrat(e){
+      let _this=this;
+      let drag=document.querySelector('.zhedie-area .trans-move-area')
+      let diffX = e.clientX;
+      document.onmousemove = function (e) {
+        // 元素的 clientX 和 clientY 默认是以元素左上角位置来计算的，这里需要向左向上同时减去鼠标点击的位置差，从而可以保证鼠标始终显示在拖拽元素时的位置
+        _this.moveDistance=e.clientX - diffX;
+        // 边界处理，防止超出各个边
+       /* if (left < 0) {
+          left = 0;
+        } else if (left > window.innerWidth - drag.offsetWidth) {
+          left = window.innerWidth - drag.offsetWidth;
+        }*/
+        let _xTrue=_this.xNum+_this.moveDistance
+        if(_xTrue>100){
+          _xTrue=100
+        }
+        drag.style.setProperty("transform",`translateX(${_xTrue}px)`);
+      };
+
+    },
+    handleDragEnd(e){
+      this.xNum+=this.moveDistance;
+      if(this.xNum>100){
+        this.xNum=100
+      }
+      this.moveDistance=0;
+
+      document.onmousemove=null
     }
   },
   unmounted() {
     this.stArr.forEach(item => {
       item.kill()
     })
-    this.stArr=[]
+    this.stArr = []
   }
 
 }
 </script>
 
 <template>
-  <div class="page-3">
+  <div class="page-3" @click.stop="handleCloseZhedie">
     <div class="page-header">
       <span>CeL24</span>
     </div>
@@ -206,7 +270,7 @@ export default {
         <div class="vertical-line right-line"></div>
         <div class="img-area">
           <img src="./img/area1-1.webp" alt="" class="base-img">
-          <img src="./img/area1-2.webp" alt="" class="float-img active-img">
+          <!--          <img src="./img/news-1.webp" alt="" class="float-img active-img">-->
           <div class="second-area">
             <div style="height: 100vh;background-color: #fafafa;">
               <div class="img-list">
@@ -221,6 +285,20 @@ export default {
               <img src="./img/area1-7.webp" width="100%" alt="">
             </div>
           </div>
+        </div>
+      </div>
+      <div class="new-imgs">
+        <div class="img-item" v-for="item in newsImg">
+          <img :src="getImage('news-'+item+'.webp')" alt="">
+          <div class="border-dom"></div>
+        </div>
+        <div class="img-item" v-for="item in newsImg">
+          <img :src="getImage('news-'+item+'.webp')" alt="">
+          <div class="border-dom"></div>
+        </div>
+        <div class="img-item" v-for="item in newsImg">
+          <img :src="getImage('news-'+item+'.webp')" alt="">
+          <div class="border-dom"></div>
         </div>
 
       </div>
@@ -246,11 +324,21 @@ export default {
           <source src="./img/area3-1.webm">
         </video>
         <div class="text-area">
-          <div class="title">{{$t('page3.area3.title')}}</div>
-          <div class="first-describe">{{$t('page3.area3.firstDescribe')}}</div>
-          <div class="second-describe">{{$t('page3.area3.secondDescribe')}}</div>
+          <div class="title" @click.stop="handleOpenZhedie">{{ $t('page3.area3.title') }}</div>
+          <div class="first-describe">{{ $t('page3.area3.firstDescribe') }}</div>
+          <div class="second-describe">{{ $t('page3.area3.secondDescribe') }}</div>
         </div>
       </div>
+    </section>
+    <section class="zhedie-area" @click.stop="handleOpenZhedie">
+      <div class="trans-move-area"
+           >
+        <img v-for="item in 25" :src="getImage('ppt/ppt'+item+'.webp')" width="100%" alt="">
+      </div>
+      <div class="visible-dom" @mouseup="handleDragEnd"
+           @mousedown="handleDragStrat"></div>
+      <div class="footer" v-if="language=='zh'">最后更新时间：2020/08/15</div>
+      <div class="footer" v-else>Last updated: 15th Aug, 2020</div>
     </section>
     <section class="page-3-area-4">
       <div class="content-area">
@@ -272,7 +360,7 @@ export default {
   font-size: 16px;
   letter-spacing: 2px;
   height: 46px;
-  border-bottom: 2px solid #232323;
+  border-bottom: 1px solid #171717;
   position: fixed;
   left: 0;
   top: 0;
@@ -292,7 +380,7 @@ export default {
 
   .tarns-area {
     position: relative;
-    padding: 20px;
+    padding: 0px 20px;
     height: 100vh;
     transition: all 1s ease-in-out;
 
@@ -508,6 +596,30 @@ export default {
       width: 36vw;
     }
   }
+
+  .new-imgs {
+    width: 500vw;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: 0;
+    top: 100px;
+
+    .img-item {
+
+      img {
+        width: 600px;
+      }
+
+      .border-dom {
+        width: 300px;
+        height: 450px;
+        border: 1px solid #171717;
+        transform: translateY(-730px) translateX(50px);
+      }
+    }
+
+  }
 }
 
 .page-3-area-2 {
@@ -555,6 +667,7 @@ export default {
     width: 100vw;
     opacity: 0;
   }
+
   .zhezhao {
     width: 100vw;
     height: 100vh;
@@ -562,13 +675,14 @@ export default {
     left: 0;
     top: 0;
     z-index: 10;
-    background-color: rgba(0,0,0,.0);
+    background-color: rgba(0, 0, 0, .0);
   }
 }
 
 .page-3-area-3 {
   width: 100vw;
   position: relative;
+
   .container {
     display: flex;
     justify-content: space-between;
@@ -586,13 +700,16 @@ export default {
       line-height: 1.5;
       opacity: 0;
       font-family: Rany-normal;
-      .title{
+
+      .title {
+        cursor: pointer;
         font-family: Rany-Bold;
         width: max-content;
         font-size: 25px;
         border-bottom: 1px solid #171717;
       }
-      .first-describe{
+
+      .first-describe {
         margin: 20px 0px;
       }
     }
@@ -601,13 +718,48 @@ export default {
 
 }
 
+.zhedie-area {
+  //height: 85vh;
+  height: 0;
+  width: 100vw;
+  background-color: #cbcbcb;
+  overflow: hidden;
+  position: relative;
+  .visible-dom{
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 5;
+    position: absolute;
+  }
+  .trans-move-area{
+    height: calc(85vh - 48px);
+    display: flex;
+    width: max-content;
+    padding: 12px 0px;
+    transform: translateX(100px);
+    img{
+      border-top: 1px solid #232323;
+      border-left: 1px solid #232323;
+      border-bottom: 1px solid #232323;
+    }
+    img:nth-child(25){
+      border-right: 1px solid #232323;
+    }
+  }
+  .footer{
+    text-align: center;
+    padding: 12px 0;
+  }
+}
+
 .page-3-area-4 {
   height: 100vh;
   width: 100vw;
   background-color: #fafafa;
-  display: flex;
-  align-items: center;
-  .content-area{
+
+  .content-area {
     width: 100%;
     display: flex;
   }
