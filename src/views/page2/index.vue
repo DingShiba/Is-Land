@@ -12,7 +12,10 @@ export default {
     }
   },
   mounted() {
-    this.createTTS()
+    setTimeout(()=>{
+      this.createTTS()
+
+    },2000)
   },
 
   methods: {

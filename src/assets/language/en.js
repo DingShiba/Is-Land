@@ -19,7 +19,37 @@ export default {
             fixed2:"During work, this \"system\" quietly drifts on the sea, firmly tethered to the ama by a robust safety rope, as the ama tirelessly shuttles between the seabed and her watery \"island\". Day after day of ebb and flow, the ama earns for herself status and prosperity."
         },
         area5:{
-            describe:"This series originates from the designer's observations of the balance between the ama and the buoyancy system, integrating the concepts of \"buoyancy\" and \"symbiosis\" into the design. The work focuses on the current situation of the ama, offering a new interpretation of this ancient yet fading traditional way of life."
+            describe:"This series originates from the designer's observations of the balance between the ama and the buoyancy system, integrating the concepts of \"buoyancy\" and \"symbiosis\" into the design. The work focuses on the current situation of the ama, offering a new interpretation of this ancient yet fading traditional way of life.",
+            label1:"Jan 06, 2020",
+            content1:"the day",
+            label2:"Yangpu, Shanghai",
+            content2:"position",
+            label3:"Hik",
+            content3:"model",
+            label4:"Yuxi Tan",
+            content4:'photographer',
+            label5:"Tong Tong",
+            content5:"make up",
+            label6:'Cellphone24',
+            content61:"director",
+            content62:"designer",
+            content63:"property master",
+            label7:'Siyang',
+            content7:"tutor",
+            label8:'Rocks',
+            content8:"props",
+            label9:"River sands",
+            label10:"Fake rocks",
+            label11:"Screen 4*4 meters",
+            label12:"Aluminum foil products",
+            label13:"A snakehead",
+            content13:'extra special thanks',
+            label14:"Pomfrets",
+            label15:'Prawns'
+
+
+
+
         },
         footer:{
             lianxi:"Contact me",

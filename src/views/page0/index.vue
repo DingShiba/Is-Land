@@ -14,21 +14,22 @@ export default {
       linksZh: "Yoshiyuki Iwase BachmannEckenstein Basel / Yoshiyuki Iwase - Japanese Master Photographer / Haenyeo - Seeing the Incredible Women Divers of Jeju Island - South Korea! - Dive O'Clock! / Ama Women Divers of Japan - Where to See & Explore this Culture - Dive O'Clock! / Culture of Jeju Haenyeo (women divers) - YouTube / Osatsu-kamado Ama Hut Experience ISESHIMA TOBA City / 海女（职业名称）_百度百科 / 这群韩国“海女”都七八十岁高龄了，还在下海捕捞 / 真实美人鱼，海女的历史与现状 / 海女的群像，那些在海里捡珍珠的人 / VisitJeju - 济州岛旅游综合信息网，济州岛自由行攻略 / 제주해녀박물관",
       httpLinks: [
         "http://1995-2015.undo.net/it/mostra/88438",
-          "http://yoshiyuki-iwase.blogspot.com/",
-          "https://www.diveoclock.com/destinations/Asia/South_Korea/Haenyeo/",
-          "https://www.diveoclock.com/destinations/Asia/Japan/Ama/",
-          "https://www.youtube.com/watch?v=lk7DQLMKBTE",
-          "https://osatsu.org/en/",
-          "https://baike.baidu.com/item/海女/71257",
-          "https://baijiahao.baidu.com/s?id=1720654313046941250&wfr=spider&for=pc",
-          "https://www.douban.com/note/691652759/?from=tag&_i=4530369HMV8gKP,8430195HMV8gKP",
-          "https://m.thepaper.cn/baijiahao_9306843",
-          "https://www.visitjeju.net/cn",
-          "http://www.jeju.go.kr/haenyeo/index.htm#english"
+        "http://yoshiyuki-iwase.blogspot.com/",
+        "https://www.diveoclock.com/destinations/Asia/South_Korea/Haenyeo/",
+        "https://www.diveoclock.com/destinations/Asia/Japan/Ama/",
+        "https://www.youtube.com/watch?v=lk7DQLMKBTE",
+        "https://osatsu.org/en/",
+        "https://baike.baidu.com/item/海女/71257",
+        "https://baijiahao.baidu.com/s?id=1720654313046941250&wfr=spider&for=pc",
+        "https://www.douban.com/note/691652759/?from=tag&_i=4530369HMV8gKP,8430195HMV8gKP",
+        "https://m.thepaper.cn/baijiahao_9306843",
+        "https://www.visitjeju.net/cn",
+        "http://www.jeju.go.kr/haenyeo/index.htm#english"
       ]
     }
   },
   mounted() {
+    // gsap.to(window, { duration: 0.5, scrollTo: 0 });
     this.createTTs()
   },
   methods: {
@@ -65,7 +66,6 @@ export default {
         start: "top top",
         end: "+=1080",
         scrub: true,
-        markers: true,
         scroller: ".page-0-area-0",
         onUpdate: () => {
           const _top = document.querySelector('.in-sce').getBoundingClientRect().top
@@ -360,12 +360,38 @@ export default {
         end: 'bottom top',
         scrub: true,
         onEnter: () => {
-          gsap.to('.area-5 .list-video', {
-            opacity: 1,
-            onStart: () => {
-              document.querySelector('.area-5 .list-video').play()
+          const _doms=document.querySelectorAll(".area-5 .list-area .flex")
+          _doms.forEach((item,index)=>{
+            if(index>1){
+              gsap.to(item,{
+                y:0,
+                delay:index*0.05,
+                duration:1
+              })
             }
+
           })
+          gsap.timeline()
+              .to(".area-5 .list-area .first-flex",{
+                y:0,
+                duration:1
+              })
+              .to(".area-5 .list-area .second-flex",{
+                y:0,
+                delay:0.1,
+                duration:1
+              },"<")
+              .to(".area-5 .list-area .first-flex",{
+                color:"#232323",
+                duration:0.2,
+                delay:0.8
+              },"<")
+              .to(".area-5 .list-area .second-flex",{
+                color:"#232323",
+                duration:0.2,
+                delay:0
+              },"<")
+
         },
         animation: gsap.timeline()
             .to('.area-5-2', {
@@ -377,7 +403,7 @@ export default {
             .to('.area-5-2', {
               x: 1800,
             }, '<')
-            .fromTo('.area-5 .list-video', {
+            .fromTo('.area-5 .list-area', {
               opacity: 1,
             }, {
               opacity: 0,
@@ -387,7 +413,15 @@ export default {
             })
       })
       this.stArr.push(st05)
+      /*创建videobangding*/
     },
+    handleMouseEnter(e) {
+      e.srcElement.play()
+    },
+    handleMouseLeave(e) {
+      e.srcElement.pause()
+      e.srcElement.currentTime = 0
+    }
   },
   unmounted() {
     this.stArr.forEach(item => {
@@ -547,24 +581,94 @@ export default {
           <div class="move-container">
             <img class="movies-index movies-item" src="./img/area-5-movies-index.webp" alt="">
             <div class="gifs-arr">
-              <img class="movies-item" src="./img/area5/0-10a.webp">
-              <img class="movies-item" src="./img/area5/0-10a.webp">
-              <img class="movies-item" src="./img/area5/0-10a.webp">
-              <img class="movies-item" src="./img/area5/0-10a.webp">
+              <video @mouseenter="handleMouseEnter"
+                     @mouseleave="handleMouseLeave"
+                     class="look1-video" src="./img/Look1.webm"></video>
+              <video @mouseenter="handleMouseEnter"
+                     @mouseleave="handleMouseLeave"
+                     class="look2-video" src="./img/Look2.webm"></video>
+              <video @mouseenter="handleMouseEnter"
+                     @mouseleave="handleMouseLeave"
+                     class="look3-video" src="./img/Look3.webm"></video>
+              <video @mouseenter="handleMouseEnter"
+                     @mouseleave="handleMouseLeave"
+                     class="look4-video" src="./img/Look4.webm"></video>
             </div>
 
-            <!--            <img src="img/area5/area5-2.gif">
-                        <img src="img/area5/area5-3.gif">
-                        <img src="img/area5/area5-4.gif">-->
+
           </div>
         </div>
+        <div class="list-area">
+          <div>
+            <div class="flex first-flex">
+              <div class="label">{{ $t('page0.area5.label1') }}</div>
+              <div class="content">{{ $t('page0.area5.content1') }}</div>
+            </div>
+            <div class="flex second-flex" style="margin-bottom: 80px">
+              <div class="label">{{ $t('page0.area5.label2') }}</div>
+              <div class="content">{{ $t('page0.area5.content2') }}</div>
+            </div>
+            <div class="flex">
+              <div class="label">{{ $t('page0.area5.label3') }}</div>
+              <div class="content">{{ $t('page0.area5.content3') }}</div>
+            </div>
+            <div class="flex">
+              <div class="label">{{ $t('page0.area5.label4') }}</div>
+              <div class="content">{{ $t('page0.area5.content4') }}</div>
+            </div>
+            <div class="flex" style="margin-bottom: 50px;">
+              <div class="label">{{ $t('page0.area5.label5') }}</div>
+              <div class="content">{{ $t('page0.area5.content5') }}</div>
+            </div>
+            <div class="flex" style="align-items: flex-start;">
+              <div class="label">{{ $t('page0.area5.label6') }}</div>
+              <div class="content" style="padding-top: 20px">
+                <div>{{ $t('page0.area5.content61') }}</div>
+                <div>{{ $t('page0.area5.content62') }}</div>
+                <div>{{ $t('page0.area5.content63') }}</div>
+              </div>
+            </div>
+            <div class="flex" style="margin-bottom: 50px;">
+              <div class="label">{{ $t('page0.area5.label7') }}</div>
+              <div class="content">{{ $t('page0.area5.content7') }}</div>
+            </div>
+            <div class="flex">
+              <div class="label">{{ $t('page0.area5.label8') }}</div>
+              <div class="content">{{ $t('page0.area5.content8') }}</div>
+            </div>
+            <div class="flex">
+              <div class="label">{{ $t('page0.area5.label9') }}</div>
+            </div>
+            <div class="flex">
+              <div class="label">{{ $t('page0.area5.label10') }}</div>
+            </div>
+            <div class="flex">
+              <div class="label">{{ $t('page0.area5.label11') }}</div>
+            </div>
+            <div class="flex">
+              <div class="label">{{ $t('page0.area5.label12') }}</div>
+            </div>
+            <div class="flex">
+              <div class="label">{{ $t('page0.area5.label13') }}</div>
+              <div class="content">{{ $t('page0.area5.content13') }}</div>
+            </div>
+            <div class="flex">
+              <div class="label">{{ $t('page0.area5.label14') }}</div>
+            </div>
+            <div class="flex">
+              <div class="label">{{ $t('page0.area5.label15') }}</div>
+            </div>
+
+          </div>
+
+        </div>
       </div>
-      <video class="list-video"
-             refs="area5Video"
-             controls
-             preload>
-        <source src="./img/list-en.webm">
-      </video>
+      <!--      <video class="list-video"
+                   refs="area5Video"
+                   controls
+                   preload>
+              <source src="./img/list-en.webm">
+            </video>-->
     </section>
     <section class="footer">
       <div class="lianxi">
@@ -577,8 +681,8 @@ export default {
           <span v-if="language=='en'">
             <span v-for="(item,index) in linksEn.split('/')">
               <a :href="httpLinks[index]"
-                class="link-item"
-                 target="_blank">{{item}}</a>
+                 class="link-item"
+                 target="_blank">{{ item }}</a>
             <span v-if="index<httpLinks.length-1">/</span>
             </span>
           </span>
@@ -586,7 +690,7 @@ export default {
             <span v-for="(item,index) in linksZh.split('/')">
               <a :href="httpLinks[index]"
                  class="link-item"
-                 target="_blank">{{item}}</a>
+                 target="_blank">{{ item }}</a>
             <span v-if="index<httpLinks.length-1">/</span>
             </span>
           </span>
@@ -595,52 +699,52 @@ export default {
       <div class="introduce">
         <div class="first-intro">
           <div class="flex">
-            <div class="label">{{$t('page0.footer.fashionDesign')}}</div>
+            <div class="label">{{ $t('page0.footer.fashionDesign') }}</div>
             <div class="content">Cellphone24</div>
           </div>
           <div class="flex">
-            <div class="label">{{$t('page0.footer.fashionTutor')}}</div>
+            <div class="label">{{ $t('page0.footer.fashionTutor') }}</div>
             <div class="content">Meng Siyang</div>
           </div>
           <div class="flex">
-            <div class="label">{{$t('page0.footer.Director')}}</div>
+            <div class="label">{{ $t('page0.footer.Director') }}</div>
             <div class="content">Cellphone24</div>
           </div>
           <div class="flex">
-            <div class="label">{{$t('page0.footer.Photographer')}}</div>
+            <div class="label">{{ $t('page0.footer.Photographer') }}</div>
             <div class="content">Tan Yuxi</div>
           </div>
           <div class="flex">
-            <div class="label">{{$t('page0.footer.MakeupArtist')}}</div>
+            <div class="label">{{ $t('page0.footer.MakeupArtist') }}</div>
             <div class="content">Tong Tong</div>
           </div>
           <div class="flex">
-            <div class="label">{{$t('page0.footer.Model')}}</div>
+            <div class="label">{{ $t('page0.footer.Model') }}</div>
             <div class="content">Hik</div>
           </div>
         </div>
         <div class="second-intro">
           <div class="flex">
-            <div class="label">{{$t('page0.footer.WebDesign')}}</div>
+            <div class="label">{{ $t('page0.footer.WebDesign') }}</div>
             <div class="content">Cellphone24</div>
           </div>
           <div class="flex">
-            <div class="label">{{$t('page0.footer.WebTechnology')}}</div>
+            <div class="label">{{ $t('page0.footer.WebTechnology') }}</div>
             <div class="content">Ding Shiba</div>
           </div>
         </div>
         <div class="third-intro">
           <div class="flex">
-            <div class="label">{{$t('page0.footer.ChineseEditing')}}</div>
+            <div class="label">{{ $t('page0.footer.ChineseEditing') }}</div>
             <div class="content">Cellphone24</div>
           </div>
           <div class="flex">
-            <div class="label">{{$t('page0.footer.Proofreading')}}</div>
+            <div class="label">{{ $t('page0.footer.Proofreading') }}</div>
             <div class="content">Hailey G</div>
           </div>
         </div>
       </div>
-      <div class="copyright">Copyright:琼ICP备2024018151号-1</div>
+      <div class="copyright">琼ICP备2024018151号-1</div>
     </section>
   </div>
 </template>
@@ -781,6 +885,7 @@ export default {
 
   .page-0-area-0::-webkit-scrollbar {
     width: 0px;
+    height: 0px;
   }
 
   .page-0-area-1 {
@@ -990,16 +1095,6 @@ export default {
     height: 100vh;
     background-color: #f0f0f0;
 
-    .list-video {
-      position: absolute;
-      left: 0;
-      top: 0;
-      opacity: 0;
-      z-index: 11;
-      width: 1920px;
-      mix-blend-mode: screen;
-    }
-
     .area-5-title {
       width: 90vw;
       margin: auto;
@@ -1017,7 +1112,6 @@ export default {
     .area-5-movies {
       width: 100vw;
       position: relative;
-      overflow: hidden;
     }
 
     .area-5-1 {
@@ -1036,6 +1130,35 @@ export default {
       left: 10vw;
       top: 0;
 
+    }
+
+    .list-area {
+      width: 80vw;
+      position: absolute;
+      z-index: 15;
+      left: 10vw;
+      top: -100px;
+      display: flex;
+      justify-content: right;
+      padding-right: 80px;
+      .flex{
+        align-items: flex-end;
+        margin-bottom: 10px;
+        transform: translateY(80vh);
+        color: #F5F5F5;
+      }
+      .label {
+        font-family: var(--list-label-big);
+        font-size: 27px;
+
+        //color: #232323;
+        width: 330px;
+        white-space:nowrap;
+      }
+      .content{
+        font-family: var(--list-label-littile);
+        font-size: 12px;
+      }
     }
 
     .area-5-3 {
@@ -1070,19 +1193,23 @@ export default {
       padding: 80px 0px;
       text-align: center;
     }
-    .lianjie{
+
+    .lianjie {
       text-align: center;
-      .links{
+
+      .links {
         width: 70vw;
         margin: auto;
         word-break: break-all;
         line-height: 1.6;
         text-align: left;
+
         .link-item {
           color: #fafafa;
           text-decoration: none;
           font-family: var(--base-content-fontfamilly);
         }
+
         .link-item:hover {
           text-decoration: underline;
           transition: all 0.5s linear;
@@ -1090,7 +1217,8 @@ export default {
       }
 
     }
-    .introduce{
+
+    .introduce {
       width: 70vw;
       margin: 80px auto;
       word-break: break-all;
@@ -1099,14 +1227,16 @@ export default {
       display: flex;
       justify-content: space-between;
 
-      .flex{
+      .flex {
         display: flex;
-        .label{
+
+        .label {
           width: 150px;
         }
       }
     }
-    .copyright{
+
+    .copyright {
       text-align: center;
       padding-bottom: 20px;
     }

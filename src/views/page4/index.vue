@@ -112,7 +112,7 @@ export default {
         ScrollTrigger.create({
           trigger: dom,
           start: "top center+=200",
-          end: "+=2000",
+          end: "+=50000",
           toggleClass: "active",
           scrub: true
         })
@@ -130,7 +130,7 @@ export default {
     createT45() {
       const st45 = ScrollTrigger.create({
         trigger: ".page-4-area-5",
-        start: 'bottom bottom',
+        start: 'bottom+=100 bottom',
         scrub: true,
         onEnter: () => {
           gsap.timeline()

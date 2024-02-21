@@ -26,7 +26,7 @@ export default {
   },
   data(){
     return{
-      current:0,
+      current:1,
       language:"en"
     }
   },
@@ -94,7 +94,7 @@ export default {
   background-color: #fafafa;
   border: 2px solid #232323;
   font-family: MS-Regular;
-  opacity: 0;
+  opacity: 1;
   .first{
     display: flex;
     justify-content: space-between;
