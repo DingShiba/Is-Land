@@ -12,7 +12,10 @@ export default {
     }
   },
   mounted() {
-    this.createTTs()
+    setTimeout(()=>{
+      this.createTTs()
+
+    },1000)
   },
   methods: {
     createTTs() {
@@ -254,7 +257,7 @@ export default {
         </div>
       </div>
       <div class="drifting">
-        <div class="title">
+        <div class="title" style="letter-spacing: -1.6px;">
           <span>{{ $t('page1.area3.title') }}</span>
         </div>
         <div class="text-area">
@@ -293,8 +296,8 @@ export default {
               <img src="./img/area4-7d.png" class="copy-d" width="400" alt="">
             </div>
             <div class="dot-item" @click="handleSelectFloat(3)">
-              <img src="./img/area4-8.webp" width="200" alt="">
-              <img src="./img/area4-8d.png" class="copy-d" width="200" alt="">
+              <img src="./img/area4-8.webp" width="300" alt="">
+              <img src="./img/area4-8d.png" class="copy-d" width="300" alt="">
             </div>
           </div>
         </div>
@@ -330,7 +333,7 @@ export default {
         </div>
         <div class="text-area">
           <div class="title">island is land</div>
-          <div class="">The ama represent another potential image of women in East Asian society—full of strength, vitality, and robust health.</div>
+          <div class="">{{$t('page1.area6.endDescribe')}}</div>
 <!--          <div v-for="item in 6" class="text-item">
             <span>{{ $t(`page1.area6.text${item}`) }}</span>
           </div>-->
@@ -355,8 +358,7 @@ export default {
 
   color: #171717;
   background-color: var(--content-bkcolor);
-  font-family: var(--base-font-family);
-
+  font-family: var(--base-content-fontfamilly);
   .page-header {
     font-family: var(--base-title-fontfamilly);
     font-size: 26px;
@@ -370,7 +372,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f0f0f0;
+    background-color: #fafafa;
 
   }
 
@@ -397,7 +399,7 @@ export default {
 
       .img-item {
         width: max-content;
-        background-color: #fafafa;
+        //background-color: #fafafa;
         height: 100%;
         padding: 12px;
         border-right: 1px solid #171717;
@@ -468,18 +470,16 @@ export default {
     .drifting {
       width: 40vw;
       margin: auto;
-
-
+      padding-bottom: 40px;
       .title {
         width: max-content;
         margin: auto;
         font-family: var(--title-bold-fontfamilly);
         font-size: 30px;
-        border-bottom: 1px solid #171717;
       }
 
       .describe {
-        margin: 20px 0px 46px 0px;
+        margin:20px 0px 30px 0px;
       }
     }
   }
@@ -518,11 +518,11 @@ export default {
       .img-first {
         transform: scale(1.03) translateX(42vw);
         z-index: 5;
-        transition: all 0.5s ease-in-out;
+        transition: all 1s ease-in-out;
 
         img {
           height: 100vh;
-          transition: all 0.5s ease-in-out;
+          transition: all 1s ease-in-out;
         }
       }
 
@@ -533,7 +533,7 @@ export default {
         img {
           height: 100vh;
           transform: translateY(100vh);
-          transition: all 0.5s ease-in-out;
+          transition: all 1s ease-in-out;
         }
       }
 
@@ -542,15 +542,15 @@ export default {
         opacity: 0;
         transform: scale(1.03);
         padding-top: 46px;
-        transition: all 0.5s ease-in-out;
+        transition: all 1s ease-in-out;
 
         .third-container {
           width: 600px;
           overflow: hidden;
-          transition: all 0.5s ease-in-out;
+          transition: all 1s ease-in-out;
 
           img {
-            transition: all 0.5s ease-in-out;
+            transition: all 1s ease-in-out;
             -webkit-clip-path: inset(0% 10% 0% 35%);
             height: calc(100vh - 46px);
             transform: translateX(-35%) translateY(100vh);
@@ -680,8 +680,8 @@ export default {
 
           .dot-item:nth-child(4) {
             position: absolute;
-            left: 200px;
-            top: 50%;
+            left: 140px;
+            top: 53%;
             z-index: 5;
             animation: fudong4 4s linear infinite;
             transition: all 0.5s ease-in-out 0.6s;
@@ -702,8 +702,7 @@ export default {
   .page-1-area-4.first-step {
     .img-first {
       transform: translateX(0px);
-      padding: 0px 20px 20px 20px;
-
+      padding: 0px 12px 12px 12px;
       img {
         height: 88vh;
       }
@@ -740,7 +739,7 @@ export default {
       opacity: 1;
       transform: scale(1);
       animation: imgSecondIn 1s ease-in-out;
-      padding: 0px 20px 20px 20px;
+      padding: 0px 12px 12px 12px;
 
       img {
         height: 88vh;
@@ -835,7 +834,7 @@ export default {
       overflow: hidden;
       display: flex;
       align-items: flex-start;
-      padding: 46px 20px 0px 0px;
+      padding: 12px 12px 0px 0px;
       position: relative;
       border-right: 1px solid #232323;
       border-left: 1px solid #232323;
@@ -874,8 +873,8 @@ export default {
 
       .text-area {
         .first-describe, .second-describe {
-          text-align: center;
-          margin: 10vh auto;
+          text-align: left;
+          margin: 5vh auto;
           opacity: 0;
         }
       }
@@ -904,10 +903,10 @@ export default {
     .text-area {
       position: absolute;
       right: 90px;
-      bottom: 120px;
+      bottom: 200px;
       z-index: 5;
 
-      width: 250px;
+      width: 260px;
       .title{
         text-align: right;
         font-size: 26px;
@@ -925,7 +924,7 @@ export default {
       position: absolute;
       right:0px;
       top:92px;
-      background-color: #fafafa;
+      background-color: #f0f0f0;
       z-index: 3;
       height: calc(100vh - 92px);
       border-top: 1px solid #7F583F;

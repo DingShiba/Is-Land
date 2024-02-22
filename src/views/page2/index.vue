@@ -374,16 +374,14 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f0f0f0;
+  background-color: #fafafa;
 
 }
 
 .page-2 {
-  --base-font-family: MS-EL;
-  --title-family: MS-Bold;
   color: #171717;
-  background-color: #fafafa;
-  font-family: var(--base-font-family);
+  background-color: var(--content-bkcolor);
+  font-family: var(--base-content-fontfamilly);
 }
 
 .page-2-area-1 {
@@ -553,7 +551,7 @@ export default {
         opacity: 0;
         padding: 46px;
         line-height: 1.5;
-        text-align: center;
+        text-align: left;
 
         .describe-2 {
           margin: 23px 0px;
@@ -571,6 +569,7 @@ export default {
   height: 100vh;
   overflow: hidden;
   position: relative;
+  border-bottom: 1px solid #232323;
   .top-draw{
     height: 100vh;
     width: 100vw;
@@ -586,6 +585,7 @@ export default {
   margin-top: 100px;
   display: flex;
   justify-content: center;
+  border-top: 1px solid #232323;
   .left-img{
     width: 70vw;
   }

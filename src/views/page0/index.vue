@@ -356,7 +356,7 @@ export default {
       const st05 = ScrollTrigger.create({
         trigger: ".area-5",
         pin: true,
-        start: "top top",
+        start: "top top+=40",
         end: 'bottom top',
         scrub: true,
         onEnter: () => {
@@ -407,6 +407,7 @@ export default {
               opacity: 1,
             }, {
               opacity: 0,
+              zIndex:-1
             }, "<")
             .to(".move-container", {
               x: -460,
@@ -484,7 +485,7 @@ export default {
       <div class="deep-second">
         <div class="move-area">
           <img class="deep-second-img" src="./img/area3Img1.webp" alt="">
-          <div class="flex" style="justify-content: flex-end;margin-top: 12px">
+          <div class="flex" style="justify-content: flex-end;margin-top: 12px;font-size: 12px;">
             <div class="describe">
               <div class="right-1 describe-item">{{ $t('page0.footer1') }}</div>
               <div class="right-2 describe-item">{{ $t('page0.footer2') }}</div>
@@ -589,10 +590,10 @@ export default {
                      class="look2-video" src="./img/Look2.webm"></video>
               <video @mouseenter="handleMouseEnter"
                      @mouseleave="handleMouseLeave"
-                     class="look3-video" src="./img/Look3.webm"></video>
+                     class="look4-video" src="./img/Look4.webm"></video>
               <video @mouseenter="handleMouseEnter"
                      @mouseleave="handleMouseLeave"
-                     class="look4-video" src="./img/Look4.webm"></video>
+                     class="look3-video" src="./img/Look3.webm"></video>
             </div>
 
 
@@ -660,15 +661,8 @@ export default {
             </div>
 
           </div>
-
         </div>
       </div>
-      <!--      <video class="list-video"
-                   refs="area5Video"
-                   controls
-                   preload>
-              <source src="./img/list-en.webm">
-            </video>-->
     </section>
     <section class="footer">
       <div class="lianxi">
@@ -766,7 +760,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f0f0f0;
+  background-color: var(--title-bkcolor);
   opacity: 0;
 
 }
@@ -860,7 +854,6 @@ export default {
             display: flex;
             justify-content: center;
             align-items: center;
-
           }
 
           .area2texts {
@@ -952,7 +945,6 @@ export default {
       .text-item {
         margin: 40px 20px;
         color: #fafafa;
-        font-family: Rany-normal;
       }
     }
 
@@ -977,7 +969,6 @@ export default {
       .text-item {
         margin: 40px 20px;
         color: #232323;
-        font-family: Rany-normal;
       }
     }
 
@@ -1005,7 +996,7 @@ export default {
     .area-2-2 {
       z-index: 9;
       width: 100%;
-      background-color: #fafafa;
+      background-color: #f0f0f0;
 
       .kongbai {
         height: 60px;
@@ -1073,13 +1064,13 @@ export default {
       text-align: center;
       width: 100vw;
       border-bottom: 2px solid #232323;
-      font-size: 26px;
-      font-family: var(--base-title-fontfamilly);
+      font-size: 20px;
+      font-family: var(--list-label-big);
     }
 
     .area-4-cao-imgs {
       width: 70%;
-      margin: 60px auto;
+      margin: 40px auto;
       display: flex;
       justify-content: space-around;
       align-items: center;
@@ -1098,8 +1089,8 @@ export default {
     .area-5-title {
       width: 90vw;
       margin: auto;
-      padding-top: 10vh;
-      font-family: Rany-Bold;
+      padding-top: 4vh;
+      font-family: MS-Bold;
       font-size: 30px;
 
     }
@@ -1149,7 +1140,7 @@ export default {
       }
       .label {
         font-family: var(--list-label-big);
-        font-size: 27px;
+        font-size: 24px;
 
         //color: #232323;
         width: 330px;
@@ -1188,6 +1179,7 @@ export default {
   .footer {
     color: #fafafa;
     background-color: #232323;
+    margin-top: 50px;
 
     .lianxi {
       padding: 80px 0px;

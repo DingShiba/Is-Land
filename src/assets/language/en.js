@@ -71,7 +71,7 @@ export default {
         describe2:"This harmonious way of life alongside the ocean may have continued for thousands of years, but it remains challenging to pinpoint the specific origins of the ama, especially when it comes to determining the professionalization of their occupation.",
         describe3:"The distinct gender orientation of the ama profession has different theories about its origins. One widely accepted explanation is that, due to women's generally inherent meticulousness and higher subcutaneous fat content, they were more suitable for diving operations before the application of advanced diving suits. It's also suggested that prolonged historical wars led to a decrease in male labor force, causing women to gradually take on more production work. Additionally, ancient Korea once implemented an unfair tax system, resulting in heavier taxes for male labor, thus making it more of a burden for men to work outside the home. Each of these arguments has its merits, and it is difficult to determine which factor is decisive. Nonetheless, over time, the unique professional identity of \"ama\" emerged in the coastal regions of Asia.",
         area3:{
-            title:"Drifting in the air, floating on the water.",
+            title:"DRIFTING IN THE AIR, FLOATING ON THE WATER.",
             describe1:"The design process for this apparel piece's core section was an intricate and iterative journey. The designer aimed for these sections to serve as focal points, providing a visually striking \"floating\" sensation and forming a visual equilibrium with the rest of the garment as a whole.",
             describe2:"After chronic testing, a commonly used aluminum-plated film, often employed for food packaging, was ultimately chosen. This composite aluminum film, more flexible and resilient than typical aluminum film, exhibits significant tear resistance. It allows for sealing using a small electric iron with cotton cloth, offering excellent airtightness. This material is also compatible with UV printing, resulting in a matte texture with a granular appearance after coloring. Injecting helium into the aluminum foil enhances its buoyancy, giving it even the ability to truly float."
         },
@@ -85,8 +85,8 @@ export default {
             text3:"\"I am a lucky old lady, still living in this world.\"",
             text4:"\"I need to die sooner.\"",
             text5:"\"But once the Thanatos comes, I will run away.\"",
-            text6:"\"I will make an effort to escape.\""
-
+            text6:"\"I will make an effort to escape.\"",
+            endDescribe:"The ama represent another potential image 7of women in East Asian society—full of strength, vitality, and robust health."
         },
         area7:{
             text:"Continue to swipe down to the next page"
@@ -98,12 +98,13 @@ export default {
         describe3:"Viewed from the water's surface, the world appears divided by color, becoming deceptively simple. The sight is composed solely of the sky's cerulean blue above and the ocean's azure blue below. The ama, tethered to their buoys, resemble an iceberg, with only a portion visible above the sea's surface, while the more crucial part extends deeply beneath the water. The ama shuttle back and forth between their \"island\" and the seabed, placing the precious marine harvest into their surface-level nets. If encountering any unforeseen circumstance in the sea, the ama can swiftly return along the direction of the safety rope. For the ama, the floating island on the sea's surface is the comforting land that puts their hearts at ease."
     },
     page3:{
-        describe1:"\"Present yourself nicely. Then the conch will say, \n" +
-            "'This grandma is so pretty,' and it will go with you.\"\n" +
-            "\"I have done that, but I still don't look very good.\"\n" +
-            "\"Even if I'm not pretty, I'm still very popular.”",
+        describe1:"\"Present yourself nicely. Then the conch will say,",
+        describe2:"'This grandma is so pretty,' and it will go with you.\"",
+        describe3:"\"I have done that, but I still don't look very good.\"",
+        describe4:"\"Even if I'm not pretty, I'm still very popular.”",
+
         area3:{
-            title:"ISLAND: comes from Continent",
+            title:"ISLAND: COME FROM CONTINENT",
             firstDescribe:"\"Is Land\" (originally \"Island\") is a series of clothing designs that began fermenting in January 2019 and was completed, including shooting and packaging, by January 2020. The \"floating sensation\" reflected in the clothing and the macroscopic \"sense of balance\" are the exclusive interpretations offered by the designer as a tribute to the ama.",
             secondDescribe:"This is a conceptual clothing piece where the concept outweighs practical wearability. The designer invested more time in preliminary research and mid-term experimentation. Initially, some experiments on the concepts of \"floating\" and \"balance\" were conducted to define the concept. This was followed by long-term material experiments to achieve the desired effect. Additionally, the designer deconstructed the wetsuit, refined its crucial structural lines, and applied them as elements in the clothing design."
         }

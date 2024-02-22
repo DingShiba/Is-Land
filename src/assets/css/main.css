@@ -1,7 +1,7 @@
 body{
     margin: 0 !important;
     scroll-behavior: smooth;
-
+    line-height: 1.2;
 }
 body::-webkit-scrollbar{
     width: 0px;
@@ -14,10 +14,10 @@ html::-webkit-scrollbar{
     --base-title-fontfamilly:Rany-normal;
     --base-content-fontfamilly:MS-THIN;
     --title-bold-fontfamilly: MS-SB;
-    --title-bkcolor:#f0f0f0;
-    --content-bkcolor:#fafafa;
+    --title-bkcolor:#fafafa;
+    --content-bkcolor:#f0f0f0;
 
-    --ruchang-describe-fontfamilly:Rany-normal;
+    --ruchang-describe-fontfamilly:Rany-Light;
     --list-label-big:MS-Medium;
     --list-label-littile:MS-Light;
 }
@@ -25,8 +25,8 @@ html::-webkit-scrollbar{
     --base-title-fontfamilly:Rany-normal;
     --base-content-fontfamilly:思源宋EL;
     --title-bold-fontfamilly: MS-SB;
-    --title-bkcolor:#f0f0f0;
-    --content-bkcolor:#fafafa;
+    --title-bkcolor:#fafafa;
+    --content-bkcolor:#f0f0f0;
 
     --ruchang-describe-fontfamilly:思源黑EL;
     --list-label-big:思源宋Bold;
@@ -43,6 +43,10 @@ html::-webkit-scrollbar{
 @font-face {
     font-family: Rany-normal;
     src:url("../fonts/Rany.otf");
+}
+@font-face {
+    font-family: Rany-Light;
+    src:url("../fonts/Rany-Light.otf");
 }
 @font-face {
     font-family: MS-Regular;

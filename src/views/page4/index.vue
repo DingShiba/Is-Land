@@ -11,7 +11,9 @@ export default {
     }
   },
   mounted() {
-    this.createTTS()
+    setTimeout(()=>{
+      this.createTTS()
+    },1000)
   },
   methods: {
     createTTS() {
@@ -130,7 +132,7 @@ export default {
     createT45() {
       const st45 = ScrollTrigger.create({
         trigger: ".page-4-area-5",
-        start: 'bottom+=100 bottom',
+        start: 'bottom-=100 bottom',
         scrub: true,
         onEnter: () => {
           gsap.timeline()
@@ -237,6 +239,7 @@ export default {
   color: #171717;
   background-color: #fafafa;
   font-family: var(--base-font-family);
+  text-align: left;
 }
 
 .page-header {
@@ -281,7 +284,7 @@ export default {
 }
 
 .page-4-area-2 {
-  height: 50vh;
+  height: 60vh;
   width: 100vw;
   display: flex;
   align-items: center;
@@ -289,7 +292,7 @@ export default {
   border-bottom: 1px solid #171717;
 
   .text-area-show {
-    width: 75vw;
+    width: 59vw;
     height: max-content;
 
     .second-describe {
@@ -361,7 +364,6 @@ export default {
     }
 
     .end-describe {
-      text-align: center;
       opacity: 0;
 
       .second-describe {
@@ -390,11 +392,11 @@ export default {
     .text-area {
       width: 888px;
       margin-top: 100px;
-      text-align: center;
       height: max-content;
 
       .second-describe {
-        margin-top: 46px;
+        margin-top: 24px;
+        text-align: right;
       }
     }
   }

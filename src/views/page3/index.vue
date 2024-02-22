@@ -10,10 +10,10 @@ export default {
     return {
       stArr: [],
       newsImg: [1, 2, 3, 4],
-      currentImg: 0,
-      pptVisible:false,
-      xNum:100,
-      moveDistance:0
+      currentImg: 1,
+      pptVisible: false,
+      xNum: 100,
+      moveDistance: 0
     }
   },
   mounted() {
@@ -38,16 +38,26 @@ export default {
         end: "+=2000",
         onUpdate: (self) => {
           const _imgArea = document.querySelector(".tarns-area .img-area"),
-              _tarnsArea = document.querySelector(".page-3-area-1 .tarns-area")
-          if (self.progress > 0.1) {
+              _tarnsArea = document.querySelector(".page-3-area-1 .tarns-area"),
+              _selectedImg=document.querySelector('.page-3-area-1 .selected-img')
+          /*if (self.progress > 0.1) {
             _imgArea.classList.add("active")
+            _selectedImg.classList.add("fly-hidden")
           } else {
             _imgArea.classList.remove('active')
-          }
-          if (self.progress > 0.2) {
+            _selectedImg.classList.remove('fly-hidden')
+          }*/
+          if (self.progress > 0.1) {
             _imgArea.classList.add("second-step")
+            _selectedImg.classList.add("fly-hidden")
           } else {
             _imgArea.classList.remove('second-step')
+            _selectedImg.classList.remove('fly-hidden')
+          }
+          if (self.progress > 0.2) {
+            _imgArea.classList.add("third-step")
+          } else {
+            _imgArea.classList.remove('third-step')
           }
           if (self.progress > 0.3) {
             _imgArea.classList.add("third-step")
@@ -55,21 +65,16 @@ export default {
             _imgArea.classList.remove('third-step')
           }
           if (self.progress > 0.4) {
-            _imgArea.classList.add("third-step")
-          } else {
-            _imgArea.classList.remove('third-step')
-          }
-          if (self.progress > 0.5) {
             _tarnsArea.classList.add("force-step")
           } else {
             _tarnsArea.classList.remove('force-step')
           }
-          if (self.progress > 0.6) {
+          if (self.progress > 0.5) {
             _tarnsArea.classList.add("five-step")
           } else {
             _tarnsArea.classList.remove('five-step')
           }
-          if (self.progress > 0.7) {
+          if (self.progress > 0.6) {
             _tarnsArea.classList.add("six-step")
           } else {
             _tarnsArea.classList.remove('six-step')
@@ -194,60 +199,84 @@ export default {
       })
       this.stArr.push(st33)
     },
-    handleOpenZhedie(){
-      if(!this.pptVisible){
-        gsap.to(".zhedie-area",{
-          height:"85vh",
-          onComplete:()=>{
-            this.pptVisible=true
+    handleOpenZhedie() {
+      if (!this.pptVisible) {
+        gsap.to(".zhedie-area", {
+          height: "85vh",
+          onComplete: () => {
+            this.pptVisible = true
           }
         })
-        gsap.set(".zhedie-area .trans-move-area",{
-          x:this.xNum,
-
+        gsap.set(".zhedie-area .trans-move-area", {
+          x: this.xNum,
         })
       }
 
     },
-    handleCloseZhedie(){
-      gsap.to(".zhedie-area",{
-        height:0,
-        onComplete:()=>{
-          this.pptVisible=false
-          this.xNum=100
+    handleCloseZhedie() {
+      gsap.to(".zhedie-area", {
+        height: 0,
+        onComplete: () => {
+          this.pptVisible = false
+          this.xNum = 100
         }
       })
     },
-    handleDragStrat(e){
-      let _this=this;
-      let drag=document.querySelector('.zhedie-area .trans-move-area')
+    handleDragStrat(e) {
+      let _this = this;
+      let drag = document.querySelector('.zhedie-area .trans-move-area')
       let diffX = e.clientX;
       document.onmousemove = function (e) {
         // 元素的 clientX 和 clientY 默认是以元素左上角位置来计算的，这里需要向左向上同时减去鼠标点击的位置差，从而可以保证鼠标始终显示在拖拽元素时的位置
-        _this.moveDistance=e.clientX - diffX;
+        _this.moveDistance = e.clientX - diffX;
         // 边界处理，防止超出各个边
-       /* if (left < 0) {
-          left = 0;
-        } else if (left > window.innerWidth - drag.offsetWidth) {
-          left = window.innerWidth - drag.offsetWidth;
-        }*/
-        let _xTrue=_this.xNum+_this.moveDistance
-        if(_xTrue>100){
-          _xTrue=100
+        /* if (left < 0) {
+           left = 0;
+         } else if (left > window.innerWidth - drag.offsetWidth) {
+           left = window.innerWidth - drag.offsetWidth;
+         }*/
+        let _xTrue = _this.xNum + _this.moveDistance
+        if (_xTrue > 100) {
+          _xTrue = 100
         }
-        drag.style.setProperty("transform",`translateX(${_xTrue}px)`);
+        drag.style.setProperty("transform", `translateX(${_xTrue}px)`);
       };
 
     },
-    handleDragEnd(e){
-      this.xNum+=this.moveDistance;
-      if(this.xNum>100){
-        this.xNum=100
+    handleDragEnd(e) {
+      this.xNum += this.moveDistance;
+      if (this.xNum > 100) {
+        this.xNum = 100
       }
-      this.moveDistance=0;
+      this.moveDistance = 0;
 
-      document.onmousemove=null
-    }
+      document.onmousemove = null
+    },
+    handleSelectImg(index,e) {
+      const _domLeft = e.srcElement.getBoundingClientRect().left + 332 / 2;
+      const _distance =  (this.currentImg+3)*(332+60) - (window.innerWidth/2 -150 -332/2) -
+          (window.innerWidth / 2 - _domLeft -150);
+      gsap.timeline()
+          .to(".page-3-area-1 .new-imgs .move-area", {
+            x: -_distance,
+          })
+          .to(".page-3-area-1 .new-imgs", {
+            opacity:0,
+            zIndex:3
+          })
+      this.currentImg=index
+    },
+    handleOpenListImg(){
+     const _dis= (this.currentImg+3)*(332+60) - (window.innerWidth/2 -150 -332/2);
+      gsap.timeline()
+          .set(".new-imgs .move-area",{
+            x:-_dis
+          })
+          .to(".page-3-area-1 .new-imgs",{
+            opacity:1,
+            zIndex:10
+          })
+    },
   },
   unmounted() {
     this.stArr.forEach(item => {
@@ -272,14 +301,20 @@ export default {
           <img src="./img/area1-1.webp" alt="" class="base-img">
           <!--          <img src="./img/news-1.webp" alt="" class="float-img active-img">-->
           <div class="second-area">
-            <div style="height: 100vh;background-color: #fafafa;">
+            <div style="height: 100vh;background-color: #f0f0f0;">
               <div class="img-list">
                 <img src="./img/area1-3.webp" alt="">
                 <img src="./img/area1-4.webp" alt="">
                 <img src="./img/area1-5.webp" alt="">
                 <img src="./img/area1-6.webp" alt="">
               </div>
-              <div class="text-describe">{{ $t('page3.describe1') }}</div>
+              <div class="text-describe">
+                <div>{{ $t('page3.describe1') }}</div>
+                <div>{{ $t('page3.describe2') }}</div>
+                <div>{{ $t('page3.describe3') }}</div>
+                <div>{{ $t('page3.describe4') }}</div>
+              </div>
+
             </div>
             <div class="end-img">
               <img src="./img/area1-7.webp" width="100%" alt="">
@@ -287,20 +322,23 @@ export default {
           </div>
         </div>
       </div>
+      <div class="selected-img">
+        <img class="selected-img-item"
+             @click="handleOpenListImg"
+             :src="getImage('news-'+currentImg+'.webp')" alt="">
+      </div>
       <div class="new-imgs">
-        <div class="img-item" v-for="item in newsImg">
-          <img :src="getImage('news-'+item+'.webp')" alt="">
-          <div class="border-dom"></div>
+        <div class="move-area">
+          <div class="img-item" v-for="item in newsImg" @mousedown="handleSelectImg(item,$event)">
+            <img :src="getImage('news-'+item+'.webp')" alt="">
+          </div>
+          <div class="img-item"  v-for="item in newsImg" @mousedown="handleSelectImg(item,$event)">
+            <img :src="getImage('news-'+item+'.webp')" alt="">
+          </div>
+          <div class="img-item" v-for="item in newsImg" @mousedown="handleSelectImg(item,$event)">
+            <img :src="getImage('news-'+item+'.webp')" alt="">
+          </div>
         </div>
-        <div class="img-item" v-for="item in newsImg">
-          <img :src="getImage('news-'+item+'.webp')" alt="">
-          <div class="border-dom"></div>
-        </div>
-        <div class="img-item" v-for="item in newsImg">
-          <img :src="getImage('news-'+item+'.webp')" alt="">
-          <div class="border-dom"></div>
-        </div>
-
       </div>
     </section>
     <section class="page-3-area-2">
@@ -332,7 +370,7 @@ export default {
     </section>
     <section class="zhedie-area" @click.stop="handleOpenZhedie">
       <div class="trans-move-area"
-           >
+      >
         <img v-for="item in 25" :src="getImage('ppt/ppt'+item+'.webp')" width="100%" alt="">
       </div>
       <div class="visible-dom" @mouseup="handleDragEnd"
@@ -355,6 +393,10 @@ export default {
 </template>
 
 <style scoped lang="less">
+.page-3{
+  font-family: var(--base-content-fontfamilly);
+  background-color: var(--content-bkcolor);
+}
 .page-header {
   font-family: Rany-normal;
   font-size: 16px;
@@ -369,7 +411,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f0f0f0;
+  background-color: var(--title-bkcolor);
 
 }
 
@@ -422,33 +464,13 @@ export default {
         transition: all 1s ease-in-out;
       }
 
-      @keyframes floatImg {
-        0% {
-          transform: translateX(5px);
-        }
-        25% {
-          transform: translateX(-5px);
-        }
-        50% {
-          transform: translateY(5px);
-        }
-        75% {
-          transform: translateY(-5px);
-        }
-        100% {
-          transform: translateX(5px);
-        }
-      }
 
-      .active-img {
-        animation: floatImg 4s linear infinite;
-      }
 
       .second-area {
         width: 100%;
         height: 100vh;
         position: absolute;
-        background-color: #fafafa;
+        background-color: #f0f0f0;
         z-index: 5;
         opacity: 0;
         left: 0;
@@ -472,11 +494,11 @@ export default {
           }
 
           img:nth-child(2) {
-            transition-delay: 0.5s;
+            transition-delay: 0.8s;
           }
 
           img:nth-child(3) {
-            transition-delay: 0.5s;
+            transition-delay: 0.8s;
           }
 
           img:nth-child(4) {
@@ -485,9 +507,10 @@ export default {
         }
 
         .text-describe {
-          width: 400px;
+          width: 440px;
           margin: 100px auto;
           text-align: center;
+          line-height: 2;
         }
 
         .end-img {
@@ -597,18 +620,79 @@ export default {
     }
   }
 
-  .new-imgs {
-    width: 500vw;
+  .selected-img {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
     display: flex;
     align-items: center;
+    left: 0;
+    top: 0;
+    z-index: 5;
+    transition: opacity 0.5s linear;
+
+    img {
+      width: 330px;
+      height: 504px;
+      margin: auto;
+      position: relative;
+      left:-150px;
+      cursor: pointer;
+    }
+    @keyframes floatImg {
+      0% {
+        transform: translateX(5px);
+      }
+      25% {
+        transform: translateX(-5px);
+      }
+      50% {
+        transform: translateY(5px);
+      }
+      75% {
+        transform: translateY(-5px);
+      }
+      100% {
+        transform: translateX(5px);
+      }
+    }
+
+    .selected-img-item {
+      animation: floatImg 4s linear infinite;
+    }
+  }
+.selected-img.fly-hidden{
+  opacity: 0;
+
+}
+  .new-imgs {
+    width: 100vw;
     position: absolute;
     left: 0;
-    top: 100px;
+    top: 0px;
+
+    z-index: 3;
+    opacity: 0;
+    height: 100vh;
+    overflow: hidden;
+
+    background-color: rgba(255, 255, 255, .8);
+
+    .move-area {
+      display: flex;
+      align-items: center;
+      height: 100vh;
+      gap: 60px;
+      width: max-content;
+      transform: translateX(-930px);
+    }
 
     .img-item {
+      border: 1px solid #232323;
 
       img {
-        width: 600px;
+        width: 330px;
+        height: 504px;
       }
 
       .border-dom {
@@ -619,6 +703,9 @@ export default {
       }
     }
 
+    .img-item:hover {
+      border-width: 2px;
+    }
   }
 }
 
@@ -686,11 +773,11 @@ export default {
   .container {
     display: flex;
     justify-content: space-between;
-    background-color: #fafafa;
     border-bottom: 1px solid #171717;
 
     .left-video {
       width: 40vw;
+      border-right: 1px solid #232323;
       //mix-blend-mode: screen;
     }
 
@@ -699,11 +786,10 @@ export default {
       padding: 100px;
       line-height: 1.5;
       opacity: 0;
-      font-family: Rany-normal;
 
       .title {
         cursor: pointer;
-        font-family: Rany-Bold;
+        font-family: var(--title-bold-fontfamilly);
         width: max-content;
         font-size: 25px;
         border-bottom: 1px solid #171717;
@@ -725,7 +811,8 @@ export default {
   background-color: #cbcbcb;
   overflow: hidden;
   position: relative;
-  .visible-dom{
+
+  .visible-dom {
     width: 100%;
     height: 100%;
     left: 0;
@@ -733,22 +820,26 @@ export default {
     z-index: 5;
     position: absolute;
   }
-  .trans-move-area{
+
+  .trans-move-area {
     height: calc(85vh - 48px);
     display: flex;
     width: max-content;
     padding: 12px 0px;
     transform: translateX(100px);
-    img{
+
+    img {
       border-top: 1px solid #232323;
       border-left: 1px solid #232323;
       border-bottom: 1px solid #232323;
     }
-    img:nth-child(25){
+
+    img:nth-child(25) {
       border-right: 1px solid #232323;
     }
   }
-  .footer{
+
+  .footer {
     text-align: center;
     padding: 12px 0;
   }
@@ -757,8 +848,7 @@ export default {
 .page-3-area-4 {
   height: 100vh;
   width: 100vw;
-  background-color: #fafafa;
-
+margin-bottom: 20px;
   .content-area {
     width: 100%;
     display: flex;
