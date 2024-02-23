@@ -47,17 +47,16 @@ export default {
       this.createT5()
     },
     handleWeel() {
-      gsap.to('.ruchang-back', {
+      gsap.set('.ruchang-back', {
         opacity: 0.3,
-        duration: 2,
-        ease: "power1.inOut"
       })
-      gsap.to('.area-1-video-2', {
+      gsap.set('.area-1-video-2', {
         opacity: 1,
-        duration: 2,
-        ease: "power1.inOut"
       })
       this.$refs.biaotiVideo.play()
+    },
+    toggleLanguage(){
+      this.$emit("toggleLanguage")
     },
     createT0() {
       const stg0 = ScrollTrigger.create({
@@ -67,17 +66,22 @@ export default {
         end: "+=1080",
         scrub: true,
         scroller: ".page-0-area-0",
-        onUpdate: () => {
+        onUpdate: (self) => {
           const _top = document.querySelector('.in-sce').getBoundingClientRect().top
           this.$refs.biaotiVideo.style.setProperty("transform", `translateY(${-_top}px)`)
         },
         animation: gsap.timeline()
             .to('.ru-chang', {
+              y: '-50vh',
+            })
+            .fromTo(".ru-chang .area-1-video-2", {
+              opacity: 1
+            }, {
+              opacity: 0
+            },"<")
+            .to('.ru-chang', {
               y: '-100vh',
             })
-            .to(".area-1-video-2", {
-              opacity: 0
-            }, "<")
             .to(".page-0-area-1 .deep-second", {
               scale: 1
             }, "<")
@@ -115,7 +119,8 @@ export default {
               zIndex: -1,
               onComplete: () => {
                 gsap.to(".menu-nav", {
-                  opacity: 1
+                  opacity: 1,
+                  zIndex:99999999
                 })
               }
             })
@@ -360,37 +365,37 @@ export default {
         end: 'bottom top',
         scrub: true,
         onEnter: () => {
-          const _doms=document.querySelectorAll(".area-5 .list-area .flex")
-          _doms.forEach((item,index)=>{
-            if(index>1){
-              gsap.to(item,{
-                y:0,
-                delay:index*0.05,
-                duration:1
+          const _doms = document.querySelectorAll(".area-5 .list-area .flex")
+          _doms.forEach((item, index) => {
+            if (index > 1) {
+              gsap.to(item, {
+                y: 0,
+                delay: index * 0.05,
+                duration: 1
               })
             }
 
           })
           gsap.timeline()
-              .to(".area-5 .list-area .first-flex",{
-                y:0,
-                duration:1
+              .to(".area-5 .list-area .first-flex", {
+                y: 0,
+                duration: 1
               })
-              .to(".area-5 .list-area .second-flex",{
-                y:0,
-                delay:0.1,
-                duration:1
-              },"<")
-              .to(".area-5 .list-area .first-flex",{
-                color:"#232323",
-                duration:0.2,
-                delay:0.8
-              },"<")
-              .to(".area-5 .list-area .second-flex",{
-                color:"#232323",
-                duration:0.2,
-                delay:0
-              },"<")
+              .to(".area-5 .list-area .second-flex", {
+                y: 0,
+                delay: 0.1,
+                duration: 1
+              }, "<")
+              .to(".area-5 .list-area .first-flex", {
+                color: "#232323",
+                duration: 0.2,
+                delay: 0.8
+              }, "<")
+              .to(".area-5 .list-area .second-flex", {
+                color: "#232323",
+                duration: 0.2,
+                delay: 0
+              }, "<")
 
         },
         animation: gsap.timeline()
@@ -407,7 +412,7 @@ export default {
               opacity: 1,
             }, {
               opacity: 0,
-              zIndex:-1
+              zIndex: -1
             }, "<")
             .to(".move-container", {
               x: -460,
@@ -468,7 +473,7 @@ export default {
                     {{ $t('page0.textArea') }}
                   </div>
                   <div class="toggleLanguage">
-                    <a style="text-decoration: underline;">切换成中文</a>
+                    <a style="text-decoration: underline;cursor: pointer" @click="toggleLanguage">{{language=='en'?'切换成中文':'Switch to English'}}</a>
                   </div>
                 </div>
                 <div class="descripe">
@@ -511,6 +516,9 @@ export default {
         <div class="text-item">
           <span>{{ $t('page0.area2.fixed2') }}</span>
         </div>
+        <div class="bg-img">
+          <img src="./img/area-2-2.webp" width="100%" alt="">
+        </div>
       </div>
       <div class="area-2-copy-text">
         <div class="text-item">
@@ -520,9 +528,9 @@ export default {
           <span>{{ $t('page0.area2.fixed2') }}</span>
         </div>
       </div>
-      <div class="area-2-footer-bg">
+<!--      <div class="area-2-footer-bg">
 
-      </div>
+      </div>-->
       <div class="area-2-1 area-2-item">
         <img src="./img/area-2-1.webp" width="100%" height="100%" alt="">
       </div>
@@ -941,7 +949,14 @@ export default {
       left: 5vw;
       overflow: hidden;
       bottom: 50px;
-
+      .bg-img{
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+        z-index: -1;
+        left:0;
+        bottom: 0;
+      }
       .text-item {
         margin: 40px 20px;
         color: #fafafa;
@@ -1132,21 +1147,23 @@ export default {
       display: flex;
       justify-content: right;
       padding-right: 80px;
-      .flex{
+
+      .flex {
         align-items: flex-end;
         margin-bottom: 10px;
         transform: translateY(80vh);
         color: #F5F5F5;
       }
+
       .label {
         font-family: var(--list-label-big);
         font-size: 24px;
 
-        //color: #232323;
-        width: 330px;
-        white-space:nowrap;
+      //color: #232323; width: 330px;
+        white-space: nowrap;
       }
-      .content{
+
+      .content {
         font-family: var(--list-label-littile);
         font-size: 12px;
       }

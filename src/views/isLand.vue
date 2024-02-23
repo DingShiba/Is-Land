@@ -72,7 +72,7 @@ export default {
       </div>
     </div>
   </div>
-  <page0 v-if="current==0" :language="language"></page0>
+  <page0 v-if="current==0" :language="language" @toggleLanguage="handleToggleLanguage"></page0>
   <page1 v-if="current==1" :language="language"></page1>
   <page2 v-if="current==2" :language="language"></page2>
   <page3 v-if="current==3" :language="language"></page3>
@@ -90,7 +90,8 @@ export default {
   position: fixed;
   left: 150px;
   top:calc(50vh - 100px);
-  z-index: 999999999;
+  //z-index: 999999999;
+  z-index: 0;
   background-color: #fafafa;
   border: 2px solid #232323;
   font-family: MS-Regular;
