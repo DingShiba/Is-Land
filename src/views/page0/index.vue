@@ -55,7 +55,7 @@ export default {
       })
       this.$refs.biaotiVideo.play()
     },
-    toggleLanguage(){
+    toggleLanguage() {
       this.$emit("toggleLanguage")
     },
     createT0() {
@@ -78,7 +78,7 @@ export default {
               opacity: 1
             }, {
               opacity: 0
-            },"<")
+            }, "<")
             .to('.ru-chang', {
               y: '-100vh',
             })
@@ -120,7 +120,7 @@ export default {
               onComplete: () => {
                 gsap.to(".menu-nav", {
                   opacity: 1,
-                  zIndex:99999999
+                  zIndex: 99999999
                 })
               }
             })
@@ -263,7 +263,11 @@ export default {
         animation: gsap.timeline()
             .to('.area-2-1', {
               scale: 1.2,
-              x: -100
+              x: -100,
+              y:100,
+            })
+            .to(".area-2 .beizhu",{
+              opacity:1
             })
             .to(".area-2-2", {
               y: '-50vh'
@@ -279,7 +283,9 @@ export default {
             .to(".area-2-4", {
               y: -50
             })
-
+            .to(".area-2 .beizhu",{
+              y: -50
+            },"<")
             .to(".area-2-footer-bg", {
               clipPath: "inset(0px 0px 100% 0px)"
             })
@@ -289,6 +295,9 @@ export default {
             .to(".area-2-4", {
               y: -300
             }, "<")
+            .to(".area-2 .beizhu",{
+              y: -300
+            },"<")
             .to(".area-2-4", {
               y: -350
             })
@@ -427,6 +436,10 @@ export default {
     handleMouseLeave(e) {
       e.srcElement.pause()
       e.srcElement.currentTime = 0
+    },
+    getImage(name) {
+      const _url = new URL(`./img/${name}`, import.meta.url)
+      return _url.pathname
     }
   },
   unmounted() {
@@ -473,7 +486,8 @@ export default {
                     {{ $t('page0.textArea') }}
                   </div>
                   <div class="toggleLanguage">
-                    <a style="text-decoration: underline;cursor: pointer" @click="toggleLanguage">{{language=='en'?'切换成中文':'Switch to English'}}</a>
+                    <a style="text-decoration: underline;cursor: pointer"
+                       @click="toggleLanguage">{{ language == 'en' ? '切换成中文' : 'Switch to English' }}</a>
                   </div>
                 </div>
                 <div class="descripe">
@@ -528,12 +542,13 @@ export default {
           <span>{{ $t('page0.area2.fixed2') }}</span>
         </div>
       </div>
-<!--      <div class="area-2-footer-bg">
+      <!--      <div class="area-2-footer-bg">
 
-      </div>-->
+            </div>-->
       <div class="area-2-1 area-2-item">
         <img src="./img/area-2-1.webp" width="100%" height="100%" alt="">
       </div>
+
       <div class="area-2-2 area-2-item ">
         <div class="text-describe">
           <div class="text-1 text-item">
@@ -550,6 +565,8 @@ export default {
 
         </div>
       </div>
+      <div class="beizhu">{{$t('page0.area2.beizhu')}}</div>
+
       <div class="area-2-3 area-2-item ">
         <div class="ba-img">
           <img src="./img/area-2-2.webp" width="100%" alt="">
@@ -569,10 +586,10 @@ export default {
         <span>Island is land</span>
       </div>
       <div class="area-4-cao-imgs">
-        <img class="cao-img-item cao-img-item1" src="./img/area-4-1.webp" alt="">
-        <img class="cao-img-item cao-img-item2" src="./img/area-4-2.webp" alt="">
-        <img class="cao-img-item cao-img-item3" src="./img/area-4-3.webp" alt="">
-        <img class="cao-img-item cao-img-item4" src="./img/area-4-4.webp" alt="">
+        <img v-for="item in 4"
+             class="cao-img-item"
+             :class="'cao-img-item'+item"
+             :src="getImage(`area4-${item}-${language}.webp`)" alt="">
       </div>
     </section>
     <section class="area-5" style="overflow: hidden">
@@ -868,6 +885,14 @@ export default {
             height: 0;
             overflow: hidden;
 
+            .toggleLanguage, .date-time {
+              width: 200px;
+            }
+
+            .toggleLanguage {
+              text-align: right;
+            }
+
             .text-label {
               width: 505px;
             }
@@ -941,7 +966,6 @@ export default {
     border-top: 1px solid #171717;
     position: relative;
 
-
     .area-2-footer-text {
       position: absolute;
       z-index: 11;
@@ -949,30 +973,22 @@ export default {
       left: 5vw;
       overflow: hidden;
       bottom: 50px;
-      .bg-img{
+
+      .bg-img {
         width: 100vw;
         height: 100vh;
         position: absolute;
         z-index: -1;
-        left:0;
+        left: 0;
         bottom: 0;
       }
+
       .text-item {
         margin: 40px 20px;
         color: #fafafa;
       }
     }
 
-    .area-2-footer-bg {
-      position: absolute;
-      z-index: 10;
-      width: 600px;
-      height: 247px;
-      left: 5vw;
-      bottom: 50px;
-      background-color: #171717;
-      backdrop-filter: blur(5px);
-    }
 
     .area-2-copy-text {
       position: absolute;
@@ -1007,7 +1023,16 @@ export default {
         top: 0;
       }
     }
-
+    .beizhu{
+      width: 90%;
+      position: absolute;
+      left: 5%;
+      top: 90px;
+      text-align: right;
+      font-size: 12px;
+      z-index: 9;
+      opacity: 0;
+    }
     .area-2-2 {
       z-index: 9;
       width: 100%;
@@ -1039,7 +1064,6 @@ export default {
       z-index: 8;
       left: 0;
       top: 110px;
-      overflow: hidden;
       height: calc(100vh - 110px);
 
       .ba-img {
@@ -1159,8 +1183,7 @@ export default {
         font-family: var(--list-label-big);
         font-size: 24px;
 
-      //color: #232323; width: 330px;
-        white-space: nowrap;
+      //color: #232323; width: 330px; white-space: nowrap;
       }
 
       .content {

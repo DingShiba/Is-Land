@@ -15,6 +15,7 @@ export default {
             describe1:"Eking out a living from the ocean has never been an easy task. The underwater environment is exceedingly intricate. Ama not only have to guard against potential attacks, but also maneuver carefully amidst sharp underwater rocks and resilient sea grass. A highly skilled ama requires more than just adept water skills acquired from extensive training; she also needs to be resolute and meticulous.",
             describe2:"Even for a highly skilled ama, it is difficult to completely guard against tragedies caused by clothing or tools getting caught on rocks, leading to fatal entrapment. Hence, in ancient times, ama often dived naked or simply wore thin garments when working. In the modern era, form-fitting silicone wetsuits have provided ama with comprehensive protection, enabling them to work more effectively and confidently in the water.",
             describe3:"As a traditional primary industry, the tools used by the ama are neither numerous nor complex. In addition to a well-fitting wetsuit, they require a set of adept tools to pry the robust muscles of the mollusks, as well as a highly visible \"buoyancy system\" from the sea surface.",
+            beizhu:"Source of the image: Internet: Exact origin could not be traced",
             fixed1:"The so-called \"buoyancy system\" generally consists of a float on the water surface and a net with storage functionality. Some ama directly use a sturdy, oversized wooden barrel to serve both functions.",
             fixed2:"During work, this \"system\" quietly drifts on the sea, firmly tethered to the ama by a robust safety rope, as the ama tirelessly shuttles between the seabed and her watery \"island\". Day after day of ebb and flow, the ama earns for herself status and prosperity."
         },
@@ -46,10 +47,6 @@ export default {
             content13:'extra special thanks',
             label14:"Pomfrets",
             label15:'Prawns'
-
-
-
-
         },
         footer:{
             lianxi:"Contact me",
