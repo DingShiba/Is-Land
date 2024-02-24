@@ -76,6 +76,12 @@ export default {
             describe1:"Many ama suffer from various occupational diseases, commonly affecting the waist, legs, or the cardiopulmonary region. Nevertheless, the honed physique developed over the years also contributes to the ama's longer life expectancy compared to the average person. Ama culture emphasizes an independent and strong female spirit, praising friendships among women, thus fostering a strong sense of community.",
             describe2:"The ama fear neither winds and waves nor fierce beasts, nor do they fear invaders. Since 1932, the ama of Jeju Island in South Korea have led hundreds of struggles against Japanese colonial aggression, constituting the largest female-led anti-Japanese salvation movement in Korean history. Subsequently, at the starting point of this movement, the South Korean government constructed the Ama Resistance Memorial Park and Ama Museum at 3204-1, Old Joe-ri, Geumdo-myeon, Jeju Island, to commemorate the resistance of the ama against Japanese colonialism."
         },
+        cf1:"\"I am fortunate. My children all passed away before me.\"",
+        cf2:"\"After my husband passed, my three children also left with him.\"",
+        cf3:"\"I am a lucky old lady, still living in this world.\"",
+        cf4:"\"I need to die sooner.\"",
+        cf5:"\"But once the Thanatos comes, I will run away.\"",
+        cf6:"\"I will make an effort to escape.\"",
         area6:{
             text1:"\"I am fortunate. My children all passed away before me.\"\n",
             text2:"\"After my husband passed, my three children also left with him.\"",

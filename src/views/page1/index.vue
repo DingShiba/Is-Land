@@ -219,14 +219,14 @@ export default {
       <div class="img-container img-item-2">
         <div class="img-item ">
           <div class="fix-container">
-            <img src="./img/area1-2.webp" height="100%" alt="">
+            <img src="./img/area1-2.webp" height="103%" alt="">
           </div>
         </div>
       </div>
       <div class="img-container img-item-3">
         <div class="img-item">
           <div class="fix-container">
-            <img src="./img/area1-3.webp" height="100%" alt="">
+            <img src="./img/area1-3.webp" height="106%" alt="">
           </div>
         </div>
       </div>
@@ -326,6 +326,11 @@ export default {
 
       </div>
     </section>
+    <section class="add-text-buchong">
+      <div class="content-area">
+        <div v-for="item in 6" class="cf-item">{{$t(`page1.cf${item}`)}}</div>
+      </div>
+    </section>
     <section class="page-1-area-6 screen">
       <div class="container">
         <div class="img-container">
@@ -407,6 +412,7 @@ export default {
         margin: auto;
         display: flex;
         justify-content: center;
+        background-color: var(--content-bkcolor);
         .fix-container{
           height: 100%;
           overflow: hidden;
@@ -532,6 +538,7 @@ export default {
         //transition: all 0.5s ease-in-out;
         img {
           height: 100vh;
+          opacity: 0;
           transform: translateY(100vh);
           transition: all 1s ease-in-out;
         }
@@ -546,14 +553,18 @@ export default {
 
         .third-container {
           width: 600px;
+          height: 100%;
           overflow: hidden;
           transition: all 1s ease-in-out;
 
+          position: relative;
           img {
             transition: all 1s ease-in-out;
-            -webkit-clip-path: inset(0% 10% 0% 35%);
             height: calc(100vh - 46px);
-            transform: translateX(-35%) translateY(100vh);
+            transform: translateY(100vh);
+            position: absolute;
+            top:46px ;
+            right: -180px;
           }
         }
 
@@ -729,65 +740,68 @@ export default {
 
       img {
         transform: translateY(0px);
-        transition: all 0.5s ease-in-out;
+        opacity: 1;
+        transition: all 0.5s ease-in-out 0.5s;
       }
     }
   }
 
   .page-1-area-4.second-step {
-    .img-second {
-      opacity: 1;
-      transform: scale(1);
-      animation: imgSecondIn 1s ease-in-out;
-      padding: 0px 12px 12px 12px;
+    .trans-move{
+      gap: 200px;
+      .img-second {
+        opacity: 1;
+        transform: scale(1);
+        animation: imgSecondIn 1s ease-in-out;
+        padding: 0px 12px 12px 12px;
 
-      img {
-        height: 88vh;
-      }
-    }
-
-    .img-third {
-      opacity: 1;
-      transform: scale(1);
-      animation: imgSecondIn 1s ease-in-out;
-
-      .third-container {
         img {
-          transform: translateX(-35%) translateY(0px);
-          transition: all 0.5s ease-in-out;
+          height: 88vh;
+        }
+      }
+      .img-third {
+        opacity: 1;
+        transform: scale(1);
+        animation: imgSecondIn 1s ease-in-out;
+
+        .third-container {
+          img {
+            transform: translateY(0px);
+            transition: all 0.5s ease-in-out;
+          }
         }
       }
     }
+
   }
 
   .page-1-area-4.third-step {
     .trans-move {
       gap: 550px;
       padding-right: 0px;
-    }
-
-    .img-third {
-      padding-right: 0px;
-
-      .third-container {
-        //width: 1500px;
-
-        img {
-          -webkit-clip-path: inset(0% 0% 0% 0%);
-          transform: translateX(0px);
+      .img-third {
+        padding-right: 0px;
+        .third-container {
+          //width: 1500px;
+          img {
+            transform: translateX(0px);
+            right: -0px;
+          }
         }
-      }
 
-      .float-dot {
-        opacity: 1;
-
-        .dot-item {
+        .float-dot {
           opacity: 1;
-          transition: opacity 0.5s ease-in-out;
-        }
 
+          .dot-item {
+            opacity: 1;
+            transition: opacity 0.5s ease-in-out;
+          }
+
+        }
       }
     }
+
+
 
 
   }
@@ -882,7 +896,18 @@ export default {
     }
   }
 }
-
+.add-text-buchong{
+  height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .content-area{
+    width: 600px;
+    height: max-content;
+    text-align: center;
+    line-height: 2.5;
+  }
+}
 .page-1-area-6 {
   .container {
     padding-top: 92px;
