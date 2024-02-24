@@ -17,7 +17,9 @@ export default {
     }
   },
   mounted() {
-    this.createTTs()
+    setTimeout(()=>{
+      this.createTTs()
+    },1000)
   },
   methods: {
     getImage(name) {
@@ -28,13 +30,14 @@ export default {
       this.createT31()
       this.createT32()
       this.createT33()
+        this.createFooter()
+
     },
     createT31() {
       const st31 = ScrollTrigger.create({
         trigger: ".page-3-area-1",
         pin: true,
         scrub: true,
-        markers:true,
         start: "top top",
         end: "+=2000",
         onUpdate: (self) => {
@@ -281,6 +284,19 @@ export default {
             zIndex: 10
           })
     },
+    createFooter(){
+      const stFooter3=ScrollTrigger.create({
+        trigger:".page-3 .page-footer",
+        start:"top bottom-=45",
+        onEnter:()=>{
+          this.jumpPage()
+        }
+      })
+      this.stArr.push(stFooter3)
+    },
+    jumpPage(){
+      this.$emit("setCurrentPage",4)
+    }
   },
   unmounted() {
     this.stArr.forEach(item => {
@@ -395,6 +411,9 @@ export default {
       <div class="img-show">
         <img src="./img/area5-1.webp" width="100%">
       </div>
+    </section>
+    <section class="page-footer">
+      <span>{{$t('page1.area7.text')}}</span>
     </section>
   </div>
 </template>
@@ -864,5 +883,12 @@ export default {
     width: 100%;
     display: flex;
   }
+}
+.page-footer{
+  background-color: #171717;
+  height: 46px;
+  color: #fafafa;
+  text-align: center;
+  line-height: 46px;
 }
 </style>

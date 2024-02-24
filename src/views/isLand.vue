@@ -30,11 +30,15 @@ export default {
           }
         })
       },1000)
-    }
+    },
+
   },
   methods: {
     selectCurrent(item) {
       this.current = item - 1
+    },
+    handleSetCurrentPage(current){
+      this.current=current
     },
     setHasInit(val) {
       this.hasInit = val
@@ -102,12 +106,18 @@ export default {
     </div>
     <page0 v-if="current==0" :language="language"
            :has-init="hasInit"
+           @setCurrentPage="handleSetCurrentPage"
            @handleSetInit="setHasInit"
            @toggleLanguage="handleToggleLanguage"></page0>
-    <page1 v-if="current==1" :language="language"></page1>
-    <page2 v-if="current==2" :language="language"></page2>
-    <page3 v-if="current==3" :language="language"></page3>
-    <page4 v-if="current==4" :language="language"></page4>
+    <page1 v-if="current==1"
+           :language="language"
+           @setCurrentPage="handleSetCurrentPage"></page1>
+    <page2 v-if="current==2" :language="language"
+           @setCurrentPage="handleSetCurrentPage"></page2>
+    <page3 v-if="current==3" :language="language"
+           @setCurrentPage="handleSetCurrentPage"></page3>
+    <page4 v-if="current==4" :language="language"
+           @setCurrentPage="handleSetCurrentPage"></page4>
   </div>
 </template>
 
@@ -126,10 +136,10 @@ export default {
 }
 
 .loading-page {
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0px;
-  z-index: 99;
+  z-index: 99999999999999;
   background-color: var(--content-bkcolor);
   width: 100vw;
   height: 100vh;
@@ -178,11 +188,11 @@ export default {
       justify-content: space-between;
 
       .number-item {
-        width: 50px;
-        height: 50px;
+        width: 46px;
+        height: 46px;
         border-radius: 50%;
         background-size: 100% 100%;
-        line-height: 50px;
+        line-height: 46px;
         text-align: center;
         cursor: pointer;
         font-size: 20px;

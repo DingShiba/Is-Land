@@ -24,6 +24,7 @@ export default {
       this.createT4()
       this.createT5()
       this.createT6()
+      this.createFooter()
     },
     createT1() {
       const st11=ScrollTrigger.create({
@@ -172,6 +173,19 @@ export default {
 
       })
       this.stArr.push(st16)
+    },
+    createFooter(){
+      const stFooter1=ScrollTrigger.create({
+        trigger:".page-1 .footer",
+        start:"top bottom-=45",
+        onEnter:()=>{
+          this.jumpPage()
+        }
+      })
+      this.stArr.push(stFooter1)
+    },
+    jumpPage(){
+      this.$emit("setCurrentPage",2)
     },
     handleSelectFloat(index) {
       const _dom = document.querySelectorAll('.page-1-area-4 .dot-item')[index]
@@ -348,7 +362,7 @@ export default {
         </div>
       </div>
     </section>
-    <section class="page-1-area-7">
+    <section class="page-1-area-7 footer">
       <span>{{$t('page1.area7.text')}}</span>
     </section>
   </div>

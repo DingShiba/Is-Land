@@ -23,6 +23,7 @@ export default {
       this.createT1()
       this.createT2()
       this.createT3()
+      this.createFooter()
     },
     createT1() {
       const st21=ScrollTrigger.create({
@@ -182,20 +183,30 @@ export default {
             .set(".page-2-area-1 .base-img-area .nine", {
               opacity: 1
             })
+            .set(".page-2-area-1 .base-img-area .ten", {
+              opacity: 1
+            }, "<")
             .to(".page-2-area-1 .step7-container", {
-              y: "-6.25vh"
+              y: -67.5
+            })
+            .set(".page-2-area-1 .ten .even-item",{
+              opacity:1
             })
             .fromTo('.page-2-area-1 .step7-container .even', {
               clipPath: "inset(0px 0px 0px 0px)"
             }, {
               clipPath: "inset(0px 0px 100% 0px)"
             })
-            .set(".page-2-area-1 .base-img-area .ten", {
-              opacity: 1
-            }, "<")
+
+
+
 
       })
       this.stArr.push(st21)
+    },
+    getImage(name) {
+      const _url = new URL(`./img/${name}`, import.meta.url)
+      return _url.pathname
     },
     createT2() {
       const st221=ScrollTrigger.create({
@@ -263,6 +274,20 @@ export default {
       })
       this.stArr.push(st23)
     },
+    createFooter(){
+      const stFooter2=ScrollTrigger.create({
+        trigger:".page-2 .footer",
+        start:"top bottom-=45",
+        onEnter:()=>{
+          this.jumpPage()
+        }
+      })
+      this.stArr.push(stFooter2)
+    },
+    jumpPage(){
+      this.$emit("setCurrentPage",3)
+    }
+
   },
   unmounted() {
     this.stArr.forEach(item => {
@@ -293,7 +318,13 @@ export default {
           <img class="base-item seven" src="./img/area1-7.webp" alt="">
           <img class="base-item eight" src="./img/area1-8.webp" alt="">
           <img class="base-item nine" src="./img/area1-9.webp" alt="">
-          <img class="base-item ten" src="./img/area1-10.webp" alt="">
+          <div class="base-item ten">
+            <img v-for="item in 16"
+                 :src="getImage(`area1-10-${item}.webp`)"
+                 :class="item%2==0?'odd-item':'even-item'"
+                 alt="">
+          </div>
+
           <div class="bottom-line">
             <div class="line-item"></div>
           </div>
@@ -451,11 +482,26 @@ export default {
         background-color: #171717;
       }
     }
+    .ten{
+      img{
+        position: absolute;
+        left:0;
+        top:0;
+        z-index: 3;
+        width: 100vw;
+      }
+      img.odd-item{
+        opacity: 1;
+      }
+      img.even-item{
+        opacity: 0;
+      }
+    }
   }
 
   .white-collose {
     width: 100vw;
-    height: 100vh;
+    height: 1080px;
     overflow: hidden;
     position: absolute;
     left: 0;
@@ -521,7 +567,7 @@ export default {
 
     .step7-container {
       .collose-item {
-        height: calc(100vh / 16);
+        height: calc(1080px / 16);
       }
     }
 
