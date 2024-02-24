@@ -244,11 +244,10 @@ export default {
 }
 
 .page-header {
-  font-family: Rany-normal;
-  font-size: 16px;
-  letter-spacing: 2px;
+  font-family: var(--base-title-fontfamilly);
+  font-size: 26px;
   height: 46px;
-  border-bottom: 2px solid #232323;
+  border-bottom: 1px solid #171717;
   position: fixed;
   left: 0;
   top: 0;
@@ -257,7 +256,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f0f0f0;
+  background-color: var(--title-bkcolor);
 
 }
 

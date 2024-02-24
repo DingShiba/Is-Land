@@ -15,7 +15,7 @@ export default {
     setTimeout(()=>{
       this.createTTS()
 
-    },2000)
+    },1000)
   },
 
   methods: {
@@ -361,11 +361,10 @@ export default {
 
 <style scoped lang="less">
 .page-header {
-  font-family: Rany-normal;
-  font-size: 16px;
-  letter-spacing: 2px;
+  font-family: var(--base-title-fontfamilly);
+  font-size: 26px;
   height: 46px;
-  border-bottom: 2px solid #232323;
+  border-bottom: 1px solid #171717;
   position: fixed;
   left: 0;
   top: 0;
@@ -374,7 +373,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #fafafa;
+  background-color: var(--title-bkcolor);
 
 }
 

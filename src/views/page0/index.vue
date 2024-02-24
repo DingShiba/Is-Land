@@ -6,7 +6,7 @@ import {ScrollToPlugin} from 'gsap/ScrollToPlugin.js'
 gsap.registerPlugin(ScrollToPlugin, ScrollTrigger);
 export default {
   name: "index",
-  props: ["language"],
+  props: ["language","hasInit"],
   data() {
     return {
       stArr: [],
@@ -28,9 +28,19 @@ export default {
       ]
     }
   },
+  watch:{
+    hasInit(val){
+
+    }
+  },
   mounted() {
-    // gsap.to(window, { duration: 0.5, scrollTo: 0 });
-    this.createTTs()
+    gsap.to(window, {
+      duration: 0.5,
+      scrollTo: 0 ,
+      onComplete:()=>{
+        this.createTTs()
+      }
+    });
   },
   methods: {
     createTTs() {
@@ -40,17 +50,19 @@ export default {
           pin: true,
           end: "+=999999",
         })*/
-      this.createT0()
+      if(!this.hasInit){
+        this.createT0()
+      }
       // this.createT1()
       this.createT2()
       this.createT4()
       this.createT5()
     },
     handleWeel() {
-      gsap.set('.ruchang-back', {
+      gsap.to('.ruchang-back', {
         opacity: 0.3,
       })
-      gsap.set('.area-1-video-2', {
+      gsap.to('.area-1-video-2', {
         opacity: 1,
       })
       this.$refs.biaotiVideo.play()
@@ -66,6 +78,10 @@ export default {
         end: "+=1080",
         scrub: true,
         scroller: ".page-0-area-0",
+        onLeave:()=>{
+          /*初始化完成*/
+          this.$emit("handleSetInit",true)
+        },
         onUpdate: (self) => {
           const _top = document.querySelector('.in-sce').getBoundingClientRect().top
           this.$refs.biaotiVideo.style.setProperty("transform", `translateY(${-_top}px)`)
@@ -74,11 +90,6 @@ export default {
             .to('.ru-chang', {
               y: '-50vh',
             })
-            .fromTo(".ru-chang .area-1-video-2", {
-              opacity: 1
-            }, {
-              opacity: 0
-            }, "<")
             .to('.ru-chang', {
               y: '-100vh',
             })
@@ -117,14 +128,7 @@ export default {
             })
             .set(".page-0-area-0", {
               zIndex: -1,
-              onComplete: () => {
-                gsap.to(".menu-nav", {
-                  opacity: 1,
-                  zIndex: 99999999
-                })
-              }
             })
-
       })
       this.stArr.push(stg0)
     },
@@ -453,10 +457,10 @@ export default {
 
 <template>
   <div class="page-0" ref="page0">
-    <div class="page-header">
+    <div class="page-header" v-if="hasInit">
       <span>CeL24</span>
     </div>
-    <section class="page-0-area-0">
+    <section class="page-0-area-0" :class="{'hidden-status':hasInit}">
       <div class="init-container">
         <div class="ru-chang">
           <div class="in-sce">
@@ -500,7 +504,7 @@ export default {
         </div>
       </div>
     </section>
-    <section class="page-0-area-1">
+    <section class="page-0-area-1" :class="{'has-init':hasInit}">
       <div class="deep-second">
         <div class="move-area">
           <img class="deep-second-img" src="./img/area3Img1.webp" alt="">
@@ -786,8 +790,7 @@ export default {
   justify-content: center;
   align-items: center;
   background-color: var(--title-bkcolor);
-  opacity: 0;
-
+  opacity: 1;
 }
 
 @keyframes fadeIn {
@@ -908,7 +911,9 @@ export default {
 
 
   }
-
+  .page-0-area-0.hidden-status{
+    z-index: -1;
+  }
   .page-0-area-0::-webkit-scrollbar {
     width: 0px;
     height: 0px;
@@ -918,14 +923,11 @@ export default {
     width: 100vw;
     height: 100vh;
     position: relative;
-
-
     .deep-second {
       height: 100vh;
       width: 90%;
       margin: auto;
       transform: scale(0.6);
-
       .move-area {
         padding-top: 190px;
       }
@@ -943,6 +945,14 @@ export default {
 
       .left-area {
         width: 702px;
+      }
+    }
+  }
+  .page-0-area-1.has-init{
+    .deep-second{
+      transform: scale(1);
+      .move-area{
+        padding-top: 66px;
       }
     }
   }
