@@ -113,18 +113,20 @@ export default {
         }
     },
     page4:{
-        describe1:"Being an ama is far more challenging than most people imagine. In addition to the complex and ever-changing external environment, diving alone presents a tremendous test for both body and mind. In order to support their families, skillful ama often need to shuttle back and forth between the seabed and the sea surface dozens of times within an hour.\"Diving almost makes you disabled, because the weight belt is too heavy. You don't know how difficult it is to come up for air when you can't breathe. My bones feel like they are going to break, and it feels like the ground beneath me is collapsing.”",
+        describe1:"Being an ama is far more challenging than most people imagine. In addition to the complex and ever-changing external environment, diving alone presents a tremendous test for both body and mind. In order to support their families, skillful ama often need to shuttle back and forth between the seabed and the sea surface dozens of times within an hour.",
+        describe102:"\"Diving almost makes you disabled, because the weight belt is too heavy. You don't know how difficult it is to come up for air when you can't breathe. My bones feel like they are going to break, and it feels like the ground beneath me is collapsing.”",
         describe2:"Even worse, the situation of the ama community is becoming increasingly precarious. The development of mechanical fishing and artificial aquaculture techniques is significantly diminishing the living space of the ama. Stringent technical requirements and grueling work intensity have also led to a near cessation of new entrants into the field. While people in the 21st century marvel at the rapid pace of technological advancement, the ama are rapidly dwindling in obscure corners. A survey in 2010 found that there were only 2,174 ama remaining nationwide in Japan, with an average age nearing 65. Meanwhile, South Korea had just over 5,000 ama, with the oldest being over 90 years old. At this rate, in two or three decades, there might no longer be any ama. The \"ama culture,\" which has continued for thousands of years, is likely to become extinct in our generation.",
         describe3:"“There was the cold, the strangling feeling of running out of breath, the inexpressible agony when water forced its way under the water-goggles, the panic and sudden fear of collapsing that invaded the entire body just when an abalone was almost at the fingertips. There were also all kinds of accidents; and the wounds inflicted on the tips of the toes when kicking off against the sea’s bottom, with its carpet of sharp-edged shells, to rise to the surface; and the leaden languor that possessed the body after it had been forced to dive almost beyond endurance. … All these things had become sharper and sharper in the remembering; the terror had become all the more intense in the repeating. And often sudden nightmares would awaken the girls from sleep so deep as seemingly to leave no room for dreams to creep in. Then, in the dead of night, in the darkness surrounding their peaceful, danger-less beds, they would peer at the flood of sweat clenched within their fists.”",
         describe4:"The sound of waves , Yukio Mishima",
-        describe5:"\"Some say that diving is like bringing the bottom of a coffin underwater.\"\n" +
-            "\"I'm already eighty years old, and also a dying person.\"\n" +
-            "\"That woman is already eighty-three years old, and can still catch ten kilograms. I can only catch ten.\"",
-        describe6:"\"My friend used to say she wouldn't die.\"\n" +
-            "\"She said life in the afterlife would be very difficult.\"\n" +
-            "\"And it will be suffocating, trampled and then buried.\"\n" +
-            "\"But when death comes, she wouldn't have any time to think.\"\n" +
-            "\"She died while napping on a chair.\"\n" +
-            "\"I hope to die like her, without pain.”"
+        cf1:"\"Some say that diving is like bringing the bottom of a coffin underwater.\"",
+        cf2:"\"I'm already eighty years old, and also a dying person.\"",
+        cf3: "\"That woman is already eighty-three years old, and can still catch ten kilograms. I can only catch ten.\"",
+        cf4: "\"My friend used to say she wouldn't die.\"",
+        cf5:"\"She said life in the afterlife would be very difficult.\"",
+        cf6:"\"And it will be suffocating, trampled and then buried.\"",
+        cf7:"\"But when death comes, she wouldn't have any time to think.\"",
+        cf8:"\"She died while napping on a chair.\"",
+        cf9:"\"I hope to die like her, without pain.”",
+
     }
 }

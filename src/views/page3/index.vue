@@ -12,7 +12,7 @@ export default {
       newsImg: [1, 2, 3, 4],
       currentImg: 1,
       pptVisible: false,
-      xNum: 100,
+      xNum: window.innerWidth/2-1290/2,
       moveDistance: 0
     }
   },
@@ -34,12 +34,13 @@ export default {
         trigger: ".page-3-area-1",
         pin: true,
         scrub: true,
+        markers:true,
         start: "top top",
         end: "+=2000",
         onUpdate: (self) => {
           const _imgArea = document.querySelector(".tarns-area .img-area"),
               _tarnsArea = document.querySelector(".page-3-area-1 .tarns-area"),
-              _selectedImg=document.querySelector('.page-3-area-1 .selected-img')
+              _selectedImg = document.querySelector('.page-3-area-1 .selected-img')
           /*if (self.progress > 0.1) {
             _imgArea.classList.add("active")
             _selectedImg.classList.add("fly-hidden")
@@ -202,13 +203,13 @@ export default {
     handleOpenZhedie() {
       if (!this.pptVisible) {
         gsap.to(".zhedie-area", {
-          height: "85vh",
+          height: 800,
           onComplete: () => {
             this.pptVisible = true
           }
         })
         gsap.set(".zhedie-area .trans-move-area", {
-          x: this.xNum,
+          x: this.xNum
         })
       }
 
@@ -235,9 +236,12 @@ export default {
          } else if (left > window.innerWidth - drag.offsetWidth) {
            left = window.innerWidth - drag.offsetWidth;
          }*/
+        const leftMax=24*1290-(window.innerWidth/2-1290/2)
         let _xTrue = _this.xNum + _this.moveDistance
-        if (_xTrue > 100) {
-          _xTrue = 100
+        if (_xTrue > (window.innerWidth/2-1290/2)) {
+          _xTrue = (window.innerWidth/2-1290/2)
+        }else if(_xTrue < -leftMax){
+          _xTrue = -leftMax
         }
         drag.style.setProperty("transform", `translateX(${_xTrue}px)`);
       };
@@ -252,29 +256,29 @@ export default {
 
       document.onmousemove = null
     },
-    handleSelectImg(index,e) {
+    handleSelectImg(index, e) {
       const _domLeft = e.srcElement.getBoundingClientRect().left + 332 / 2;
-      const _distance =  (this.currentImg+3)*(332+60) - (window.innerWidth/2 -150 -332/2) -
-          (window.innerWidth / 2 - _domLeft -150);
+      const _distance = (this.currentImg + 3) * (332 + 60) - (window.innerWidth / 2 - 150 - 332 / 2) -
+          (window.innerWidth / 2 - _domLeft - 150);
       gsap.timeline()
           .to(".page-3-area-1 .new-imgs .move-area", {
             x: -_distance,
           })
           .to(".page-3-area-1 .new-imgs", {
-            opacity:0,
-            zIndex:3
+            opacity: 0,
+            zIndex: 3
           })
-      this.currentImg=index
+      this.currentImg = index
     },
-    handleOpenListImg(){
-     const _dis= (this.currentImg+3)*(332+60) - (window.innerWidth/2 -150 -332/2);
+    handleOpenListImg() {
+      const _dis = (this.currentImg + 3) * (332 + 60) - (window.innerWidth / 2 - 150 - 332 / 2);
       gsap.timeline()
-          .set(".new-imgs .move-area",{
-            x:-_dis
+          .set(".new-imgs .move-area", {
+            x: -_dis
           })
-          .to(".page-3-area-1 .new-imgs",{
-            opacity:1,
-            zIndex:10
+          .to(".page-3-area-1 .new-imgs", {
+            opacity: 1,
+            zIndex: 10
           })
     },
   },
@@ -323,16 +327,18 @@ export default {
         </div>
       </div>
       <div class="selected-img">
-        <img class="selected-img-item"
-             @click="handleOpenListImg"
-             :src="getImage('news-'+currentImg+'.webp')" alt="">
+        <div class="selected-img-container">
+          <img class="selected-img-item"
+               @click="handleOpenListImg"
+               :src="getImage('news-'+currentImg+'.webp')" alt="">
+        </div>
       </div>
       <div class="new-imgs">
         <div class="move-area">
           <div class="img-item" v-for="item in newsImg" @mousedown="handleSelectImg(item,$event)">
             <img :src="getImage('news-'+item+'.webp')" alt="">
           </div>
-          <div class="img-item"  v-for="item in newsImg" @mousedown="handleSelectImg(item,$event)">
+          <div class="img-item" v-for="item in newsImg" @mousedown="handleSelectImg(item,$event)">
             <img :src="getImage('news-'+item+'.webp')" alt="">
           </div>
           <div class="img-item" v-for="item in newsImg" @mousedown="handleSelectImg(item,$event)">
@@ -369,9 +375,10 @@ export default {
       </div>
     </section>
     <section class="zhedie-area" @click.stop="handleOpenZhedie">
-      <div class="trans-move-area"
-      >
-        <img v-for="item in 25" :src="getImage('ppt/ppt'+item+'.webp')" width="100%" alt="">
+      <div class="trans-move-area">
+        <img v-for="item in 25"
+             :src="getImage('ppt/ppt'+item+'.webp')"
+             alt="">
       </div>
       <div class="visible-dom" @mouseup="handleDragEnd"
            @mousedown="handleDragStrat"></div>
@@ -393,10 +400,11 @@ export default {
 </template>
 
 <style scoped lang="less">
-.page-3{
+.page-3 {
   font-family: var(--base-content-fontfamilly);
   background-color: var(--content-bkcolor);
 }
+
 .page-header {
   font-family: Rany-normal;
   font-size: 16px;
@@ -422,7 +430,7 @@ export default {
 
   .tarns-area {
     position: relative;
-    padding: 0px 20px;
+    padding: 0px 12px 12px 12px;
     height: 100vh;
     transition: all 1s ease-in-out;
 
@@ -443,7 +451,7 @@ export default {
     }
 
     .img-area {
-      width: 36vw;
+      width: 40vw;
       position: relative;
       height: 100%;
       overflow: hidden;
@@ -463,7 +471,6 @@ export default {
         z-index: 2;
         transition: all 1s ease-in-out;
       }
-
 
 
       .second-area {
@@ -616,7 +623,7 @@ export default {
     }
 
     .img-area {
-      width: 36vw;
+      width: 40vw;
     }
   }
 
@@ -629,16 +636,23 @@ export default {
     left: 0;
     top: 0;
     z-index: 5;
+    transform: translateY(-50px);
     transition: opacity 0.5s linear;
 
-    img {
-      width: 330px;
-      height: 504px;
+    .selected-img-container {
+      height: 630px;
+      width: max-content;
       margin: auto;
-      position: relative;
-      left:-150px;
-      cursor: pointer;
+      img {
+        width: 330px;
+        margin: auto;
+        position: relative;
+        left: -150px;
+        cursor: pointer;
+      }
     }
+
+
     @keyframes floatImg {
       0% {
         transform: translateX(5px);
@@ -661,10 +675,12 @@ export default {
       animation: floatImg 4s linear infinite;
     }
   }
-.selected-img.fly-hidden{
-  opacity: 0;
 
-}
+  .selected-img.fly-hidden {
+    opacity: 0;
+
+  }
+
   .new-imgs {
     width: 100vw;
     position: absolute;
@@ -684,23 +700,17 @@ export default {
       height: 100vh;
       gap: 60px;
       width: max-content;
-      transform: translateX(-930px);
+      transform: translateX(-930px) translateY(-50px);
     }
 
     .img-item {
       border: 1px solid #232323;
-
+      height: 630px;
       img {
         width: 330px;
-        height: 504px;
+        //height: 504px;
       }
 
-      .border-dom {
-        width: 300px;
-        height: 450px;
-        border: 1px solid #171717;
-        transform: translateY(-730px) translateX(50px);
-      }
     }
 
     .img-item:hover {
@@ -726,11 +736,11 @@ export default {
   }
 
   .img-container {
-    padding: 20px;
+    padding: 12px;
   }
 
   .img-area {
-    width: 36vw;
+    width: 40vw;
     position: relative;
 
     img {
@@ -822,7 +832,7 @@ export default {
   }
 
   .trans-move-area {
-    height: calc(85vh - 48px);
+    height: calc(800px - 48px);
     display: flex;
     width: max-content;
     padding: 12px 0px;
@@ -832,6 +842,7 @@ export default {
       border-top: 1px solid #232323;
       border-left: 1px solid #232323;
       border-bottom: 1px solid #232323;
+      width: 1290px;
     }
 
     img:nth-child(25) {
@@ -848,7 +859,8 @@ export default {
 .page-3-area-4 {
   height: 100vh;
   width: 100vw;
-margin-bottom: 20px;
+  margin-bottom: 20px;
+
   .content-area {
     width: 100%;
     display: flex;

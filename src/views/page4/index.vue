@@ -179,7 +179,8 @@ export default {
     <section class="page-4-area-2">
       <div class="text-area-show">
         <div class="first-describe">{{ $t('page4.describe1') }}</div>
-        <div class="second-describe">{{ $t('page4.describe2') }}</div>
+        <div class="second-describe">{{ $t('page4.describe102') }}</div>
+        <div class="third-describe">{{ $t('page4.describe2') }}</div>
       </div>
     </section>
     <section class="page-4-area-3">
@@ -207,8 +208,8 @@ export default {
         </div>
         <img src="./img/area4-8.webp" style="margin-top: 50px" alt="">
         <div class="end-describe">
-          <div class="first-describe">{{ $t('page4.describe5') }}</div>
-          <div class="second-describe">{{ $t('page4.describe6') }}</div>
+          <div v-for="item in 9"
+               class="end-describe-item">{{ $t('page4.cf'+item) }}</div>
         </div>
       </div>
       <div class="top-area">
@@ -296,7 +297,7 @@ export default {
     height: max-content;
 
     .second-describe {
-      margin-top: 46px;
+      margin: 46px 0px;
       //line-height: 20px;
     }
   }
@@ -365,9 +366,10 @@ export default {
 
     .end-describe {
       opacity: 0;
-
-      .second-describe {
-        margin-top: 46px;
+      line-height: 2.5;
+      text-align: left;
+      .end-describe-item:nth-child(3){
+        margin-bottom: 46px;
       }
     }
 
