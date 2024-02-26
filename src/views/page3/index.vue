@@ -73,12 +73,12 @@ export default {
           } else {
             _tarnsArea.classList.remove('force-step')
           }
-          if (self.progress > 0.5) {
+          if (self.progress > 0.6) {
             _tarnsArea.classList.add("five-step")
           } else {
             _tarnsArea.classList.remove('five-step')
           }
-          if (self.progress > 0.6) {
+          if (self.progress > 0.8) {
             _tarnsArea.classList.add("six-step")
           } else {
             _tarnsArea.classList.remove('six-step')
@@ -271,18 +271,35 @@ export default {
             opacity: 0,
             zIndex: 3
           })
+          .to(".selected-img .selected-img-container",{
+            opacity:1
+          },"<")
       this.currentImg = index
     },
     handleOpenListImg() {
       const _dis = (this.currentImg + 3) * (332 + 60) - (window.innerWidth / 2 - 150 - 332 / 2);
+      console.log(_dis)
       gsap.timeline()
+          .to(".selected-img .selected-img-container",{
+            opacity:0
+          })
           .set(".new-imgs .move-area", {
             x: -_dis
-          })
+          },"<")
           .to(".page-3-area-1 .new-imgs", {
             opacity: 1,
             zIndex: 10
+          },"<")
+    },
+    closeSelect(){
+      gsap.timeline()
+          .to(".page-3-area-1 .new-imgs", {
+            opacity: 0,
+            zIndex: 3
           })
+          .to(".selected-img .selected-img-container",{
+            opacity:1
+          },"<")
     },
     createFooter(){
       const stFooter3=ScrollTrigger.create({
@@ -349,7 +366,7 @@ export default {
                :src="getImage('news-'+currentImg+'.webp')" alt="">
         </div>
       </div>
-      <div class="new-imgs">
+      <div class="new-imgs" @click.stop="closeSelect">
         <div class="move-area">
           <div class="img-item" v-for="item in newsImg" @mousedown="handleSelectImg(item,$event)">
             <img :src="getImage('news-'+item+'.webp')" alt="">
@@ -658,8 +675,7 @@ export default {
     transition: opacity 0.5s linear;
 
     .selected-img-container {
-      height: 630px;
-      width: max-content;
+      width: 330px;
       margin: auto;
       img {
         height: 556px;
@@ -718,13 +734,16 @@ export default {
       height: 100vh;
       gap: 60px;
       width: max-content;
-      transform: translateX(-930px) ;
+      transform: translateX(-930px) translateY(-50px);
     }
 
     .img-item {
       border: 1px solid #232323;
       height: 556px;
       width: 330px;
+      display: flex;
+      overflow: hidden;
+      justify-content: center;
       img {
         height: 556px;
       }

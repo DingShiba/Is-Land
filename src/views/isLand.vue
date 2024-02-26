@@ -57,6 +57,9 @@ export default {
       }
       this.$i18n.locale = this.language
     },
+    refreshPage(){
+      location.reload()
+    }
   },
   components: {
     Page0,
@@ -87,7 +90,7 @@ export default {
         </div>
       </div>
       <div class="second">
-        <div class="is-land-menu">
+        <div class="is-land-menu" @click="refreshPage">
           <span>is land</span>
         </div>
         <div class="toggle-language" :class="{'zh-lag':language=='en'}" @click="handleToggleLanguage">
@@ -234,6 +237,8 @@ export default {
       display: flex;
       overflow: hidden;
       align-items: center;
+      cursor: pointer;
+
     }
     .is-land-menu:hover{
       background-image: url("./img/nav-2.png");
