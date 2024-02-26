@@ -6,16 +6,16 @@ import {ScrollToPlugin} from 'gsap/ScrollToPlugin.js'
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 export default {
   name: "index",
-  data(){
-    return{
-      stArr:[]
+  data() {
+    return {
+      stArr: []
     }
   },
   mounted() {
-    setTimeout(()=>{
+    setTimeout(() => {
       this.createTTs()
 
-    },1000)
+    }, 1000)
   },
   methods: {
     createTTs() {
@@ -27,7 +27,7 @@ export default {
       this.createFooter()
     },
     createT1() {
-      const st11=ScrollTrigger.create({
+      const st11 = ScrollTrigger.create({
         trigger: ".page-1-area-1",
         pin: true,
         start: "top top",
@@ -38,24 +38,24 @@ export default {
               opacity: 1,
             })
             .to('.page-1-area-1 .img-item-2 img', {
-              scale:1.03,
-              onComplete:()=>{
-                gsap.to(".page-1-area-1 .img-item-2 img",{
-                  scale:1
+              scale: 1.03,
+              onComplete: () => {
+                gsap.to(".page-1-area-1 .img-item-2 img", {
+                  scale: 1
                 })
               }
-            },"<")
+            }, "<")
             .to('.page-1-area-1 .img-item-2 img', {
-              scale:1,
+              scale: 1,
             })
             .to('.page-1-area-1 .img-item-3', {
               opacity: 1,
             })
             .to(".page-1-area-1 .img-item-3 img", {
-             scale:1.03
-            },"<")
+              scale: 1.03
+            }, "<")
             .to(".page-1-area-1 .img-item-3 img", {
-              scale:1
+              scale: 1
             })
       })
       this.stArr.push(st11)
@@ -72,7 +72,7 @@ export default {
           delay: 0.2
         }, '<')
       })
-      const st13=ScrollTrigger.create({
+      const st13 = ScrollTrigger.create({
         trigger: ".page-1-area-3 .imgs-container-deep",
         scrub: true,
         start: "+=80% bottom",
@@ -82,7 +82,7 @@ export default {
       this.stArr.push(st13)
     },
     createT4() {
-      const st14=ScrollTrigger.create({
+      const st14 = ScrollTrigger.create({
         trigger: ".page-1-area-4",
         pin: true,
         start: "top top",
@@ -124,7 +124,7 @@ export default {
 
     },
     createT5() {
-      const st15=ScrollTrigger.create({
+      const st15 = ScrollTrigger.create({
         trigger: ".page-1-area-5",
         pin: true,
         start: "top top",
@@ -157,56 +157,60 @@ export default {
       this.stArr.push(st15)
     },
     createT6() {
-      const _dom=document.querySelector('.page-1-area-6')
-      const st16=ScrollTrigger.create({
+      const _dom = document.querySelector('.page-1-area-6')
+      const st16 = ScrollTrigger.create({
         trigger: ".page-1-area-6",
         pin: true,
         start: "top top",
         end: "+=300",
         scrub: true,
-        onEnter:()=>{
+        onEnter: () => {
           _dom.classList.add("active")
         },
-        onLeaveBack:()=>{
+        onLeaveBack: () => {
           _dom.classList.remove("active")
         },
 
       })
       this.stArr.push(st16)
     },
-    createFooter(){
-      const stFooter1=ScrollTrigger.create({
-        trigger:".page-1 .page-footer",
-        start:"top top+=10",
-        onEnter:()=>{
-          gsap.to(".page-footer .footer-text",{
-            opacity:0,onComplete:()=>{
+    createFooter() {
+      const stFooter1 = ScrollTrigger.create({
+        trigger: ".page-1 .page-footer",
+        start: "top top+=10",
+        onEnter: () => {
+          gsap.to(".page-footer .footer-text", {
+            opacity: 0, onComplete: () => {
               this.jumpPage()
             }
           })
         },
       })
       this.stArr.push(stFooter1)
-      const stFooter2=ScrollTrigger.create({
-        trigger:".page-1 .page-footer .footer-text",
-        start:"bottom bottom-=12",
-        end:"+=1080",
-        pin:true
+      const stFooter2 = ScrollTrigger.create({
+        trigger: ".page-1 .page-footer .footer-text",
+        start: "bottom bottom-=12",
+        end: "+=1080",
+        pin: true
       })
       this.stArr.push(stFooter2)
     },
-    jumpPage(){
-      this.$emit("setCurrentPage",2)
+    jumpPage() {
+      this.$emit("setCurrentPage", 2)
     },
     handleSelectFloat(index) {
       const _dom = document.querySelectorAll('.page-1-area-4 .dot-item')[index]
-      gsap.timeline()
-          .to(_dom, {
-            scale: 0.5
-          })
-          .to(_dom, {
-            scale: 1
-          })
+      const imgs = _dom.querySelectorAll("img")
+      imgs.forEach(item => {
+        gsap.timeline()
+            .to(item, {
+              scale: 0.5
+            })
+            .to(item, {
+              scale: 1
+            })
+      })
+
     },
     handleArea1Scroll() {
       const _top = document.querySelector('.page-1-area-1 .img-item-2').getBoundingClientRect().top
@@ -223,7 +227,7 @@ export default {
     this.stArr.forEach(item => {
       item.kill()
     })
-    this.stArr=[]
+    this.stArr = []
   }
 }
 </script>
@@ -235,11 +239,11 @@ export default {
     </div>
     <section class="page-1-area-1 screen">
       <div class="img-container  img-item-1">
-          <div class="img-item">
-            <div class="fix-container">
-              <img src="./img/area1-1.webp" height="100%" alt="">
-            </div>
+        <div class="img-item">
+          <div class="fix-container">
+            <img src="./img/area1-1.webp" height="100%" alt="">
           </div>
+        </div>
       </div>
       <div class="img-container img-item-2">
         <div class="img-item ">
@@ -353,7 +357,7 @@ export default {
     </section>
     <section class="add-text-buchong">
       <div class="content-area">
-        <div v-for="item in 6" class="cf-item">{{$t(`page1.cf${item}`)}}</div>
+        <div v-for="item in 6" class="cf-item">{{ $t(`page1.cf${item}`) }}</div>
       </div>
     </section>
     <section class="page-1-area-6 screen">
@@ -363,10 +367,10 @@ export default {
         </div>
         <div class="text-area">
           <div class="title">island is land</div>
-          <div class="">{{$t('page1.area6.endDescribe')}}</div>
-<!--          <div v-for="item in 6" class="text-item">
-            <span>{{ $t(`page1.area6.text${item}`) }}</span>
-          </div>-->
+          <div class="">{{ $t('page1.area6.endDescribe') }}</div>
+          <!--          <div v-for="item in 6" class="text-item">
+                      <span>{{ $t(`page1.area6.text${item}`) }}</span>
+                    </div>-->
         </div>
         <div class="white-area">
           <img src="./img/area6-2.webp" width="100%" alt="">
@@ -374,7 +378,7 @@ export default {
       </div>
     </section>
     <section class="page-1-area-7 page-footer">
-      <span class="footer-text">{{$t('page1.area7.text')}}</span>
+      <span class="footer-text">{{ $t('page1.area7.text') }}</span>
     </section>
   </div>
 </template>
@@ -389,6 +393,7 @@ export default {
   color: #171717;
   background-color: var(--content-bkcolor);
   font-family: var(--base-content-fontfamilly);
+
   .page-header {
     font-family: var(--base-title-fontfamilly);
     font-size: 26px;
@@ -438,7 +443,8 @@ export default {
         display: flex;
         justify-content: center;
         background-color: var(--content-bkcolor);
-        .fix-container{
+
+        .fix-container {
           height: 100%;
           overflow: hidden;
         }
@@ -482,6 +488,7 @@ export default {
 
   .page-1-area-3 {
     border-bottom: 1px solid #171717;
+
     .imgs-container {
       width: 100vw;
       padding: 46px 0px;
@@ -502,6 +509,7 @@ export default {
       width: 40vw;
       margin: auto;
       padding-bottom: 40px;
+
       .title {
         width: max-content;
         margin: auto;
@@ -510,7 +518,7 @@ export default {
       }
 
       .describe {
-        margin:20px 0px 30px 0px;
+        margin: 20px 0px 30px 0px;
       }
     }
   }
@@ -520,6 +528,7 @@ export default {
     width: 100vw;
     overflow: hidden;
     position: relative;
+
     .trans-move {
       position: absolute;
       right: 0px;
@@ -583,12 +592,13 @@ export default {
           transition: all 1s ease-in-out;
 
           position: relative;
+
           img {
             transition: all 1s ease-in-out;
             height: calc(100vh - 46px);
             transform: translateY(100vh);
             position: absolute;
-            top:46px ;
+            top: 46px;
             right: -180px;
           }
         }
@@ -607,11 +617,11 @@ export default {
             opacity: 0;
             position: relative;
             //transition: all 0.5s ease-in-out;
-            .copy-d{
+            .copy-d {
               position: absolute;
               z-index: -1;
               left: -40px;
-              top:40px;
+              top: 40px;
             }
           }
 
@@ -718,7 +728,7 @@ export default {
             position: absolute;
             left: 140px;
             top: 53%;
-            z-index: 5;
+            z-index: 3;
             animation: fudong4 4s linear infinite;
             transition: all 0.5s ease-in-out 0.6s;
           }
@@ -739,6 +749,7 @@ export default {
     .img-first {
       transform: translateX(0px);
       padding: 0px 12px 12px 12px;
+
       img {
         height: 88vh;
       }
@@ -772,8 +783,9 @@ export default {
   }
 
   .page-1-area-4.second-step {
-    .trans-move{
+    .trans-move {
       gap: 200px;
+
       .img-second {
         opacity: 1;
         transform: scale(1);
@@ -784,6 +796,7 @@ export default {
           height: 88vh;
         }
       }
+
       .img-third {
         opacity: 1;
         transform: scale(1);
@@ -804,8 +817,10 @@ export default {
     .trans-move {
       gap: 550px;
       padding-right: 0px;
+
       .img-third {
         padding-right: 0px;
+
         .third-container {
           //width: 1500px;
           img {
@@ -825,8 +840,6 @@ export default {
         }
       }
     }
-
-
 
 
   }
@@ -921,29 +934,34 @@ export default {
     }
   }
 }
-.add-text-buchong{
+
+.add-text-buchong {
   height: 50vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  .content-area{
+
+  .content-area {
     width: 600px;
     height: max-content;
     text-align: center;
     line-height: 2.5;
   }
 }
+
 .page-1-area-6 {
   .container {
     padding-top: 92px;
     width: 100%;
     height: 100vh;
     overflow: hidden;
-    .img-container{
+
+    .img-container {
       width: 100vw;
       height: calc(100vh - 92px);
       overflow: hidden;
     }
+
     .bg-img {
       transform: scale(1.03);
       transition: all 0.5s ease-in-out;
@@ -957,7 +975,8 @@ export default {
       z-index: 5;
 
       width: 260px;
-      .title{
+
+      .title {
         text-align: right;
         font-size: 26px;
         font-family: var(--title-bold-fontfamilly);
@@ -968,12 +987,13 @@ export default {
         margin: 10px 0px;
       }
     }
-    .white-area{
+
+    .white-area {
       display: flex;
       align-items: center;
       position: absolute;
-      right:0px;
-      top:92px;
+      right: 0px;
+      top: 92px;
       background-color: #f0f0f0;
       z-index: 3;
       height: calc(100vh - 92px);
@@ -982,7 +1002,8 @@ export default {
       padding: 0px 90px;
       transform: translateX(100%);
       transition: all 0.5s ease-in-out;
-      img{
+
+      img {
         margin: auto;
         opacity: 0;
         transition: all 0.5s ease-in;
@@ -991,21 +1012,25 @@ export default {
     }
   }
 }
-.page-1-area-6.active{
-  .container{
-    .bg-img{
+
+.page-1-area-6.active {
+  .container {
+    .bg-img {
       transform: scale(1);
     }
-    .white-area{
+
+    .white-area {
       transform: translateY(0px);
-      img{
+
+      img {
         opacity: 1;
       }
     }
   }
 
 }
-.page-1-area-7{
+
+.page-1-area-7 {
   background-color: #171717;
   height: 100vh;
   color: #fafafa;

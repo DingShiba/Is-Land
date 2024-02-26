@@ -161,7 +161,6 @@ export default {
 }
 
 .menu-nav {
-  transform: scale(1.4);
   height: 120px;
   position: fixed;
   left: 150px;
@@ -253,8 +252,8 @@ export default {
     }
     .toggle-language.zh-lag{
       font-family: 楷体;
-      font-size: 16px;
-      font-weight: bold;
+      font-size: 20px;
+      font-weight: 600;
     }
     .toggle-language:hover{
       background-image: url("./img/nav-3.png");

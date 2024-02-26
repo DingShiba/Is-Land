@@ -662,7 +662,7 @@ export default {
       width: max-content;
       margin: auto;
       img {
-        width: 330px;
+        height: 556px;
         margin: auto;
         position: relative;
         left: -150px;
@@ -718,15 +718,15 @@ export default {
       height: 100vh;
       gap: 60px;
       width: max-content;
-      transform: translateX(-930px) translateY(-50px);
+      transform: translateX(-930px) ;
     }
 
     .img-item {
       border: 1px solid #232323;
-      height: 630px;
+      height: 556px;
+      width: 330px;
       img {
-        width: 330px;
-        //height: 504px;
+        height: 556px;
       }
 
     }
