@@ -176,13 +176,24 @@ export default {
     },
     createFooter(){
       const stFooter1=ScrollTrigger.create({
-        trigger:".page-1 .footer",
-        start:"top bottom-=45",
+        trigger:".page-1 .page-footer",
+        start:"top top+=10",
         onEnter:()=>{
-          this.jumpPage()
-        }
+          gsap.to(".page-footer .footer-text",{
+            opacity:0,onComplete:()=>{
+              this.jumpPage()
+            }
+          })
+        },
       })
       this.stArr.push(stFooter1)
+      const stFooter2=ScrollTrigger.create({
+        trigger:".page-1 .page-footer .footer-text",
+        start:"bottom bottom-=12",
+        end:"+=1080",
+        pin:true
+      })
+      this.stArr.push(stFooter2)
     },
     jumpPage(){
       this.$emit("setCurrentPage",2)
@@ -362,8 +373,8 @@ export default {
         </div>
       </div>
     </section>
-    <section class="page-1-area-7 footer">
-      <span>{{$t('page1.area7.text')}}</span>
+    <section class="page-1-area-7 page-footer">
+      <span class="footer-text">{{$t('page1.area7.text')}}</span>
     </section>
   </div>
 </template>
@@ -996,9 +1007,12 @@ export default {
 }
 .page-1-area-7{
   background-color: #171717;
-  height: 46px;
+  height: 100vh;
   color: #fafafa;
   text-align: center;
-  line-height: 46px;
+  padding-top: 12px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
 }
 </style>

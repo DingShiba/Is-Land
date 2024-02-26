@@ -21,12 +21,13 @@ export default {
     current(val) {
       window.scroll(0, 0)
       this.loading=true
-
+      document.body.style.overflow = 'hidden';
       setTimeout(()=>{
         gsap.to(".loading-page",{
           opacity:0,
           onComplete:()=>{
             this.loading=false
+            document.body.style.overflow = 'auto';
           }
         })
       },1000)
@@ -89,7 +90,7 @@ export default {
         <div class="is-land-menu">
           <span>is land</span>
         </div>
-        <div class="toggle-language" @click="handleToggleLanguage">
+        <div class="toggle-language" :class="{'zh-lag':language=='en'}" @click="handleToggleLanguage">
           <span>{{ language == 'en' ? '汉' : 'En' }}</span>
         </div>
       </div>
@@ -99,9 +100,8 @@ export default {
         <svg class="loading-item" viewBox="0 0 1024 1024" width="64" height="64">
           <path
               d="M384 128A64 64 13680 1 0 640 128 64 64 13680 1 0 384 128zM655.53 240.47A64 64 13680 1 0 911.53 240.47 64 64 13680 1 0 655.53 240.47zM832 512A32 32 13680 1 0 960 512 32 32 13680 1 0 832 512zM719.53 783.53A32 32 13680 1 0 847.53 783.53 32 32 13680 1 0 719.53 783.53zM448.002 896A32 32 13680 1 0 576.002 896 32 32 13680 1 0 448.002 896zM176.472 783.53A32 32 13680 1 0 304.472 783.53 32 32 13680 1 0 176.472 783.53zM144.472 240.47A48 48 13680 1 0 336.472 240.47 48 48 13680 1 0 144.472 240.47zM56 512A36 36 13680 1 0 200 512 36 36 13680 1 0 56 512z"
-              fill="#000000" p-id="4260"></path>
+              fill="#fff" p-id="4260"></path>
         </svg>
-        <div>loading...</div>
       </div>
     </div>
     <page0 v-if="current==0" :language="language"
@@ -140,7 +140,7 @@ export default {
   left: 0;
   top: 0px;
   z-index: 99999999999999;
-  background-color: var(--content-bkcolor);
+  background-color: #232323;
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -161,7 +161,7 @@ export default {
 }
 
 .menu-nav {
-  width: 300px;
+  transform: scale(1.4);
   height: 120px;
   position: fixed;
   left: 150px;
@@ -181,7 +181,7 @@ export default {
 
     .number-page {
       //gap: 20px;
-      width: 80%;
+      width: 236px;
       padding: 0px 12px;
       display: flex;
       align-items: center;
@@ -205,9 +205,15 @@ export default {
     }
 
     .zhi-ding {
-      width: 20%;
+      width: 37px;
       text-align: center;
       cursor: pointer;
+      overflow: hidden;
+    }
+    .zhi-ding:hover {
+     background-image: url("./img/nav-1.png");
+      background-size: 100% 100%;
+      background-position: center center;
     }
 
     .vertical-line {
@@ -223,16 +229,37 @@ export default {
     align-items: center;
     height: 29%;
     .is-land-menu {
-      padding: 12px;
-      width: 80%;
+      width: 236px;
+      height: 100%;
+      padding: 0px 12px ;
       display: flex;
+      overflow: hidden;
       align-items: center;
+    }
+    .is-land-menu:hover{
+      background-image: url("./img/nav-2.png");
+      background-size: 100% 100%;
+      background-position: center center;
     }
 
     .toggle-language {
       cursor: pointer;
-      width: 20%;
-      text-align: center;
+      width: 37px;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .toggle-language.zh-lag{
+      font-family: 楷体;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .toggle-language:hover{
+      background-image: url("./img/nav-3.png");
+      background-size: 100% 100%;
+      background-position: center center;
     }
   }
 }

@@ -441,6 +441,9 @@ export default {
       e.srcElement.pause()
       e.srcElement.currentTime = 0
     },
+    jumpPage(index){
+      this.$emit("setCurrentPage",index)
+    },
     getImage(name) {
       const _url = new URL(`./img/${name}`, import.meta.url)
       return _url.pathname
@@ -613,15 +616,19 @@ export default {
             <div class="gifs-arr">
               <video @mouseenter="handleMouseEnter"
                      @mouseleave="handleMouseLeave"
+                     @click="jumpPage(1)"
                      class="look1-video" src="./img/Look1.webm"></video>
               <video @mouseenter="handleMouseEnter"
                      @mouseleave="handleMouseLeave"
+                     @click="jumpPage(2)"
                      class="look2-video" src="./img/Look2.webm"></video>
               <video @mouseenter="handleMouseEnter"
                      @mouseleave="handleMouseLeave"
+                     @click="jumpPage(3)"
                      class="look4-video" src="./img/Look4.webm"></video>
               <video @mouseenter="handleMouseEnter"
                      @mouseleave="handleMouseLeave"
+                     @click="jumpPage(4)"
                      class="look3-video" src="./img/Look3.webm"></video>
             </div>
 
@@ -980,6 +987,7 @@ export default {
       position: absolute;
       z-index: 11;
       width: 600px;
+      height: 250px;
       left: 5vw;
       overflow: hidden;
       bottom: 50px;
