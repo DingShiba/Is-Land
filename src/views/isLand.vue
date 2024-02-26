@@ -12,7 +12,7 @@ export default {
   data() {
     return {
       current: -1,
-      language: "en",
+      language: "zh",
       hasInit: false,
       loading: false
     }
@@ -50,15 +50,13 @@ export default {
     handleToggleLanguage() {
       if (this.language == 'en') {
         this.language = 'zh'
-        document.querySelector('.is-land').classList.add("zh")
       } else {
         this.language = 'en'
-        document.querySelector('.is-land').classList.remove("zh")
       }
       this.$i18n.locale = this.language
     },
     refreshPage() {
-      location.reload()
+      location.reload(true)
     }
   },
   components: {
@@ -75,7 +73,7 @@ export default {
 </script>
 
 <template>
-  <div class="is-land">
+  <div class="is-land" :class="{'zh':language=='zh'}">
     <div class="menu-nav" v-if="hasInit">
       <div class="first">
         <div class="number-page">

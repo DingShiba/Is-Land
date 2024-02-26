@@ -222,10 +222,10 @@ export default {
     <section class="page-4-area-5">
       <div class="content-container">
         <img src="./img/area5-1.webp" width="100%" alt="">
-        <video preload class="base-video" style="opacity: 0">
+        <video preload muted class="base-video" style="opacity: 0">
           <source src="./img/area5-2.mp4">
         </video>
-        <video preload autoplay loop class="float-video" style="opacity: 0">
+        <video preload autoplay loop muted class="float-video" style="opacity: 0">
           <source src="./img/area5-3.mp4">
         </video>
       </div>

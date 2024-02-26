@@ -408,7 +408,7 @@ export default {
     </section>
     <section class="page-3-area-3">
       <div class="container">
-        <video preload autoplay loop class="left-video">
+        <video preload autoplay muted loop class="left-video">
           <source src="./img/area3-1.webm">
         </video>
         <div class="text-area">

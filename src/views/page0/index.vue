@@ -469,6 +469,7 @@ export default {
           <div class="in-sce">
             <video class="area-1-video-1"
                    autoplay
+                   muted
                    loop
                    preload>
               <source src="./img/backvideo.webm">

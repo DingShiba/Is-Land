@@ -248,22 +248,22 @@ export default {
         trigger: ".page-2-area-3",
         scrub: true,
         pin:true,
-        start: "top top",
-        end: "bottom top",
+        start: "bottom bottom",
+        end: "+=500",
         animation: gsap.timeline()
-            .to(".page-2-area-3 .base-image",{
+           /* .to(".page-2-area-3 .base-image",{
               y:-800
-            })
-            .fromTo(".page-2-area-3 .top-draw",{
+            })*/
+            .fromTo(".page-2-area-3 .area3-video",{
               opacity:0
             },{
-              opacity:1
+              opacity:1,
+              onStart:()=>{
+                const _domVideo= document.querySelector('.page-2-area-3 .area3-video')
+                _domVideo.currentTime=_domVideo.duration
+              }
             })
-            .fromTo(".page-2-area-3 .top-img-area",{
-              opacity:0
-            },{
-              opacity:1
-            })
+
       })
       this.stArr.push(st23)
     },
@@ -374,10 +374,11 @@ export default {
       <div class="base-image">
         <img src="./img/area3-1.webp" width="100%" alt="">
       </div>
-      <div class="top-draw">
+      <video preload muted src="./img/area3.webm"  class="area3-video"></video>
+<!--      <div class="top-draw">
 
-      </div>
-        <img class="top-img-area" src="./img/area3-2.webp" style="position:absolute;top:0;right:0;z-index:12;mix-blend-mode: darken" alt="">
+      </div>-->
+<!--        <img class="top-img-area" src="./img/area3-2.webp" style="position:absolute;top:0;right:0;z-index:12;mix-blend-mode: darken" alt="">-->
       <div class="text-describe">
 
       </div>
@@ -614,8 +615,8 @@ export default {
 }
 
 .page-2-area-3 {
-  height: 100vh;
-  overflow: hidden;
+/*  height: 100vh;
+  overflow: hidden;*/
   position: relative;
   border-bottom: 1px solid #232323;
   .top-draw{
@@ -626,6 +627,14 @@ export default {
     top:0;
     left:0;
     background-color: rgba(0, 0, 0, 0.6);
+  }
+  .area3-video{
+    position: absolute;
+    left: 0;
+    top:0;
+    z-index: 5;
+    opacity: 0;
+    width: 1920px;
   }
 
 }
