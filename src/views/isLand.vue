@@ -11,26 +11,26 @@ export default {
   name: "isLand",
   data() {
     return {
-      current: 0,
+      current: -1,
       language: "en",
       hasInit: false,
-      loading:false
+      loading: false
     }
   },
   watch: {
     current(val) {
+      this.loading = true
       window.scroll(0, 0)
-      this.loading=true
       document.body.style.overflow = 'hidden';
-      setTimeout(()=>{
-        gsap.to(".loading-page",{
-          opacity:0,
-          onComplete:()=>{
-            this.loading=false
+      setTimeout(() => {
+        gsap.to(".loading-page", {
+          opacity: 0,
+          onComplete: () => {
+            this.loading = false
             document.body.style.overflow = 'auto';
           }
         })
-      },1000)
+      }, 1000)
     },
 
   },
@@ -38,8 +38,8 @@ export default {
     selectCurrent(item) {
       this.current = item - 1
     },
-    handleSetCurrentPage(current){
-      this.current=current
+    handleSetCurrentPage(current) {
+      this.current = current
     },
     setHasInit(val) {
       this.hasInit = val
@@ -57,7 +57,7 @@ export default {
       }
       this.$i18n.locale = this.language
     },
-    refreshPage(){
+    refreshPage() {
       location.reload()
     }
   },
@@ -69,6 +69,7 @@ export default {
     Page4
   },
   mounted() {
+    this.current = 0
   },
 }
 </script>
@@ -149,6 +150,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+
   .loading-item {
     animation: rotateLoading 1s linear infinite;
   }
@@ -212,8 +214,9 @@ export default {
       cursor: pointer;
       overflow: hidden;
     }
+
     .zhi-ding:hover {
-     background-image: url("./img/nav-1.png");
+      background-image: url("./img/nav-1.png");
       background-size: 100% 100%;
       background-position: center center;
     }
@@ -230,17 +233,19 @@ export default {
     justify-content: space-between;
     align-items: center;
     height: 29%;
+
     .is-land-menu {
       width: 236px;
       height: 100%;
-      padding: 0px 12px ;
+      padding: 0px 12px;
       display: flex;
       overflow: hidden;
       align-items: center;
       cursor: pointer;
 
     }
-    .is-land-menu:hover{
+
+    .is-land-menu:hover {
       background-image: url("./img/nav-2.png");
       background-size: 100% 100%;
       background-position: center center;
@@ -255,12 +260,14 @@ export default {
       justify-content: center;
       overflow: hidden;
     }
-    .toggle-language.zh-lag{
+
+    .toggle-language.zh-lag {
       font-family: 楷体;
       font-size: 20px;
       font-weight: 600;
     }
-    .toggle-language:hover{
+
+    .toggle-language:hover {
       background-image: url("./img/nav-3.png");
       background-size: 100% 100%;
       background-position: center center;

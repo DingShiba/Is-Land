@@ -301,15 +301,26 @@ export default {
             opacity:1
           },"<")
     },
-    createFooter(){
-      const stFooter3=ScrollTrigger.create({
-        trigger:".page-3 .page-footer",
-        start:"top bottom-=45",
-        onEnter:()=>{
-          this.jumpPage()
-        }
+    createFooter() {
+      const stFooter1 = ScrollTrigger.create({
+        trigger: ".page-footer",
+        start: "top top+=10",
+        onEnter: () => {
+          gsap.to(".page-footer .footer-text", {
+            opacity: 0, onComplete: () => {
+              this.jumpPage()
+            }
+          })
+        },
       })
-      this.stArr.push(stFooter3)
+      this.stArr.push(stFooter1)
+      const stFooter2 = ScrollTrigger.create({
+        trigger: ".page-footer .footer-text",
+        start: "bottom bottom-=12",
+        end: "+=1080",
+        pin: true
+      })
+      this.stArr.push(stFooter2)
     },
     jumpPage(){
       this.$emit("setCurrentPage",4)
@@ -430,7 +441,7 @@ export default {
       </div>
     </section>
     <section class="page-footer">
-      <span>{{$t('page1.area7.text')}}</span>
+      <span class="footer-text">{{$t('page1.area7.text')}}</span>
     </section>
   </div>
 </template>
@@ -905,9 +916,12 @@ export default {
 }
 .page-footer{
   background-color: #171717;
-  height: 46px;
+  height: 100vh;
   color: #fafafa;
   text-align: center;
-  line-height: 46px;
+  padding-top: 12px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
 }
 </style>

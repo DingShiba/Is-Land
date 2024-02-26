@@ -1,7 +1,6 @@
 <script>
 import gsap from 'gsap'
 import {ScrollTrigger} from 'gsap/ScrollTrigger';
-
 gsap.registerPlugin(ScrollTrigger);
 export default {
   name: "index",
@@ -14,10 +13,8 @@ export default {
   mounted() {
     setTimeout(()=>{
       this.createTTS()
-
     },1000)
   },
-
   methods: {
     createTTS() {
       this.createT1()
@@ -267,20 +264,27 @@ export default {
             },{
               opacity:1
             })
-
-
-
-
       })
       this.stArr.push(st23)
     },
-    createFooter(){
-      const stFooter2=ScrollTrigger.create({
-        trigger:".page-2 .footer",
-        start:"top bottom-=45",
-        onEnter:()=>{
-          this.jumpPage()
-        }
+    createFooter() {
+      const stFooter1 = ScrollTrigger.create({
+        trigger: ".page-footer",
+        start: "top top+=10",
+        onEnter: () => {
+          gsap.to(".page-footer .footer-text", {
+            opacity: 0, onComplete: () => {
+              this.jumpPage()
+            }
+          })
+        },
+      })
+      this.stArr.push(stFooter1)
+      const stFooter2 = ScrollTrigger.create({
+        trigger: ".page-footer .footer-text",
+        start: "bottom bottom-=12",
+        end: "+=1080",
+        pin: true
       })
       this.stArr.push(stFooter2)
     },
@@ -324,7 +328,6 @@ export default {
                  :class="item%2==0?'odd-item':'even-item'"
                  alt="">
           </div>
-
           <div class="bottom-line">
             <div class="line-item"></div>
           </div>
@@ -383,8 +386,8 @@ export default {
       <img class="left-img" width="100%" src="./img/area4-1.webp" alt="">
       <img class="right-img" width="100%" src="./img/area4-2.webp" alt="">
     </section>
-    <section class="footer">
-      <span>{{$t('page1.area7.text')}}</span>
+    <section class="page-footer">
+      <span class="footer-text">{{$t('page1.area7.text')}}</span>
     </section>
 
   </div>
@@ -638,11 +641,14 @@ export default {
     width: 30vw;
   }
 }
-.footer{
+.page-footer{
   background-color: #171717;
-  height: 46px;
+  height: 100vh;
   color: #fafafa;
   text-align: center;
-  line-height: 46px;
+  padding-top: 12px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
 }
 </style>
