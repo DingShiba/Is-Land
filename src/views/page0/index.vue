@@ -609,7 +609,7 @@ export default {
       </div>
       <div class="area-5-movies">
         <div class="area-5-2">
-          <img src="./img/area-5-2.webp" width="100%" height="100%" alt="">
+          <img src="./img/area-5-2.webp" width="100%" alt="">
         </div>
         <div class="area-5-3">
           <div class="move-container">

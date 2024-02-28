@@ -183,8 +183,10 @@ export default {
             .set(".page-2-area-1 .base-img-area .ten", {
               opacity: 1
             }, "<")
-            .to(".page-2-area-1 .step7-container", {
-              y: -67.5
+            .fromTo(".page-2-area-1 .step7-container", {
+              y:0
+            },{
+              y: '-3.515625vw'
             })
             .set(".page-2-area-1 .ten .even-item",{
               opacity:1
@@ -454,7 +456,6 @@ export default {
 
     .base-item {
       opacity: 0;
-      height: 100%;
       width: 100%;
 
     }
@@ -505,7 +506,7 @@ export default {
 
   .white-collose {
     width: 100vw;
-    height: 1080px;
+    height: 100vh;
     overflow: hidden;
     position: absolute;
     left: 0;
@@ -571,7 +572,7 @@ export default {
 
     .step7-container {
       .collose-item {
-        height: calc(1080px / 16);
+        height: calc(56.25vw / 16);
       }
     }
 
