@@ -5,8 +5,8 @@ export default {
     },
     page0:{
         textArea:"The ama/haenyeo culture was once widely distributed in the coastal areas of Asia. Amas are brimming with vitality and vigor, representing a highly distinctive feminine power flourishing in East Asia. They make their living from the sea, serving as the most skilled oceanic hunters. Adhering strictly to and revering the rules of nature, they are the scattered marine spirits in the earthly realm. The ama culture can be traced back several thousand years, yet it seems to be on the verge of extinction. This piece focuses attention on the plight of the ama, taking the ama and their hunting tools as the focal points of design, embracing the concepts of \"balance\" and \"buoyancy,\" providing a new interpretation for this ancient yet dwindling traditional way of life.",
-        describe1:'China Graduate Fashion Week Menswear Design Award, 2020 -',
-        describe2:'China Graduate Fashion Week Technology Innovation Award, 2020 -',
+        describe1:'- China Graduate Fashion Week Menswear Design Award, 2020 -',
+        describe2:'- China Graduate Fashion Week Technology Innovation Award, 2020 -',
         footer1:"Source of the image (left to right): Seaweed Harvest , 1956, Yoshiyuki Iwase",
         footer2:"Internet: Exact origin could not be traced",
         left1:"\"People who accompany the sea are filled with both joy and sadness... I immerse myself in their world.\" —Iwase Yoshiyuki, 1983",

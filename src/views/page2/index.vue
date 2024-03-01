@@ -12,8 +12,11 @@ export default {
   },
   mounted() {
     setTimeout(()=>{
+      this.$emit("handleLoadingFalse")
       this.createTTS()
-    },1000)
+    },2000)
+
+
   },
   methods: {
     createTTS() {
@@ -183,6 +186,9 @@ export default {
             .set(".page-2-area-1 .base-img-area .ten", {
               opacity: 1
             }, "<")
+            .to(".page-2-area-1 .step5-container .even",{
+              scale:0.8
+            })
             .fromTo(".page-2-area-1 .step7-container", {
               y:0
             },{
@@ -196,10 +202,6 @@ export default {
             }, {
               clipPath: "inset(0px 0px 100% 0px)"
             })
-
-
-
-
       })
       this.stArr.push(st21)
     },

@@ -12,10 +12,24 @@ export default {
     }
   },
   mounted() {
-    setTimeout(() => {
+    setTimeout(()=>{
+      this.$emit("handleLoadingFalse")
       this.createTTs()
+    },1000)
+ /*   document.querySelector('.page-1').addEventListener("load",()=>{
 
-    }, 1000)
+    })*/
+    /*this.$nextTick(()=>{
+      const _doms=document.querySelectorAll('img')
+      console.log(_doms)
+      _doms.forEach((item,index)=>{
+        console.log(index)
+        item.addEventListener('load',()=>{
+          console.log("图片"+index+"加载完成")
+        })
+      })
+    })*/
+
   },
   methods: {
     createTTs() {

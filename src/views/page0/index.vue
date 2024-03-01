@@ -10,6 +10,7 @@ export default {
   data() {
     return {
       stArr: [],
+      currentTime:0,
       linksEn: "Yoshiyuki Iwase BachmannEckenstein Basel / Yoshiyuki Iwase - Japanese Master Photographer / Haenyeo - Seeing the Incredible Women Divers of Jeju Island - South Korea! - Dive O'Clock! / Ama Women Divers of Japan - Where to See & Explore this Culture - Dive O'Clock! / Culture of Jeju Haenyeo (women divers) - YouTube / Osatsu-kamado Ama Hut Experience ISESHIMA TOBA City / 海女（职业名称）_百度百科 / 这群韩国“海女”都七八十岁高龄了，还在下海捕捞 / 真实美人鱼，海女的历史与现状 / 海女的群像，那些在海里捡珍珠的人 / VisitJeju - 济州岛旅游综合信息网，济州岛自由行攻略 / 제주해녀박물관 ",
       linksZh: "Yoshiyuki Iwase BachmannEckenstein Basel / Yoshiyuki Iwase - Japanese Master Photographer / Haenyeo - Seeing the Incredible Women Divers of Jeju Island - South Korea! - Dive O'Clock! / Ama Women Divers of Japan - Where to See & Explore this Culture - Dive O'Clock! / Culture of Jeju Haenyeo (women divers) - YouTube / Osatsu-kamado Ama Hut Experience ISESHIMA TOBA City / 海女（职业名称）_百度百科 / 这群韩国“海女”都七八十岁高龄了，还在下海捕捞 / 真实美人鱼，海女的历史与现状 / 海女的群像，那些在海里捡珍珠的人 / VisitJeju - 济州岛旅游综合信息网，济州岛自由行攻略 / 제주해녀박물관",
       httpLinks: [
@@ -28,33 +29,36 @@ export default {
       ]
     }
   },
-  watch:{
-    hasInit(val){
+
+  mounted() {
+    window.onload = ()=> {
+      gsap.to(window, {
+        duration: 0.5,
+        scrollTo: 0 ,
+        onComplete:()=>{
+          this.$emit("handleLoadingFalse")
+          this.createTTs()
+          /**
+           * 30s 自动播放title*/
+          setTimeout(()=>{
+            const _index=document.querySelector('.page-0-area-0').style.zIndex
+            if(_index!=-1) this.handleWeel()
+          },30*1000)
+        }
+      });
+
 
     }
-  },
-  mounted() {
-    gsap.to(window, {
-      duration: 0.5,
-      scrollTo: 0 ,
-      onComplete:()=>{
-        this.createTTs()
-      }
-    });
+
   },
   methods: {
     createTTs() {
-      /*  ScrollTrigger.create({
-          trigger: ".menu-header",
-          scrub: true,
-          pin: true,
-          end: "+=999999",
-        })*/
       if(!this.hasInit){
         this.createT0()
       }
       // this.createT1()
       this.createT2()
+      this.createT3()
       this.createT4()
       this.createT5()
     },
@@ -99,7 +103,7 @@ export default {
             .fromTo(".area2texts", {
               height: 0
             }, {
-              height: 230
+              height: 190
             })
             .to(".page-0-area-1 .deep-second .move-area", {
               paddingTop: 420
@@ -156,7 +160,7 @@ export default {
             .fromTo(".area2texts", {
               height: 0
             }, {
-              height: 230
+              height: 190
             })
             .to(".page-0-area-1 .deep-second .move-area", {
               paddingTop: 420
@@ -285,10 +289,10 @@ export default {
               opacity: 0
             }, "<")
             .to(".area-2-4", {
-              y: -50
+              y: -62
             })
             .to(".area-2 .beizhu",{
-              y: -50
+              y: -62
             },"<")
             .to(".area-2-footer-bg", {
               clipPath: "inset(0px 0px 100% 0px)"
@@ -297,13 +301,13 @@ export default {
               clipPath: "inset(0px 0px 100% 0px)"
             }, "<")
             .to(".area-2-4", {
-              y: -300
+              y: -312
             }, "<")
             .to(".area-2 .beizhu",{
-              y: -300
+              y: -312
             },"<")
             .to(".area-2-4", {
-              y: -350
+              y: -374
             })
       })
       this.stArr.push(st021)
@@ -334,9 +338,19 @@ export default {
       this.stArr.push(st022)
     },
     createT3() {
+      return false;
       const st03 = ScrollTrigger.create({
         trigger: ".area-3",
         scrub: true,
+        pin:true,
+        start:"top top",
+        end:"+=10000",
+        onUpdate:(self)=>{
+          /*console.log(self.progress)
+          this.currentTime++
+          const dom=document.querySelector(".area-3 .xu-lie")
+          dom.currentTime=this.currentTime*/
+        },
 
       })
       this.stArr.push(st03)
@@ -371,6 +385,10 @@ export default {
       this.stArr.push(st04)
     },
     createT5() {
+      /*计算move-container 多宽？*/
+      const _domWidth=document.querySelector('.move-container').offsetWidth;
+      const _distance=_domWidth - window.innerWidth;
+      console.log(_distance)
       const st05 = ScrollTrigger.create({
         trigger: ".area-5",
         pin: true,
@@ -428,7 +446,7 @@ export default {
               zIndex: -1
             }, "<")
             .to(".move-container", {
-              x: -460,
+              x: -_distance,
             })
       })
       this.stArr.push(st05)
@@ -488,9 +506,9 @@ export default {
               <div class="header-title-body"
                    style="overflow: hidden;">
                 <div class="flex area2texts"
-                     style="padding:0px 24px;align-items: flex-start;justify-content: space-between;">
+                     style="padding:10px 24px 0px 24px;align-items: flex-start;justify-content: space-between;">
                   <div class="date-time">2019/2020</div>
-                  <div class="text-label">
+                  <div class="text-label" :class="{'en':language=='en'}">
                     {{ $t('page0.textArea') }}
                   </div>
                   <div class="toggleLanguage">
@@ -498,7 +516,7 @@ export default {
                        @click="toggleLanguage">{{ language == 'en' ? '切换成中文' : 'Switch to English' }}</a>
                   </div>
                 </div>
-                <div class="descripe">
+                <div class="descripe" >
                   <div class="descripe-item">{{ $t('page0.describe1') }}</div>
                   <div class="descripe-item">{{ $t('page0.describe2') }}</div>
                 </div>
@@ -588,6 +606,7 @@ export default {
       </div>
     </section>
     <section class="area-3 screen">
+      <video class="xu-lie" src="./img/area3/xulie.webm" preload> </video>
     </section>
     <section class="area-4">
       <div class="area-4-title">
@@ -609,7 +628,7 @@ export default {
       </div>
       <div class="area-5-movies">
         <div class="area-5-2">
-          <img src="./img/area-5-2.webp" width="100%" alt="">
+          <img src="./img/area-5-2.webp" height="100%" alt="">
         </div>
         <div class="area-5-3">
           <div class="move-container">
@@ -618,7 +637,8 @@ export default {
               <video @mouseenter="handleMouseEnter"
                      @mouseleave="handleMouseLeave"
                      @click="jumpPage(1)"
-                     class="look1-video" src="./img/Look1.webm"></video>
+                     class="look1-video"
+                     src="./img/Look1.webm"></video>
               <video @mouseenter="handleMouseEnter"
                      @mouseleave="handleMouseLeave"
                      @click="jumpPage(2)"
@@ -632,8 +652,6 @@ export default {
                      @click="jumpPage(4)"
                      class="look3-video" src="./img/Look3.webm"></video>
             </div>
-
-
           </div>
         </div>
         <div class="list-area">
@@ -907,10 +925,14 @@ export default {
             .text-label {
               width: 505px;
             }
+            .text-label.en  {
+              width: 685px;
+            }
           }
 
           .descripe {
             width: 505px;
+            text-align: center;
             margin: auto;
           }
         }
@@ -929,13 +951,13 @@ export default {
 
   .page-0-area-1 {
     width: 100vw;
-    height: 100vh;
+    //height: 100vh;
     position: relative;
     .deep-second {
-      height: 100vh;
+      //height: 100vh;
       width: 90%;
       margin: auto;
-      transform: scale(0.6);
+      transform: scale(0.8);
       .move-area {
         padding-top: 190px;
       }
@@ -948,11 +970,13 @@ export default {
 
       .describe {
         width: 640px;
+        line-height: 1.5;
         text-align: right;
       }
 
       .left-area {
         width: 702px;
+        margin-bottom: 62px;
       }
     }
   }
@@ -980,7 +1004,8 @@ export default {
 
 
   .area-2 {
-    height: 100vh;
+    //height: 100vh;
+    width: 100vw;
     border-top: 1px solid #171717;
     position: relative;
 
@@ -991,11 +1016,14 @@ export default {
       height: 250px;
       left: 5vw;
       overflow: hidden;
-      bottom: 50px;
+      bottom: 62px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
 
       .bg-img {
         width: 100vw;
-        height: 100vh;
+        //height: 100vh;
         position: absolute;
         z-index: -1;
         left: 0;
@@ -1003,8 +1031,11 @@ export default {
       }
 
       .text-item {
-        margin: 40px 20px;
+        margin: 0px 20px;
         color: #fafafa;
+      }
+      .text-item:nth-child(2) {
+        margin: 40px 20px 0px 20px;
       }
     }
 
@@ -1013,12 +1044,19 @@ export default {
       position: absolute;
       z-index: 4;
       width: 600px;
+      height: 250px;
       left: 5vw;
-      bottom: 50px;
+      bottom: 62px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
 
       .text-item {
-        margin: 40px 20px;
         color: #232323;
+        margin: 0px 20px;
+      }
+      .text-item:nth-child(2) {
+        margin: 40px 20px 0px 20px;
       }
     }
 
@@ -1113,6 +1151,16 @@ export default {
     height: 100vh;
     background-color: #171717;
     opacity: 1;
+    position: relative;
+    overflow: hidden;
+    .area3-photo-item{
+      position: absolute;
+      left:0;
+      top:0;
+      z-index: 1;
+      width: 100%;
+    }
+
   }
 
   .area-4 {
@@ -1217,6 +1265,7 @@ export default {
       overflow: hidden;
 
       .move-container {
+        width: max-content;
         height: 100%;
         display: flex;
         transform: translateX(10vw);

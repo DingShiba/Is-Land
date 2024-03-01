@@ -18,8 +18,9 @@ export default {
   },
   mounted() {
     setTimeout(()=>{
+      this.$emit("handleLoadingFalse")
       this.createTTs()
-    },1000)
+    },1500)
   },
   methods: {
     getImage(name) {

@@ -12,8 +12,10 @@ export default {
   },
   mounted() {
     setTimeout(()=>{
-      this.createTTS()
+      this.$emit("handleLoadingFalse")
+      this.createTTs()
     },1000)
+
   },
   methods: {
     createTTS() {

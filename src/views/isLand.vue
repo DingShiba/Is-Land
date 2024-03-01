@@ -22,21 +22,24 @@ export default {
       this.loading = true
       window.scroll(0, 0)
       document.body.style.overflow = 'hidden';
-      setTimeout(() => {
-        gsap.to(".loading-page", {
-          opacity: 0,
-          onComplete: () => {
-            this.loading = false
-            document.body.style.overflow = 'auto';
-          }
-        })
-      }, 1000)
     },
 
+  },
+  mounted() {
+    this.current = 0
   },
   methods: {
     selectCurrent(item) {
       this.current = item - 1
+    },
+    setLoadingFalse(){
+      gsap.to(".loading-page", {
+        opacity: 0,
+        onComplete: () => {
+          this.loading = false
+          document.body.style.overflow = 'auto';
+        }
+      })
     },
     handleSetCurrentPage(current) {
       this.current = current
@@ -66,9 +69,7 @@ export default {
     Page3,
     Page4
   },
-  mounted() {
-    this.current = 0
-  },
+
 }
 </script>
 
@@ -98,27 +99,36 @@ export default {
       </div>
     </div>
     <div class="loading-page" v-if="loading">
-      <div>
-        <svg class="loading-item" viewBox="0 0 1024 1024" width="64" height="64">
+      <div class="loading-container">
+<!--        <svg class="loading-item" viewBox="0 0 1024 1024" width="64" height="64">
           <path
               d="M384 128A64 64 13680 1 0 640 128 64 64 13680 1 0 384 128zM655.53 240.47A64 64 13680 1 0 911.53 240.47 64 64 13680 1 0 655.53 240.47zM832 512A32 32 13680 1 0 960 512 32 32 13680 1 0 832 512zM719.53 783.53A32 32 13680 1 0 847.53 783.53 32 32 13680 1 0 719.53 783.53zM448.002 896A32 32 13680 1 0 576.002 896 32 32 13680 1 0 448.002 896zM176.472 783.53A32 32 13680 1 0 304.472 783.53 32 32 13680 1 0 176.472 783.53zM144.472 240.47A48 48 13680 1 0 336.472 240.47 48 48 13680 1 0 144.472 240.47zM56 512A36 36 13680 1 0 200 512 36 36 13680 1 0 56 512z"
               fill="#fff" p-id="4260"></path>
-        </svg>
+        </svg>-->
+        <span class="loading-item">C</span>
+        <span class="loading-item">e</span>
+        <span class="loading-item">L</span>
+        <span class="loading-item">24</span>
       </div>
     </div>
     <page0 v-if="current==0" :language="language"
            :has-init="hasInit"
+           @handleLoadingFalse="setLoadingFalse"
            @setCurrentPage="handleSetCurrentPage"
            @handleSetInit="setHasInit"
            @toggleLanguage="handleToggleLanguage"></page0>
     <page1 v-if="current==1"
            :language="language"
+           @handleLoadingFalse="setLoadingFalse"
            @setCurrentPage="handleSetCurrentPage"></page1>
     <page2 v-if="current==2" :language="language"
+           @handleLoadingFalse="setLoadingFalse"
            @setCurrentPage="handleSetCurrentPage"></page2>
     <page3 v-if="current==3" :language="language"
+           @handleLoadingFalse="setLoadingFalse"
            @setCurrentPage="handleSetCurrentPage"></page3>
     <page4 v-if="current==4" :language="language"
+           @handleLoadingFalse="setLoadingFalse"
            @setCurrentPage="handleSetCurrentPage"></page4>
   </div>
 </template>
@@ -141,7 +151,7 @@ export default {
   position: fixed;
   left: 0;
   top: 0px;
-  z-index: 99999999999999;
+  z-index: 9999999999999999999999999;
   background-color: #232323;
   width: 100vw;
   height: 100vh;
@@ -151,6 +161,114 @@ export default {
 
   .loading-item {
     animation: rotateLoading 1s linear infinite;
+  }
+  .loading-container{
+    font-family: var(--base-title-fontfamilly);
+    font-size: 26px;
+    color: var(--title-bkcolor);
+  }
+  @keyframes loading1{
+    0%{
+      opacity: 1;
+    }
+    40%{
+      opacity: 1;
+    }
+    50%{
+      opacity: 0;
+    }
+    60%{
+      opacity: 1;
+    }
+    70%{
+      opacity: 0;
+    }
+    100%{
+      opacity: 0;
+    }
+
+  }
+  @keyframes loading2{
+    0%{
+      opacity: 1;
+    }
+    40%{
+      opacity: 1;
+    }
+    50%{
+      opacity: 0;
+    }
+    60%{
+      opacity: 0;
+    }
+    70%{
+      opacity: 1;
+    }
+    80%{
+      opacity: 0;
+    }
+    100%{
+      opacity: 0;
+    }
+
+  }
+  @keyframes loading3{
+    0%{
+      opacity: 1;
+    }
+    40%{
+      opacity: 1;
+    }
+    50%{
+      opacity: 0;
+    }
+
+    70%{
+      opacity: 0;
+    }
+    80%{
+      opacity: 1;
+    }
+    90%{
+      opacity: 0;
+    }
+    100%{
+      opacity: 0;
+    }
+
+  }
+  @keyframes loading4{
+    0%{
+      opacity: 1;
+    }
+    40%{
+      opacity: 1;
+    }
+    50%{
+      opacity: 0;
+    }
+    80%{
+      opacity: 0;
+    }
+    90%{
+      opacity: 1;
+    }
+    100%{
+      opacity: 1;
+    }
+
+  }
+  .loading-item:nth-child(1){
+    animation: loading1 2s linear infinite;
+  }
+  .loading-item:nth-child(2){
+    animation: loading2 2s linear infinite;
+  }
+  .loading-item:nth-child(3){
+    animation: loading3 2s linear infinite;
+  }
+  .loading-item:nth-child(4){
+    animation: loading4 2s linear infinite;
   }
 }
 
