@@ -94,7 +94,8 @@ export default {
           <span>is land</span>
         </div>
         <div class="toggle-language" :class="{'zh-lag':language=='en'}" @click="handleToggleLanguage">
-          <span>{{ language == 'en' ? '汉' : 'En' }}</span>
+          <img v-if="language=='en'" width="26" src="./img/zh-han.png" alt="">
+          <span v-else>En</span>
         </div>
       </div>
     </div>

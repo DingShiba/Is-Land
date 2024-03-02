@@ -19,10 +19,15 @@ export default {
   mounted() {
     setTimeout(()=>{
       this.$emit("handleLoadingFalse")
+      this.setArea3Height()
       this.createTTs()
     },1500)
   },
   methods: {
+    setArea3Height(){
+      const _height=document.querySelector('.page-3-area-2 .area2Video').offsetHeight-300;
+      document.querySelector('.page-3-area-2').style.setProperty('height',_height+'px')
+    },
     getImage(name) {
       const _url = new URL(`./img/${name}`, import.meta.url)
       return _url.pathname
@@ -397,7 +402,6 @@ export default {
         <div class="img-area">
           <img src="./img/area2-1.webp" class="base-img" alt="">
           <img src="./img/area2-2.webp" class="float-img" alt="">
-
         </div>
       </div>
       <video class="area2Video" preload>
@@ -457,7 +461,7 @@ export default {
   font-family: var(--base-title-fontfamilly);
   font-size: 26px;
   height: 46px;
-  border-bottom: 1px solid #171717;
+  border-bottom: 2px solid #171717;
   position: fixed;
   left: 0;
   top: 0;
@@ -769,11 +773,8 @@ export default {
 }
 
 .page-3-area-2 {
-  height: 100vh;
   width: 100vw;
-  overflow: hidden;
   border-top: 1px solid #171717;
-  border-bottom: 1px solid #171717;
   display: flex;
   position: relative;
   justify-content: center;
@@ -786,12 +787,16 @@ export default {
 
   .img-container {
     padding: 12px;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
   }
 
   .img-area {
     width: 40vw;
+    height: 100vh;
+    margin: auto;
     position: relative;
-
     img {
       width: 100%;
     }
@@ -812,11 +817,13 @@ export default {
     z-index: 10;
     width: 100vw;
     opacity: 0;
+
+
   }
 
   .zhezhao {
     width: 100vw;
-    height: 100vh;
+    height: 100%;
     position: absolute;
     left: 0;
     top: 0;
@@ -828,7 +835,7 @@ export default {
 .page-3-area-3 {
   width: 100vw;
   position: relative;
-
+  border-top: 1px solid #171717;
   .container {
     display: flex;
     justify-content: space-between;

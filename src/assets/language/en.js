@@ -127,6 +127,14 @@ export default {
         cf7:"\"But when death comes, she wouldn't have any time to think.\"",
         cf8:"\"She died while napping on a chair.\"",
         cf9:"\"I hope to die like her, without pain.”",
-
+        score:{
+            describe1:"\"How could there have been no instances of ama dying in the sea,\"",
+            describe2:"\"But I don't want to only live five years and then die.\"",
+            describe3:"\"I can still catch marine life to earn money for my grandchildren,\"",
+            describe4:"\"You should see their smiles.\"",
+            describeTitle:"请为island.cel24.art打分",
+            message:"请留下你的悄悄话"
+        }
     }
+
 }

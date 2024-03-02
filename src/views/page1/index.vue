@@ -189,6 +189,19 @@ export default {
       this.stArr.push(st16)
     },
     createFooter() {
+      const stFooter0 = ScrollTrigger.create({
+        trigger: ".page-1 .footer-text",
+        start: "top bottom-=30",
+        end:"+=2000",
+        scrub:true,
+        pin:true,
+        onEnter:()=>{
+          gsap.to(".page-1 .footer-text",{
+            opacity:1
+          })
+        }
+      })
+      this.stArr.push(stFooter0)
       const stFooter1 = ScrollTrigger.create({
         trigger: ".page-1 .page-footer",
         start: "top top+=10",
@@ -201,13 +214,13 @@ export default {
         },
       })
       this.stArr.push(stFooter1)
-      const stFooter2 = ScrollTrigger.create({
-        trigger: ".page-1 .page-footer .footer-text",
-        start: "bottom bottom-=12",
-        end: "+=1080",
+    /*  const stFooter2 = ScrollTrigger.create({
+        trigger: ".page-1 .page-footer",
+        start: "top bottom-=30",
+        end: "+=100",
         pin: true
       })
-      this.stArr.push(stFooter2)
+      this.stArr.push(stFooter2)*/
     },
     jumpPage() {
       this.$emit("setCurrentPage", 2)
@@ -218,10 +231,12 @@ export default {
       imgs.forEach(item => {
         gsap.timeline()
             .to(item, {
-              scale: 0.5
+              scale: 0.5,
+              duration:1
             })
             .to(item, {
-              scale: 1
+              scale: 1,
+              duration:2.2
             })
       })
 
@@ -255,7 +270,7 @@ export default {
       <div class="img-container  img-item-1">
         <div class="img-item">
           <div class="fix-container">
-            <img src="./img/area1-1.webp" height="100%" alt="">
+            <img src="./img/area1-1.webp" width="100%" alt="">
           </div>
         </div>
       </div>
@@ -412,7 +427,7 @@ export default {
     font-family: var(--base-title-fontfamilly);
     font-size: 26px;
     height: 46px;
-    border-bottom: 1px solid #171717;
+    border-bottom: 2px solid #171717;
     position: fixed;
     left: 0;
     top: 0;
@@ -440,16 +455,12 @@ export default {
 
     .img-container {
       width: 100vw;
-      height: 100vh;
 
       position: absolute;
       left: 0px;
       top: 0px;
 
       .img-item {
-        width: max-content;
-        //background-color: #fafafa;
-        height: 100%;
         padding: 12px;
         border-right: 1px solid #171717;
         border-left: 1px solid #171717;
@@ -459,7 +470,7 @@ export default {
         background-color: var(--content-bkcolor);
 
         .fix-container {
-          height: 100%;
+          width: 100%;
           overflow: hidden;
         }
       }
@@ -470,6 +481,9 @@ export default {
     .img-item-1 {
       opacity: 1;
       z-index: 1;
+     .img-item{
+       width: 700px;
+     }
     }
 
     .img-item-2 {
@@ -520,7 +534,7 @@ export default {
     }
 
     .drifting {
-      width: 40vw;
+      width: 780px;
       margin: auto;
       padding-bottom: 40px;
 
@@ -713,8 +727,8 @@ export default {
 
           .dot-item:nth-child(1) {
             position: absolute;
-            left: 30%;
-            bottom: 86px;
+            left: 32%;
+            bottom: 80px;
             z-index: 6;
             animation: fudong1 4s linear infinite;
             transition: all 0.5s ease-in-out;
@@ -722,8 +736,8 @@ export default {
 
           .dot-item:nth-child(2) {
             position: absolute;
-            left: 26%;
-            bottom: 180px;
+            left: 28%;
+            bottom: 174px;
             z-index: 5;
             animation: fudong2 4s linear infinite;
             transition: all 0.5s ease-in-out 0.2s;
@@ -950,7 +964,7 @@ export default {
 }
 
 .add-text-buchong {
-  height: 50vh;
+  //height: 350px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -960,6 +974,7 @@ export default {
     height: max-content;
     text-align: center;
     line-height: 2.5;
+    margin-top: 92px;
   }
 }
 
@@ -985,7 +1000,7 @@ export default {
     .text-area {
       position: absolute;
       right: 90px;
-      bottom: 200px;
+      top: 625px;
       z-index: 5;
 
       width: 260px;
@@ -1003,8 +1018,6 @@ export default {
     }
 
     .white-area {
-      display: flex;
-      align-items: center;
       position: absolute;
       right: 0px;
       top: 92px;
@@ -1013,7 +1026,7 @@ export default {
       height: calc(100vh - 92px);
       border-top: 1px solid #7F583F;
       width: 500px;
-      padding: 0px 90px;
+      padding: 80px 90px;
       transform: translateX(100%);
       transition: all 0.5s ease-in-out;
 
@@ -1021,7 +1034,6 @@ export default {
         margin: auto;
         opacity: 0;
         transition: all 0.5s ease-in;
-        transform: translateY(-100px);
       }
     }
   }
@@ -1053,5 +1065,8 @@ export default {
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  .footer-text{
+    opacity: 0;
+  }
 }
 </style>

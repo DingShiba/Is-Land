@@ -24,7 +24,7 @@ html::-webkit-scrollbar{
 .is-land.zh{
     --base-title-fontfamilly:Rany-normal;
     --base-content-fontfamilly:思源宋EL;
-    --title-bold-fontfamilly: MS-SB;
+    --title-bold-fontfamilly: 思源宋Bold;
     --title-bkcolor:#fafafa;
     --content-bkcolor:#f0f0f0;
 

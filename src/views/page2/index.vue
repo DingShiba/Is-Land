@@ -403,7 +403,7 @@ export default {
   font-family: var(--base-title-fontfamilly);
   font-size: 26px;
   height: 46px;
-  border-bottom: 1px solid #171717;
+  border-bottom: 2px solid #171717;
   position: fixed;
   left: 0;
   top: 0;

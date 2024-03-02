@@ -31,7 +31,7 @@ export default {
   },
 
   mounted() {
-    window.onload = ()=> {
+    setTimeout(()=>{
       gsap.to(window, {
         duration: 0.5,
         scrollTo: 0 ,
@@ -46,21 +46,20 @@ export default {
           },30*1000)
         }
       });
-
-
-    }
+    },2000)
 
   },
   methods: {
     createTTs() {
       if(!this.hasInit){
         this.createT0()
+      }else {
+        this.createT2()
+        this.createT3()
+        this.createT4()
+        this.createT5()
       }
-      // this.createT1()
-      this.createT2()
-      this.createT3()
-      this.createT4()
-      this.createT5()
+
     },
     handleWeel() {
       gsap.to('.ruchang-back', {
@@ -85,6 +84,7 @@ export default {
         onLeave:()=>{
           /*初始化完成*/
           this.$emit("handleSetInit",true)
+          this.createTTs()
         },
         onUpdate: (self) => {
           const _top = document.querySelector('.in-sce').getBoundingClientRect().top
@@ -108,6 +108,9 @@ export default {
             .to(".page-0-area-1 .deep-second .move-area", {
               paddingTop: 420
             }, "<")
+            .to(".zhanwei-blank",{
+              scale:2
+            })
             .to(".page-0-area-0 .header-title-body .area2texts", {
               opacity: 0,
               height: 0
@@ -136,143 +139,20 @@ export default {
       })
       this.stArr.push(stg0)
     },
-    createT1() {
-      let st01 = ScrollTrigger.create({
-        trigger: ".page-0-area-1",
-        start: "top top",
-        end: "+=2000",
-        scrub: true,
-        pin: true,
-        onUpdate: () => {
-          const _top = document.querySelector('.in-sce').getBoundingClientRect().top
-          this.$refs.biaotiVideo.style.setProperty("transform", `translateY(${-_top}px)`)
-        },
-        animation: gsap.timeline()
-            .to('.ru-chang', {
-              y: '-100vh',
-            })
-            .to(".area-1-video-2", {
-              opacity: 0
-            }, "<")
-            .to(".page-0-area-1 .deep-second", {
-              scale: 1
-            }, "<")
-            .fromTo(".area2texts", {
-              height: 0
-            }, {
-              height: 190
-            })
-            .to(".page-0-area-1 .deep-second .move-area", {
-              paddingTop: 420
-            }, "<")
-            .to(".page-0-area-1 .header-title-body .area2texts", {
-              opacity: 0,
-              height: 0
-            })
-            .to(".page-0-area-1 .header-title-body .descripe", {
-              opacity: 0,
-              height: 0
-            }, "<")
-            .to(".page-0-area-1 .title", {
-              fontSize: 26,
-              letterSpacing: 0,
-              height: 46
-            }, "<")
-            .to(".header-title-container", {
-              padding: 0
-            }, "<")
-            .to(".page-0-area-1 .deep-second .move-area", {
-              paddingTop: 66,
-            }, "<")
-            .set(".page-0 .page-header", {
-              opacity: 1
-            })
 
-      })
-      this.stArr.push(st01)
-      /* ScrollTrigger.create({
-         trigger: '.header-title',
-         start: 'top center',
-         end: "+=400",
-         scrub: true,
-         toggleClass: "active",
-         onEnter: () => {
-           gsap.timeline()
-               .to(window, {
-                 scrollTo: '.header-title-container',
-                 duration: 0.5
-               })
-               .fromTo('.deep-second-img', {
-                 scale: 0.8
-               }, {
-                 scale: 1
-               }, '<')
-
-         },
-
-       })
-       /!*固定deep-2*!/
-       ScrollTrigger.create({
-         trigger: '.deep-second',
-         pin: true,
-         start: "top top",
-         end: "+=1400",
-         scrub: true,
-       })
-       /!*固定header-title*!/
-       ScrollTrigger.create({
-         trigger: '.header-title-container',
-         pin: true,
-         scrub: true,
-         start: 'top top',
-         end: '+=427',
-         onUpdate: (self) => {
-         },
-         onEnter: () => {
-           gsap.timeline()
-               .to('.area2texts', {
-                 opacity: 1,
-                 height: 280
-               })
-               .to('.deep-second .move-area', {
-                 paddingTop: 440
-               }, '<')
-         },
-         animation: gsap.timeline()
-             .fromTo('.header-title-body', {
-               opacity: 1,
-               height: 320
-             }, {
-               height: 0,
-               opacity: 0
-             })
-             .to('.deep-second .move-area', {
-               y: -350
-             }, '<')
-             .to('.header-title .title', {
-               fontSize: 16
-             }, '<')
-             .to('.header-title', {
-               paddingBottom: 0
-             }, "<")
-             .set('.menu-header', {
-               opacity: 1
-             }, ">")
-       })*/
-
-    },
     createT2() {
       const st021 = ScrollTrigger.create({
         trigger: ".area-2",
         pin: true,
         start: "top top",
-        end: "bottom top",
+        end: "+=2000",
         scrub: true,
         animation: gsap.timeline()
             .to('.area-2-1', {
               scale: 1.2,
               x: -100,
               y:100,
+              duration:1.5
             })
             .to(".area-2 .beizhu",{
               opacity:1
@@ -344,12 +224,10 @@ export default {
         scrub: true,
         pin:true,
         start:"top top",
-        end:"+=10000",
+        end:"+=15000",
         onUpdate:(self)=>{
-          /*console.log(self.progress)
-          this.currentTime++
           const dom=document.querySelector(".area-3 .xu-lie")
-          dom.currentTime=this.currentTime*/
+          dom.currentTime=15*self.progress
         },
 
       })
@@ -385,10 +263,12 @@ export default {
       this.stArr.push(st04)
     },
     createT5() {
+      /*计算上面覆盖图片的高度*/
+      const _height=document.querySelector('.area-5-2').offsetHeight
+      document.querySelector(".area-5-3 .move-container").style.setProperty('height',_height+'px')
       /*计算move-container 多宽？*/
-      const _domWidth=document.querySelector('.move-container').offsetWidth;
-      const _distance=_domWidth - window.innerWidth;
-      console.log(_distance)
+      const _domWidth=document.querySelector('.area-5-3 .gifs-arr video').offsetWidth;
+      const _distance=_domWidth*4+document.querySelector(".area-5-3 .movies-item").offsetWidth - window.innerWidth;
       const st05 = ScrollTrigger.create({
         trigger: ".area-5",
         pin: true,
@@ -431,7 +311,7 @@ export default {
         },
         animation: gsap.timeline()
             .to('.area-5-2', {
-              x: 500,
+              x: 300,
             })
             .set('.move-container .gifs-arr', {
               opacity: 1
@@ -451,6 +331,7 @@ export default {
       })
       this.stArr.push(st05)
       /*创建videobangding*/
+
     },
     handleMouseEnter(e) {
       e.srcElement.play()
@@ -478,6 +359,7 @@ export default {
 
 <template>
   <div class="page-0" ref="page0">
+    <div class="zhanwei-blank"></div>
     <div class="page-header" v-if="hasInit">
       <span>CeL24</span>
     </div>
@@ -513,7 +395,7 @@ export default {
                   </div>
                   <div class="toggleLanguage">
                     <a style="text-decoration: underline;cursor: pointer"
-                       @click="toggleLanguage">{{ language == 'en' ? '切换成中文' : 'Switch to English' }}</a>
+                       @click="toggleLanguage">{{ language == 'en' ? '切换成中文' : 'English version' }}</a>
                   </div>
                 </div>
                 <div class="descripe" >
@@ -548,7 +430,7 @@ export default {
         </div>
       </div>
     </section>
-    <section class="area-2 screen">
+    <section class="area-2 ">
       <div class="area-2-footer-text">
         <div class="text-item">
           <span>{{ $t('page0.area2.fixed1') }}</span>
@@ -628,7 +510,7 @@ export default {
       </div>
       <div class="area-5-movies">
         <div class="area-5-2">
-          <img src="./img/area-5-2.webp" height="100%" alt="">
+          <img src="./img/area-5-2.webp" width="100%" alt="">
         </div>
         <div class="area-5-3">
           <div class="move-container">
@@ -731,6 +613,9 @@ export default {
             <span v-for="(item,index) in linksEn.split('/')">
               <a :href="httpLinks[index]"
                  class="link-item"
+                 :class="{
+                  'link-item-song':index>5
+                 }"
                  target="_blank">{{ item }}</a>
             <span v-if="index<httpLinks.length-1">/</span>
             </span>
@@ -802,11 +687,17 @@ export default {
 /*.page-0::-webkit-scrollbar{
   display: none;
 }*/
+.zhanwei-blank{
+  position: absolute;
+  z-index: -10;
+  width: 1px;
+  height: 1px;
+}
 .page-header {
   font-family: var(--base-title-fontfamilly);
   font-size: 26px;
   height: 46px;
-  border-bottom: 1px solid #171717;
+  border-bottom: 2px solid #171717;
   position: fixed;
   left: 0;
   top: 0;
@@ -1189,13 +1080,12 @@ export default {
   }
 
   .area-5 {
-    height: 100vh;
     background-color: #f0f0f0;
 
     .area-5-title {
       width: 90vw;
       margin: auto;
-      padding-top: 4vh;
+      padding: 15px 0px;
       font-family: MS-Bold;
       font-size: 30px;
 
@@ -1211,16 +1101,10 @@ export default {
       position: relative;
     }
 
-    .area-5-1 {
-      position: absolute;
-      z-index: 8;
-      right: 10vw;
-      top: 0;
-    }
+
 
     .area-5-2 {
       width: 80vw;
-      height: 750px;
       margin: auto;
       position: absolute;
       z-index: 10;
@@ -1260,19 +1144,21 @@ export default {
     }
 
     .area-5-3 {
-      height: 750px;
       width: 100vw;
       overflow: hidden;
-
       .move-container {
         width: max-content;
-        height: 100%;
         display: flex;
         transform: translateX(10vw);
-
         .gifs-arr {
           opacity: 0;
           display: flex;
+          height: 100%;
+          width: max-content;
+          video{
+            height: 744px;
+
+          }
         }
 
         .movies-item {
@@ -1308,6 +1194,9 @@ export default {
           color: #fafafa;
           text-decoration: none;
           font-family: var(--base-content-fontfamilly);
+        }
+        .link-item.link-item-song{
+          font-family: 思源宋EL;
         }
 
         .link-item:hover {
