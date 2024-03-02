@@ -266,7 +266,7 @@ export default {
     <div class="page-header">
       <span>CeL24</span>
     </div>
-    <section class="page-1-area-1 screen">
+    <section class="page-1-area-1 ">
       <div class="img-container  img-item-1">
         <div class="img-item">
           <div class="fix-container">
@@ -277,14 +277,14 @@ export default {
       <div class="img-container img-item-2">
         <div class="img-item ">
           <div class="fix-container">
-            <img src="./img/area1-2.webp" height="103%" alt="">
+            <img src="./img/area1-2.webp" width="100%" alt="">
           </div>
         </div>
       </div>
       <div class="img-container img-item-3">
         <div class="img-item">
           <div class="fix-container">
-            <img src="./img/area1-3.webp" height="106%" alt="">
+            <img src="./img/area1-3.webp" width="100%" alt="">
           </div>
         </div>
       </div>
@@ -452,7 +452,7 @@ export default {
     position: relative;
     //background-color: #171717;
     overflow: hidden;
-
+    border-bottom: 1px solid #232323;
     .img-container {
       width: 100vw;
 
@@ -490,12 +490,19 @@ export default {
       opacity: 0;
       z-index: 2;
       //margin-top: 200px;
+      .img-item{
+        width: 750px;
+      }
     }
 
     .img-item-3 {
       opacity: 0;
       z-index: 3;
+      position: relative;
       //margin-top: 200px;
+      .img-item{
+        width: 800px;
+      }
     }
   }
 
