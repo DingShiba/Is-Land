@@ -131,6 +131,9 @@ export default {
     <page4 v-if="current==4" :language="language"
            @handleLoadingFalse="setLoadingFalse"
            @setCurrentPage="handleSetCurrentPage"></page4>
+    <section class="page-footer-text">
+      {{ $t('page1.area7.text') }}
+    </section>
   </div>
 </template>
 
@@ -390,5 +393,14 @@ export default {
       background-position: center center;
     }
   }
+}
+.page-footer-text {
+  position: fixed;
+  bottom: 12px;
+  left: 0;
+  width: 100vw;
+  color: #fafafa;
+  text-align: center;
+  opacity: 0;
 }
 </style>

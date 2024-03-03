@@ -189,38 +189,43 @@ export default {
       this.stArr.push(st16)
     },
     createFooter() {
-      const stFooter0 = ScrollTrigger.create({
-        trigger: ".page-1 .footer-text",
-        start: "top bottom-=30",
-        end:"+=2000",
-        scrub:true,
-        pin:true,
-        onEnter:()=>{
-          gsap.to(".page-1 .footer-text",{
-            opacity:1
-          })
+      const stFooter11 = ScrollTrigger.create({
+        trigger: ".page-1 .footer-text-zhanwei",
+        start: "top bottom-=20",
+        scrub: true,
+        onEnter: () => {
+          gsap.timeline()
+              .to(".page-footer-text", {
+                opacity: 1
+              })
+              .set('.footer-text-zhanwei', {
+                height: '101vh'
+              })
+        },
+        onLeaveBack: () => {
+          gsap.timeline()
+              .to(".page-footer-text", {
+                opacity: 0
+              })
+              .set('.footer-text-zhanwei', {
+                height: 50
+              })
         }
       })
-      this.stArr.push(stFooter0)
-      const stFooter1 = ScrollTrigger.create({
-        trigger: ".page-1 .page-footer",
-        start: "top top+=10",
+      this.stArr.push(stFooter11)
+      const stFooter12 = ScrollTrigger.create({
+        trigger: ".page-1 .footer-text-zhanwei",
+        start: "top top",
+        scrub: true,
         onEnter: () => {
-          gsap.to(".page-footer .footer-text", {
+          gsap.to(".page-footer-text", {
             opacity: 0, onComplete: () => {
               this.jumpPage()
             }
           })
         },
       })
-      this.stArr.push(stFooter1)
-    /*  const stFooter2 = ScrollTrigger.create({
-        trigger: ".page-1 .page-footer",
-        start: "top bottom-=30",
-        end: "+=100",
-        pin: true
-      })
-      this.stArr.push(stFooter2)*/
+      this.stArr.push(stFooter12)
     },
     jumpPage() {
       this.$emit("setCurrentPage", 2)
@@ -389,7 +394,7 @@ export default {
         <div v-for="item in 6" class="cf-item">{{ $t(`page1.cf${item}`) }}</div>
       </div>
     </section>
-    <section class="page-1-area-6 screen">
+    <section class="page-1-area-6">
       <div class="container">
         <div class="img-container">
           <img class="bg-img" src="./img/area6-1.webp" width="100%" alt="">
@@ -406,9 +411,7 @@ export default {
         </div>
       </div>
     </section>
-    <section class="page-1-area-7 page-footer">
-      <span class="footer-text">{{ $t('page1.area7.text') }}</span>
-    </section>
+    <section class="footer-text-zhanwei"></section>
   </div>
 </template>
 
@@ -439,7 +442,11 @@ export default {
     background-color: #fafafa;
 
   }
-
+  .footer-text-zhanwei {
+    height: 50px;
+    width: 100vw;
+    background-color: #232323;
+  }
   .screen {
     width: 100vw;
     height: 100vh;
@@ -986,6 +993,8 @@ export default {
 }
 
 .page-1-area-6 {
+  width: 100vw;
+  height: 100vh;
   .container {
     padding-top: 92px;
     width: 100%;
@@ -1063,7 +1072,7 @@ export default {
 
 }
 
-.page-1-area-7 {
+/*.page-1-area-7 {
   background-color: #171717;
   height: 100vh;
   color: #fafafa;
@@ -1075,5 +1084,5 @@ export default {
   .footer-text{
     opacity: 0;
   }
-}
+}*/
 </style>

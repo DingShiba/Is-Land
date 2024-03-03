@@ -6,11 +6,11 @@ import {ScrollToPlugin} from 'gsap/ScrollToPlugin.js'
 gsap.registerPlugin(ScrollToPlugin, ScrollTrigger);
 export default {
   name: "index",
-  props: ["language","hasInit"],
+  props: ["language", "hasInit"],
   data() {
     return {
       stArr: [],
-      currentTime:0,
+      currentTime: 0,
       linksEn: "Yoshiyuki Iwase BachmannEckenstein Basel / Yoshiyuki Iwase - Japanese Master Photographer / Haenyeo - Seeing the Incredible Women Divers of Jeju Island - South Korea! - Dive O'Clock! / Ama Women Divers of Japan - Where to See & Explore this Culture - Dive O'Clock! / Culture of Jeju Haenyeo (women divers) - YouTube / Osatsu-kamado Ama Hut Experience ISESHIMA TOBA City / 海女（职业名称）_百度百科 / 这群韩国“海女”都七八十岁高龄了，还在下海捕捞 / 真实美人鱼，海女的历史与现状 / 海女的群像，那些在海里捡珍珠的人 / VisitJeju - 济州岛旅游综合信息网，济州岛自由行攻略 / 제주해녀박물관 ",
       linksZh: "Yoshiyuki Iwase BachmannEckenstein Basel / Yoshiyuki Iwase - Japanese Master Photographer / Haenyeo - Seeing the Incredible Women Divers of Jeju Island - South Korea! - Dive O'Clock! / Ama Women Divers of Japan - Where to See & Explore this Culture - Dive O'Clock! / Culture of Jeju Haenyeo (women divers) - YouTube / Osatsu-kamado Ama Hut Experience ISESHIMA TOBA City / 海女（职业名称）_百度百科 / 这群韩国“海女”都七八十岁高龄了，还在下海捕捞 / 真实美人鱼，海女的历史与现状 / 海女的群像，那些在海里捡珍珠的人 / VisitJeju - 济州岛旅游综合信息网，济州岛自由行攻略 / 제주해녀박물관",
       httpLinks: [
@@ -31,33 +31,34 @@ export default {
   },
 
   mounted() {
-    setTimeout(()=>{
+    setTimeout(() => {
       gsap.to(window, {
         duration: 0.5,
-        scrollTo: 0 ,
-        onComplete:()=>{
+        scrollTo: 0,
+        onComplete: () => {
           this.$emit("handleLoadingFalse")
           this.createTTs()
           /**
            * 30s 自动播放title*/
-          setTimeout(()=>{
-            const _index=document.querySelector('.page-0-area-0').style.zIndex
-            if(_index!=-1) this.handleWeel()
-          },30*1000)
+          setTimeout(() => {
+            const _index = document.querySelector('.page-0-area-0').style.zIndex
+            if (_index != -1) this.handleWeel()
+          }, 30 * 1000)
         }
       });
-    },2000)
+    }, 2000)
 
   },
   methods: {
     createTTs() {
-      if(!this.hasInit){
+      if (!this.hasInit) {
         this.createT0()
-      }else {
+      } else {
         this.createT2()
         this.createT3()
         this.createT4()
         this.createT5()
+        this.createTFooter()
       }
 
     },
@@ -81,9 +82,9 @@ export default {
         end: "+=1080",
         scrub: true,
         scroller: ".page-0-area-0",
-        onLeave:()=>{
+        onLeave: () => {
           /*初始化完成*/
-          this.$emit("handleSetInit",true)
+          this.$emit("handleSetInit", true)
           this.createTTs()
         },
         onUpdate: (self) => {
@@ -108,8 +109,8 @@ export default {
             .to(".page-0-area-1 .deep-second .move-area", {
               paddingTop: 420
             }, "<")
-            .to(".zhanwei-blank",{
-              scale:2
+            .to(".zhanwei-blank", {
+              scale: 2
             })
             .to(".page-0-area-0 .header-title-body .area2texts", {
               opacity: 0,
@@ -151,11 +152,11 @@ export default {
             .to('.area-2-1', {
               scale: 1.2,
               x: -100,
-              y:100,
-              duration:1.5
+              y: 100,
+              duration: 1.5
             })
-            .to(".area-2 .beizhu",{
-              opacity:1
+            .to(".area-2 .beizhu", {
+              opacity: 1
             })
             .to(".area-2-2", {
               y: '-50vh'
@@ -171,9 +172,9 @@ export default {
             .to(".area-2-4", {
               y: -62
             })
-            .to(".area-2 .beizhu",{
+            .to(".area-2 .beizhu", {
               y: -62
-            },"<")
+            }, "<")
             .to(".area-2-footer-bg", {
               clipPath: "inset(0px 0px 100% 0px)"
             })
@@ -183,9 +184,9 @@ export default {
             .to(".area-2-4", {
               y: -312
             }, "<")
-            .to(".area-2 .beizhu",{
+            .to(".area-2 .beizhu", {
               y: -312
-            },"<")
+            }, "<")
             .to(".area-2-4", {
               y: -374
             })
@@ -218,17 +219,34 @@ export default {
       this.stArr.push(st022)
     },
     createT3() {
-      return false;
+      return false
+      const tl = gsap.timeline(),
+          _doms = document.querySelectorAll('.area3-photo-item');
+      _doms.forEach((item, index) => {
+        tl.add(gsap.to(item, {
+          opacity: 1
+        }))
+        if (index > 0) {
+          tl.add(gsap.to(_doms[index - 1], {
+            opacity: 0
+          }))
+        }
+
+      })
       const st03 = ScrollTrigger.create({
         trigger: ".area-3",
         scrub: true,
-        pin:true,
-        start:"top top",
-        end:"+=15000",
-        onUpdate:(self)=>{
-          const dom=document.querySelector(".area-3 .xu-lie")
-          dom.currentTime=15*self.progress
-        },
+        pin: true,
+        start: "top top",
+        direction: 1,
+        end: "+=15000",
+        /* onUpdate:(self)=>{
+           if(self.direction==-1){
+             st03.clearScrollMemory()
+             st03.kill()
+           }
+         },*/
+        animation: tl
 
       })
       this.stArr.push(st03)
@@ -263,15 +281,13 @@ export default {
       this.stArr.push(st04)
     },
     createT5() {
-      /*计算上面覆盖图片的高度*/
-      const _height=document.querySelector('.area-5-2').offsetHeight
-      document.querySelector(".area-5-3 .move-container").style.setProperty('height',_height+'px')
       /*计算move-container 多宽？*/
-      const _domWidth=document.querySelector('.area-5-3 .gifs-arr video').offsetWidth;
-      const _distance=_domWidth*4+document.querySelector(".area-5-3 .movies-item").offsetWidth - window.innerWidth;
+      const _domWidth = document.querySelector('.area-5-3 .move-container').offsetWidth;
+      const _distance = _domWidth - window.innerWidth;
       const st05 = ScrollTrigger.create({
         trigger: ".area-5",
         pin: true,
+        // pinSpacing: "margin",
         start: "top top+=40",
         end: 'bottom top',
         scrub: true,
@@ -333,6 +349,45 @@ export default {
       /*创建videobangding*/
 
     },
+    createTFooter() {
+      const stFooter01 = ScrollTrigger.create({
+        trigger: ".page-0 .footer-text-zhanwei",
+        start: "top bottom-=20",
+        scrub: true,
+        onEnter: () => {
+          gsap.timeline()
+              .to(".page-footer-text", {
+                opacity: 1
+              })
+              .set('.footer-text-zhanwei', {
+                height: '101vh'
+              })
+        },
+        onLeaveBack: () => {
+          gsap.timeline()
+              .to(".page-footer-text", {
+                opacity: 0
+              })
+              .set('.footer-text-zhanwei', {
+                height: 30
+              })
+        }
+      })
+      this.stArr.push(stFooter01)
+      const stFooter02 = ScrollTrigger.create({
+        trigger: ".page-0 .footer-text-zhanwei",
+        start: "top top",
+        scrub: true,
+        onEnter: () => {
+          gsap.to(".page-footer-text", {
+            opacity: 0, onComplete: () => {
+              this.jumpPage(1)
+            }
+          })
+        },
+      })
+      this.stArr.push(stFooter02)
+    },
     handleMouseEnter(e) {
       e.srcElement.play()
     },
@@ -340,8 +395,8 @@ export default {
       e.srcElement.pause()
       e.srcElement.currentTime = 0
     },
-    jumpPage(index){
-      this.$emit("setCurrentPage",index)
+    jumpPage(index) {
+      this.$emit("setCurrentPage", index)
     },
     getImage(name) {
       const _url = new URL(`./img/${name}`, import.meta.url)
@@ -398,7 +453,7 @@ export default {
                        @click="toggleLanguage">{{ language == 'en' ? '切换成中文' : 'English version' }}</a>
                   </div>
                 </div>
-                <div class="descripe" >
+                <div class="descripe">
                   <div class="descripe-item">{{ $t('page0.describe1') }}</div>
                   <div class="descripe-item">{{ $t('page0.describe2') }}</div>
                 </div>
@@ -430,7 +485,7 @@ export default {
         </div>
       </div>
     </section>
-    <section class="area-2 ">
+    <section class="area-2">
       <div class="area-2-footer-text">
         <div class="text-item">
           <span>{{ $t('page0.area2.fixed1') }}</span>
@@ -450,11 +505,8 @@ export default {
           <span>{{ $t('page0.area2.fixed2') }}</span>
         </div>
       </div>
-      <!--      <div class="area-2-footer-bg">
-
-            </div>-->
       <div class="area-2-1 area-2-item">
-        <img src="./img/area-2-1.webp" width="100%" height="100%" alt="">
+        <img src="./img/area-2-1.webp" width="90%" alt="">
       </div>
 
       <div class="area-2-2 area-2-item ">
@@ -473,7 +525,7 @@ export default {
 
         </div>
       </div>
-      <div class="beizhu">{{$t('page0.area2.beizhu')}}</div>
+      <div class="beizhu">{{ $t('page0.area2.beizhu') }}</div>
 
       <div class="area-2-3 area-2-item ">
         <div class="ba-img">
@@ -488,7 +540,8 @@ export default {
       </div>
     </section>
     <section class="area-3 screen">
-      <video class="xu-lie" src="./img/area3/xulie.webm" preload> </video>
+      <img class="base-img" src="./img/area3/Pic1.webp" alt="">
+      <img v-for="item in 154" class="area3-photo-item" :src="getImage('area3/Pic'+item+'.webp')">
     </section>
     <section class="area-4">
       <div class="area-4-title">
@@ -680,6 +733,7 @@ export default {
       </div>
       <div class="copyright">琼ICP备2024018151号-1</div>
     </section>
+    <section class="footer-text-zhanwei"></section>
   </div>
 </template>
 
@@ -687,12 +741,13 @@ export default {
 /*.page-0::-webkit-scrollbar{
   display: none;
 }*/
-.zhanwei-blank{
+.zhanwei-blank {
   position: absolute;
   z-index: -10;
   width: 1px;
   height: 1px;
 }
+
 .page-header {
   font-family: var(--base-title-fontfamilly);
   font-size: 26px;
@@ -816,7 +871,8 @@ export default {
             .text-label {
               width: 505px;
             }
-            .text-label.en  {
+
+            .text-label.en {
               width: 685px;
             }
           }
@@ -832,9 +888,11 @@ export default {
 
 
   }
-  .page-0-area-0.hidden-status{
+
+  .page-0-area-0.hidden-status {
     z-index: -1;
   }
+
   .page-0-area-0::-webkit-scrollbar {
     width: 0px;
     height: 0px;
@@ -842,13 +900,12 @@ export default {
 
   .page-0-area-1 {
     width: 100vw;
-    //height: 100vh;
-    position: relative;
+  //height: 100vh; position: relative;
+
     .deep-second {
-      //height: 100vh;
-      width: 90%;
-      margin: auto;
+    //height: 100vh; width: 90%; margin: auto;
       transform: scale(0.8);
+
       .move-area {
         padding-top: 190px;
       }
@@ -871,10 +928,12 @@ export default {
       }
     }
   }
-  .page-0-area-1.has-init{
-    .deep-second{
+
+  .page-0-area-1.has-init {
+    .deep-second {
       transform: scale(1);
-      .move-area{
+
+      .move-area {
         padding-top: 66px;
       }
     }
@@ -895,10 +954,8 @@ export default {
 
 
   .area-2 {
-    //height: 100vh;
-    width: 100vw;
+  //height: 100vh; position: relative; width: 100vw;
     border-top: 1px solid #171717;
-    position: relative;
 
     .area-2-footer-text {
       position: absolute;
@@ -914,9 +971,7 @@ export default {
 
       .bg-img {
         width: 100vw;
-        //height: 100vh;
-        position: absolute;
-        z-index: -1;
+      //height: 100vh; position: absolute; z-index: -1;
         left: 0;
         bottom: 0;
       }
@@ -925,6 +980,7 @@ export default {
         margin: 0px 20px;
         color: #fafafa;
       }
+
       .text-item:nth-child(2) {
         margin: 40px 20px 0px 20px;
       }
@@ -946,6 +1002,7 @@ export default {
         color: #232323;
         margin: 0px 20px;
       }
+
       .text-item:nth-child(2) {
         margin: 40px 20px 0px 20px;
       }
@@ -960,18 +1017,18 @@ export default {
     .area-2-1 {
       z-index: 10;
       width: 100%;
-      height: 100vh;
-      position: relative;
+      position: absolute;
       display: flex;
       justify-content: flex-end;
+      left: 0;
+      top: 0;
 
       img {
-        position: absolute;
-        right: 0px;
-        top: 0;
+        margin: auto;
       }
     }
-    .beizhu{
+
+    .beizhu {
       width: 90%;
       position: absolute;
       left: 5%;
@@ -981,6 +1038,7 @@ export default {
       z-index: 9;
       opacity: 0;
     }
+
     .area-2-2 {
       z-index: 9;
       width: 100%;
@@ -1012,7 +1070,7 @@ export default {
       z-index: 8;
       left: 0;
       top: 110px;
-      height: calc(100vh - 110px);
+
 
       .ba-img {
         width: 90%;
@@ -1022,12 +1080,12 @@ export default {
     }
 
     .area-2-4 {
-      position: absolute;
+      position: relative;
+      margin-top: 110px;
       z-index: 7;
-      left: 0;
-      top: 110px;
+
       overflow: hidden;
-      height: calc(100vh - 110px);
+
 
       .ba-img {
         width: 90%;
@@ -1039,17 +1097,19 @@ export default {
 
   .area-3 {
     width: 100vw;
-    height: 100vh;
     background-color: #171717;
     opacity: 1;
     position: relative;
     overflow: hidden;
-    .area3-photo-item{
+
+    .area3-photo-item {
       position: absolute;
-      left:0;
-      top:0;
+      left: 0;
+      top: 0;
       z-index: 1;
       width: 100%;
+      /*      display: none;*/
+      opacity: 0;
     }
 
   }
@@ -1102,15 +1162,11 @@ export default {
     }
 
 
-
     .area-5-2 {
       width: 80vw;
       margin: auto;
-      position: absolute;
+      position: relative;
       z-index: 10;
-      left: 10vw;
-      top: 0;
-
     }
 
     .list-area {
@@ -1145,17 +1201,25 @@ export default {
 
     .area-5-3 {
       width: 100vw;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
       overflow: hidden;
+
       .move-container {
         width: max-content;
         display: flex;
+        height: 100%;
         transform: translateX(10vw);
+
         .gifs-arr {
           opacity: 0;
           display: flex;
           height: 100%;
           width: max-content;
-          video{
+
+          video {
             height: 744px;
 
           }
@@ -1174,6 +1238,7 @@ export default {
     color: #fafafa;
     background-color: #232323;
     margin-top: 50px;
+    position: relative;
 
     .lianxi {
       padding: 80px 0px;
@@ -1195,7 +1260,8 @@ export default {
           text-decoration: none;
           font-family: var(--base-content-fontfamilly);
         }
-        .link-item.link-item-song{
+
+        .link-item.link-item-song {
           font-family: 思源宋EL;
         }
 
@@ -1229,7 +1295,16 @@ export default {
       text-align: center;
       padding-bottom: 20px;
     }
+
   }
+
+  .footer-text-zhanwei {
+    height: 30px;
+    width: 100vw;
+    background-color: #232323;
+  }
+
+
 
 }
 </style>

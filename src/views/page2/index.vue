@@ -1,20 +1,21 @@
 <script>
 import gsap from 'gsap'
 import {ScrollTrigger} from 'gsap/ScrollTrigger';
+
 gsap.registerPlugin(ScrollTrigger);
 export default {
   name: "index",
   data() {
     return {
       colloseNum: 2,
-      stArr:[]
+      stArr: []
     }
   },
   mounted() {
-    setTimeout(()=>{
+    setTimeout(() => {
       this.$emit("handleLoadingFalse")
       this.createTTS()
-    },2000)
+    }, 2000)
 
 
   },
@@ -26,7 +27,7 @@ export default {
       this.createFooter()
     },
     createT1() {
-      const st21=ScrollTrigger.create({
+      const st21 = ScrollTrigger.create({
         trigger: ".page-2-area-1",
         pin: true,
         start: "top top",
@@ -186,16 +187,16 @@ export default {
             .set(".page-2-area-1 .base-img-area .ten", {
               opacity: 1
             }, "<")
-            .to(".page-2-area-1 .step5-container .even",{
-              scale:0.8
+            .to(".page-2-area-1 .step5-container .even", {
+              scale: 0.8
             })
             .fromTo(".page-2-area-1 .step7-container", {
-              y:0
-            },{
+              y: 0
+            }, {
               y: '-3.515625vw'
             })
-            .set(".page-2-area-1 .ten .even-item",{
-              opacity:1
+            .set(".page-2-area-1 .ten .even-item", {
+              opacity: 1
             })
             .fromTo('.page-2-area-1 .step7-container .even', {
               clipPath: "inset(0px 0px 0px 0px)"
@@ -210,25 +211,22 @@ export default {
       return _url.pathname
     },
     createT2() {
-      const st221=ScrollTrigger.create({
+      const st221 = ScrollTrigger.create({
         trigger: ".page-2-area-2",
         scrub: true,
         start: "top bottom",
         end: "bottom bottom",
         animation: gsap.timeline()
-        /*    .to(".page-2-area-1 .base-img-area",{
-              scale:0.5
-            })*/
-            .to(".page-2-area-1 .find-love",{
-              scale:0.5,
-              y:'25vh'
+            .to(".page-2-area-1 .find-love", {
+              scale: 0.5,
+              y: '25vh'
             })
-            .to(".page-2-area-1 .vertical-line",{
-              scale:1.5
-            },"<")
-            .to(".page-2-area-1 .bottom-line",{
-              scale:1.5
-            },"<")
+            .to(".page-2-area-1 .vertical-line", {
+              scale: 1.5
+            }, "<")
+            .to(".page-2-area-1 .bottom-line", {
+              scale: 1.5
+            }, "<")
             .fromTo(".page-2-area-2 .img-text", {
               opacity: 0,
             }, {
@@ -236,35 +234,34 @@ export default {
             }, "<")
 
 
-
       })
       this.stArr.push(st221)
-      const st222=ScrollTrigger.create({
-        trigger:".page-2-area-2 .text-area",
-        scrub:true,
-        start:"top bottom-=300",
-        toggleClass:"active",
+      const st222 = ScrollTrigger.create({
+        trigger: ".page-2-area-2 .text-area",
+        scrub: true,
+        start: "top bottom-=300",
+        toggleClass: "active",
       })
       this.stArr.push(st222)
     },
     createT3() {
-      const st23=ScrollTrigger.create({
+      const st23 = ScrollTrigger.create({
         trigger: ".page-2-area-3",
         scrub: true,
-        pin:true,
+        pin: true,
         start: "bottom bottom",
         end: "+=500",
         animation: gsap.timeline()
-           /* .to(".page-2-area-3 .base-image",{
-              y:-800
-            })*/
-            .fromTo(".page-2-area-3 .area3-video",{
-              opacity:0
-            },{
-              opacity:1,
-              onStart:()=>{
-                const _domVideo= document.querySelector('.page-2-area-3 .area3-video')
-                _domVideo.currentTime=_domVideo.duration
+            /* .to(".page-2-area-3 .base-image",{
+               y:-800
+             })*/
+            .fromTo(".page-2-area-3 .area3-video", {
+              opacity: 0
+            }, {
+              opacity: 1,
+              onStart: () => {
+                const _domVideo = document.querySelector('.page-2-area-3 .area3-video')
+                _domVideo.currentTime = _domVideo.duration
               }
             })
 
@@ -272,7 +269,7 @@ export default {
       this.stArr.push(st23)
     },
     createFooter() {
-      const stFooter1 = ScrollTrigger.create({
+   /*   const stFooter1 = ScrollTrigger.create({
         trigger: ".page-footer",
         start: "top top+=10",
         onEnter: () => {
@@ -290,10 +287,47 @@ export default {
         end: "+=1080",
         pin: true
       })
-      this.stArr.push(stFooter2)
+      this.stArr.push(stFooter2)*/
+      const stFooter21 = ScrollTrigger.create({
+        trigger: ".page-2 .footer-text-zhanwei",
+        start: "top bottom-=20",
+        scrub: true,
+        onEnter: () => {
+          gsap.timeline()
+              .to(".page-footer-text", {
+                opacity: 1
+              })
+              .set('.footer-text-zhanwei', {
+                height: '101vh'
+              })
+        },
+        onLeaveBack: () => {
+          gsap.timeline()
+              .to(".page-footer-text", {
+                opacity: 0
+              })
+              .set('.footer-text-zhanwei', {
+                height: 50
+              })
+        }
+      })
+      this.stArr.push(stFooter21)
+      const stFooter22 = ScrollTrigger.create({
+        trigger: ".page-2 .footer-text-zhanwei",
+        start: "top top",
+        scrub: true,
+        onEnter: () => {
+          gsap.to(".page-footer-text", {
+            opacity: 0, onComplete: () => {
+              this.jumpPage()
+            }
+          })
+        },
+      })
+      this.stArr.push(stFooter22)
     },
-    jumpPage(){
-      this.$emit("setCurrentPage",3)
+    jumpPage() {
+      this.$emit("setCurrentPage", 3)
     }
 
   },
@@ -301,7 +335,7 @@ export default {
     this.stArr.forEach(item => {
       item.kill()
     })
-    this.stArr=[]
+    this.stArr = []
   }
 }
 </script>
@@ -378,11 +412,11 @@ export default {
       <div class="base-image">
         <img src="./img/area3-1.webp" width="100%" alt="">
       </div>
-      <video preload muted src="./img/area3.webm"  class="area3-video"></video>
-<!--      <div class="top-draw">
+      <video preload muted src="./img/area3.webm" class="area3-video"></video>
+      <!--      <div class="top-draw">
 
-      </div>-->
-<!--        <img class="top-img-area" src="./img/area3-2.webp" style="position:absolute;top:0;right:0;z-index:12;mix-blend-mode: darken" alt="">-->
+            </div>-->
+      <!--        <img class="top-img-area" src="./img/area3-2.webp" style="position:absolute;top:0;right:0;z-index:12;mix-blend-mode: darken" alt="">-->
       <div class="text-describe">
 
       </div>
@@ -391,9 +425,8 @@ export default {
       <img class="left-img" width="100%" src="./img/area4-1.webp" alt="">
       <img class="right-img" width="100%" src="./img/area4-2.webp" alt="">
     </section>
-    <section class="page-footer">
-      <span class="footer-text">{{$t('page1.area7.text')}}</span>
-    </section>
+    <section class="footer-text-zhanwei"></section>
+
 
   </div>
 </template>
@@ -489,18 +522,21 @@ export default {
         background-color: #171717;
       }
     }
-    .ten{
-      img{
+
+    .ten {
+      img {
         position: absolute;
-        left:0;
-        top:0;
+        left: 0;
+        top: 0;
         z-index: 3;
         width: 100vw;
       }
-      img.odd-item{
+
+      img.odd-item {
         opacity: 1;
       }
-      img.even-item{
+
+      img.even-item {
         opacity: 0;
       }
     }
@@ -609,7 +645,8 @@ export default {
           margin: 23px 0px;
         }
       }
-      .text-area.active{
+
+      .text-area.active {
         opacity: 1;
         transition: opacity 0.5s linear;
       }
@@ -618,49 +655,49 @@ export default {
 }
 
 .page-2-area-3 {
-/*  height: 100vh;
-  overflow: hidden;*/
+  /*  height: 100vh;
+    overflow: hidden;*/
   position: relative;
   border-bottom: 1px solid #232323;
-  .top-draw{
+
+  .top-draw {
     height: 100vh;
     width: 100vw;
     position: absolute;
     z-index: 10;
-    top:0;
-    left:0;
+    top: 0;
+    left: 0;
     background-color: rgba(0, 0, 0, 0.6);
   }
-  .area3-video{
+
+  .area3-video {
     position: absolute;
     left: 0;
-    top:0;
+    top: 0;
     z-index: 5;
     opacity: 0;
     width: 1920px;
   }
 
 }
-.page-2-area-4{
+
+.page-2-area-4 {
   margin-top: 100px;
   display: flex;
   justify-content: center;
   border-top: 1px solid #232323;
-  .left-img{
+
+  .left-img {
     width: 70vw;
   }
-  .right-img{
+
+  .right-img {
     width: 30vw;
   }
 }
-.page-footer{
-  background-color: #171717;
-  height: 100vh;
-  color: #fafafa;
-  text-align: center;
-  padding-top: 12px;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
+.footer-text-zhanwei {
+  height: 50px;
+  width: 100vw;
+  background-color: #232323;
 }
 </style>
