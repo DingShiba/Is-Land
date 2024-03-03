@@ -5,10 +5,11 @@ import {ScrollTrigger} from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 export default {
   name: "index",
-  props: ["language"],
+  props: ["language","loading"],
   data() {
     return {
       stArr: [],
+      timer:null,
       newsImg: [1, 2, 3, 4],
       currentImg: 1,
       pptVisible: false,
@@ -17,13 +18,20 @@ export default {
     }
   },
   mounted() {
-    setTimeout(()=>{
-      this.$emit("handleLoadingFalse")
-      this.setArea3Height()
-      this.createTTs()
-    },1500)
+    this.initPage()
   },
   methods: {
+    initPage(){
+      this.timer=setTimeout(()=>{
+        if(!this.loading){
+          clearTimeout(this.timer)
+          this.setArea3Height()
+          this.createTTs()
+        }else {
+          this.initPage()
+        }
+      },60)
+    },
     setArea3Height(){
       const _height=document.querySelector('.page-3-area-2 .area2Video').offsetHeight-300;
       document.querySelector('.page-3-area-2').style.setProperty('height',_height+'px')
@@ -131,16 +139,20 @@ export default {
         pin: true,
         scrub: true,
         start: "top top",
-        end: "bottom top",
+        end: "+=2000",
+        markers:true,
         animation: gsap.timeline()
             .to(".page-3-area-1 .left-line", {
-              x: '-50vw'
+              x: '-50vw',
+              duration:2
             })
             .to(".page-3-area-1 .right-line", {
-              x: '50vw'
+              x: '50vw',
+              duration:2
             }, "<")
             .to(".page-3-area-2 .base-img", {
-              scale: 3.5
+              scale: 3.5,
+              duration:2
             }, "<")
             .to(".page-3-area-2 .float-img", {
               scale: 2,
@@ -266,8 +278,8 @@ export default {
       document.onmousemove = null
     },
     handleSelectImg(index, e) {
-      const _domLeft = e.srcElement.getBoundingClientRect().left + 332 / 2;
-      const _distance = (this.currentImg + 3) * (332 + 60) - (window.innerWidth / 2 - 150 - 332 / 2) -
+      const _domLeft = e.srcElement.getBoundingClientRect().left + 266 / 2;
+      const _distance = (this.currentImg + 3) * (266 + 60) - (window.innerWidth / 2 - 150 - 266 / 2) -
           (window.innerWidth / 2 - _domLeft - 150);
       gsap.timeline()
           .to(".page-3-area-1 .new-imgs .move-area", {
@@ -283,8 +295,7 @@ export default {
       this.currentImg = index
     },
     handleOpenListImg() {
-      const _dis = (this.currentImg + 3) * (332 + 60) - (window.innerWidth / 2 - 150 - 332 / 2);
-      console.log(_dis)
+      const _dis = (this.currentImg + 3) * (266 + 60) - (window.innerWidth / 2 - 150 - 266 / 2);
       gsap.timeline()
           .to(".selected-img .selected-img-container",{
             opacity:0
@@ -396,9 +407,11 @@ export default {
       </div>
       <div class="selected-img">
         <div class="selected-img-container">
-          <img class="selected-img-item"
-               @click="handleOpenListImg"
-               :src="getImage('news-'+currentImg+'.webp')" alt="">
+          <div class="selected-img-pin">
+            <img class="selected-img-item"
+                 @click="handleOpenListImg"
+                 :src="getImage('news-'+currentImg+'.webp')" alt="">
+          </div>
         </div>
       </div>
       <div class="new-imgs" @click.stop="closeSelect">
@@ -707,14 +720,16 @@ export default {
     left: 0;
     top: 0;
     z-index: 5;
-    transform: translateY(-50px);
+    transform: translateY(-118px);
     transition: opacity 0.5s linear;
 
     .selected-img-container {
-      width: 330px;
+      width: 264px;
       margin: auto;
+
+
       img {
-        height: 556px;
+        height: 470px;
         margin: auto;
         position: relative;
         left: -150px;
@@ -770,18 +785,18 @@ export default {
       height: 100vh;
       gap: 60px;
       width: max-content;
-      transform: translateX(-930px) translateY(-50px);
+      transform: translateX(-930px) translateY(-118px);
     }
 
     .img-item {
       border: 1px solid #232323;
-      height: 556px;
-      width: 330px;
+      height: 470px;
+      width: 264px;
       display: flex;
       overflow: hidden;
       justify-content: center;
       img {
-        height: 556px;
+        height: 470px;
       }
 
     }
@@ -860,7 +875,7 @@ export default {
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid #171717;
-
+    align-items: center;
     .left-video {
       width: 40vw;
       border-right: 1px solid #232323;
@@ -875,7 +890,7 @@ export default {
 
       .title {
         cursor: pointer;
-        font-family: var(--title-bold-fontfamilly);
+        font-family: MS-SB;
         width: max-content;
         font-size: 25px;
         border-bottom: 1px solid #171717;

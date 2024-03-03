@@ -14,7 +14,9 @@ export default {
       current: -1,
       language: "zh",
       hasInit: false,
-      loading: false
+      loading: true,
+      loadedNum:0,
+      allMediaNum:0
     }
   },
   watch: {
@@ -22,13 +24,33 @@ export default {
       this.loading = true
       window.scroll(0, 0)
       document.body.style.overflow = 'hidden';
+      this.$nextTick(()=>{
+        this.listenLoading()
+      })
     },
-
   },
   mounted() {
     this.current = 0
   },
   methods: {
+    listenLoading(){
+      this.loadedNum=0
+      const _imgDoms=document.querySelectorAll(".page-component-area img"),
+          _videoDoms=document.querySelectorAll(".page-component-area video");
+      this.allMediaNum=_imgDoms.length+_videoDoms.length;
+      for(let i=0;i<_imgDoms.length;i++){
+        _imgDoms[i].onload=this.addLoadedNum
+      }
+      for(let i=0;i<_videoDoms.length;i++){
+        _videoDoms[i].onloadedmetadata=this.addLoadedNum
+      }
+    },
+    addLoadedNum(){
+      this.loadedNum++;
+      if(this.loadedNum==this.allMediaNum){
+        this.setLoadingFalse()
+      }
+    },
     selectCurrent(item) {
       this.current = item - 1
     },
@@ -112,25 +134,34 @@ export default {
         <span class="loading-item">24</span>
       </div>
     </div>
-    <page0 v-if="current==0" :language="language"
-           :has-init="hasInit"
-           @handleLoadingFalse="setLoadingFalse"
-           @setCurrentPage="handleSetCurrentPage"
-           @handleSetInit="setHasInit"
-           @toggleLanguage="handleToggleLanguage"></page0>
-    <page1 v-if="current==1"
-           :language="language"
-           @handleLoadingFalse="setLoadingFalse"
-           @setCurrentPage="handleSetCurrentPage"></page1>
-    <page2 v-if="current==2" :language="language"
-           @handleLoadingFalse="setLoadingFalse"
-           @setCurrentPage="handleSetCurrentPage"></page2>
-    <page3 v-if="current==3" :language="language"
-           @handleLoadingFalse="setLoadingFalse"
-           @setCurrentPage="handleSetCurrentPage"></page3>
-    <page4 v-if="current==4" :language="language"
-           @handleLoadingFalse="setLoadingFalse"
-           @setCurrentPage="handleSetCurrentPage"></page4>
+    <div class="page-component-area">
+      <page0 v-if="current==0"
+             :language="language"
+             :has-init="hasInit"
+             :loading="loading"
+             @handleLoadingFalse="setLoadingFalse"
+             @setCurrentPage="handleSetCurrentPage"
+             @handleSetInit="setHasInit"
+             @toggleLanguage="handleToggleLanguage"></page0>
+      <page1 v-if="current==1"
+             :language="language"
+             :loading="loading"
+             @handleLoadingFalse="setLoadingFalse"
+             @setCurrentPage="handleSetCurrentPage"></page1>
+      <page2 v-if="current==2"
+             :language="language"
+             :loading="loading"
+             @handleLoadingFalse="setLoadingFalse"
+             @setCurrentPage="handleSetCurrentPage"></page2>
+      <page3 v-if="current==3" :language="language"
+             :loading="loading"
+             @handleLoadingFalse="setLoadingFalse"
+             @setCurrentPage="handleSetCurrentPage"></page3>
+      <page4 v-if="current==4" :language="language"
+             :loading="loading"
+             @handleLoadingFalse="setLoadingFalse"
+             @setCurrentPage="handleSetCurrentPage"></page4>
+    </div>
     <section class="page-footer-text">
       {{ $t('page1.area7.text') }}
     </section>
@@ -288,7 +319,7 @@ export default {
 .menu-nav {
   height: 120px;
   position: fixed;
-  left: 150px;
+  left: 6vw;
   top: calc(50vh - 100px);
   z-index: 999999999;
   background-color: #fafafa;

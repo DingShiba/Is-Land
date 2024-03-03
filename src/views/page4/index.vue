@@ -5,10 +5,11 @@ import {ScrollTrigger} from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 export default {
   name: "index",
-  props:["language"],
+  props:["language","loading"],
   data() {
     return {
       stArr: [],
+      timer:null,
       linksEn: "Yoshiyuki Iwase BachmannEckenstein Basel / Yoshiyuki Iwase - Japanese Master Photographer / Haenyeo - Seeing the Incredible Women Divers of Jeju Island - South Korea! - Dive O'Clock! / Ama Women Divers of Japan - Where to See & Explore this Culture - Dive O'Clock! / Culture of Jeju Haenyeo (women divers) - YouTube / Osatsu-kamado Ama Hut Experience ISESHIMA TOBA City / 海女（职业名称）_百度百科 / 这群韩国“海女”都七八十岁高龄了，还在下海捕捞 / 真实美人鱼，海女的历史与现状 / 海女的群像，那些在海里捡珍珠的人 / VisitJeju - 济州岛旅游综合信息网，济州岛自由行攻略 / 제주해녀박물관 ",
       linksZh: "Yoshiyuki Iwase BachmannEckenstein Basel / Yoshiyuki Iwase - Japanese Master Photographer / Haenyeo - Seeing the Incredible Women Divers of Jeju Island - South Korea! - Dive O'Clock! / Ama Women Divers of Japan - Where to See & Explore this Culture - Dive O'Clock! / Culture of Jeju Haenyeo (women divers) - YouTube / Osatsu-kamado Ama Hut Experience ISESHIMA TOBA City / 海女（职业名称）_百度百科 / 这群韩国“海女”都七八十岁高龄了，还在下海捕捞 / 真实美人鱼，海女的历史与现状 / 海女的群像，那些在海里捡珍珠的人 / VisitJeju - 济州岛旅游综合信息网，济州岛自由行攻略 / 제주해녀박물관",
       httpLinks: [
@@ -28,14 +29,23 @@ export default {
     }
   },
   mounted() {
-    setTimeout(()=>{
-      this.$emit("handleLoadingFalse")
-      this.createTTS()
-    },1000)
+    this.$nextTick(()=>{
+      this.initPage()
 
+    })
   },
   methods: {
-    createTTS() {
+    initPage(){
+      this.timer=setTimeout(()=>{
+        if(!this.loading){
+          clearTimeout(this.timer)
+          this.createTTs()
+        }else {
+          this.initPage()
+        }
+      },60)
+    },
+    createTTs() {
       this.createT41()
       this.createT43()
       this.createT44()
@@ -106,6 +116,8 @@ export default {
       this.stArr.push(st432)
     },
     createT44() {
+      const _height=document.querySelector(".page-4-area-4 .top-area .text-area").offsetHeight;
+      document.querySelector(".page-4-area-4 .zhanwei-fu").style.setProperty('height',_height+'px');
       const st441 = ScrollTrigger.create({
         trigger: ".page-4-area-4 .top-area .text-area",
         pin: true,
@@ -562,10 +574,9 @@ export default {
     justify-content: center;
 
     .text-area {
-      width: 888px;
+      width: 48vw;
       margin-top: 100px;
       height: max-content;
-
       .second-describe {
         margin-top: 24px;
         text-align: right;

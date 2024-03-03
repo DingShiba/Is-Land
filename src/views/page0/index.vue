@@ -6,11 +6,13 @@ import {ScrollToPlugin} from 'gsap/ScrollToPlugin.js'
 gsap.registerPlugin(ScrollToPlugin, ScrollTrigger);
 export default {
   name: "index",
-  props: ["language", "hasInit"],
+  props: ["language", "hasInit","loading"],
   data() {
     return {
       stArr: [],
       currentTime: 0,
+      timer:null,
+      videoTimer:null,
       linksEn: "Yoshiyuki Iwase BachmannEckenstein Basel / Yoshiyuki Iwase - Japanese Master Photographer / Haenyeo - Seeing the Incredible Women Divers of Jeju Island - South Korea! - Dive O'Clock! / Ama Women Divers of Japan - Where to See & Explore this Culture - Dive O'Clock! / Culture of Jeju Haenyeo (women divers) - YouTube / Osatsu-kamado Ama Hut Experience ISESHIMA TOBA City / 海女（职业名称）_百度百科 / 这群韩国“海女”都七八十岁高龄了，还在下海捕捞 / 真实美人鱼，海女的历史与现状 / 海女的群像，那些在海里捡珍珠的人 / VisitJeju - 济州岛旅游综合信息网，济州岛自由行攻略 / 제주해녀박물관 ",
       linksZh: "Yoshiyuki Iwase BachmannEckenstein Basel / Yoshiyuki Iwase - Japanese Master Photographer / Haenyeo - Seeing the Incredible Women Divers of Jeju Island - South Korea! - Dive O'Clock! / Ama Women Divers of Japan - Where to See & Explore this Culture - Dive O'Clock! / Culture of Jeju Haenyeo (women divers) - YouTube / Osatsu-kamado Ama Hut Experience ISESHIMA TOBA City / 海女（职业名称）_百度百科 / 这群韩国“海女”都七八十岁高龄了，还在下海捕捞 / 真实美人鱼，海女的历史与现状 / 海女的群像，那些在海里捡珍珠的人 / VisitJeju - 济州岛旅游综合信息网，济州岛自由行攻略 / 제주해녀박물관",
       httpLinks: [
@@ -29,26 +31,32 @@ export default {
       ]
     }
   },
-
   mounted() {
-    setTimeout(() => {
-      gsap.to(window, {
-        duration: 0.5,
-        scrollTo: 0,
-        onComplete: () => {
-          this.$emit("handleLoadingFalse")
-          this.createTTs()
-          /**
-           * 30s 自动播放title*/
-          setTimeout(() => {
-            const _index = document.querySelector('.page-0-area-0').style.zIndex
-            if (_index != -1) this.handleWeel()
-          }, 30 * 1000)
-        }
-      });
-    }, 2000)
+    this.initPage()
   },
   methods: {
+    initPage(){
+      this.timer=setTimeout(()=>{
+        if(!this.loading){
+          clearTimeout(this.timer)
+          gsap.to(window, {
+            duration: 0.5,
+            scrollTo: 0,
+            onComplete: () => {
+              this.createTTs()
+              /**
+               * 30s 自动播放title*/
+              this.videoTimer=setTimeout(() => {
+                const _index = document.querySelector('.page-0-area-0').style.zIndex
+                if (_index != -1) this.handleWeel()
+              }, 30 * 1000)
+            }
+          });
+        }else {
+          this.initPage()
+        }
+      },60)
+    },
     createTTs() {
       if (!this.hasInit) {
         this.createT0()
@@ -401,6 +409,7 @@ export default {
     }
   },
   unmounted() {
+    clearTimeout(this.videoTimer)
     this.stArr.forEach(item => {
       item.kill()
     })

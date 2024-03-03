@@ -6,32 +6,27 @@ import {ScrollToPlugin} from 'gsap/ScrollToPlugin.js'
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 export default {
   name: "index",
+  props:["loading"],
   data() {
     return {
-      stArr: []
+      stArr: [],
+      timer:null
     }
   },
   mounted() {
-    setTimeout(()=>{
-      this.$emit("handleLoadingFalse")
-      this.createTTs()
-    },1000)
- /*   document.querySelector('.page-1').addEventListener("load",()=>{
-
-    })*/
-    /*this.$nextTick(()=>{
-      const _doms=document.querySelectorAll('img')
-      console.log(_doms)
-      _doms.forEach((item,index)=>{
-        console.log(index)
-        item.addEventListener('load',()=>{
-          console.log("图片"+index+"加载完成")
-        })
-      })
-    })*/
-
+    this.initPage()
   },
   methods: {
+    initPage(){
+      this.timer=setTimeout(()=>{
+        if(!this.loading){
+          clearTimeout(this.timer)
+          this.createTTs()
+        }else {
+          this.initPage()
+        }
+      },60)
+    },
     createTTs() {
       this.createT1()
       this.createT3()
@@ -995,6 +990,7 @@ export default {
 .page-1-area-6 {
   width: 100vw;
   height: 100vh;
+  position: relative;
   .container {
     padding-top: 92px;
     width: 100%;

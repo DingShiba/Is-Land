@@ -5,22 +5,29 @@ import {ScrollTrigger} from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 export default {
   name: "index",
+  props: ["loading"],
   data() {
     return {
       colloseNum: 2,
-      stArr: []
+      stArr: [],
+      timer: null
     }
   },
   mounted() {
-    setTimeout(() => {
-      this.$emit("handleLoadingFalse")
-      this.createTTS()
-    }, 2000)
-
-
+    this.initPage()
   },
   methods: {
-    createTTS() {
+    initPage() {
+      this.timer = setTimeout(() => {
+        if (!this.loading) {
+          clearTimeout(this.timer)
+          this.createTTs()
+        } else {
+          this.initPage()
+        }
+      }, 60)
+    },
+    createTTs() {
       this.createT1()
       this.createT2()
       this.createT3()
@@ -269,25 +276,25 @@ export default {
       this.stArr.push(st23)
     },
     createFooter() {
-   /*   const stFooter1 = ScrollTrigger.create({
-        trigger: ".page-footer",
-        start: "top top+=10",
-        onEnter: () => {
-          gsap.to(".page-footer .footer-text", {
-            opacity: 0, onComplete: () => {
-              this.jumpPage()
-            }
-          })
-        },
-      })
-      this.stArr.push(stFooter1)
-      const stFooter2 = ScrollTrigger.create({
-        trigger: ".page-footer .footer-text",
-        start: "bottom bottom-=12",
-        end: "+=1080",
-        pin: true
-      })
-      this.stArr.push(stFooter2)*/
+      /*   const stFooter1 = ScrollTrigger.create({
+           trigger: ".page-footer",
+           start: "top top+=10",
+           onEnter: () => {
+             gsap.to(".page-footer .footer-text", {
+               opacity: 0, onComplete: () => {
+                 this.jumpPage()
+               }
+             })
+           },
+         })
+         this.stArr.push(stFooter1)
+         const stFooter2 = ScrollTrigger.create({
+           trigger: ".page-footer .footer-text",
+           start: "bottom bottom-=12",
+           end: "+=1080",
+           pin: true
+         })
+         this.stArr.push(stFooter2)*/
       const stFooter21 = ScrollTrigger.create({
         trigger: ".page-2 .footer-text-zhanwei",
         start: "top bottom-=20",
@@ -657,6 +664,7 @@ export default {
 .page-2-area-3 {
   /*  height: 100vh;
     overflow: hidden;*/
+  width: 100vw;
   position: relative;
   border-bottom: 1px solid #232323;
 
@@ -676,7 +684,7 @@ export default {
     top: 0;
     z-index: 5;
     opacity: 0;
-    width: 1920px;
+    width: 100%;
   }
 
 }
@@ -695,6 +703,7 @@ export default {
     width: 30vw;
   }
 }
+
 .footer-text-zhanwei {
   height: 50px;
   width: 100vw;
