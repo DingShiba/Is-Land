@@ -47,7 +47,6 @@ export default {
         }
       });
     }, 2000)
-
   },
   methods: {
     createTTs() {
@@ -140,7 +139,6 @@ export default {
       })
       this.stArr.push(stg0)
     },
-
     createT2() {
       const st021 = ScrollTrigger.create({
         trigger: ".area-2",
@@ -219,7 +217,6 @@ export default {
       this.stArr.push(st022)
     },
     createT3() {
-      return false
       const tl = gsap.timeline(),
           _doms = document.querySelectorAll('.area3-photo-item');
       _doms.forEach((item, index) => {

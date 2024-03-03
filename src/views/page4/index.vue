@@ -408,11 +408,9 @@ export default {
 
 <style scoped lang="less">
 .page-4 {
-  --base-font-family: MS-EL;
-  --title-family: MS-Bold;
   color: #171717;
   background-color: #fafafa;
-  font-family: var(--base-font-family);
+  font-family: var(--base-content-fontfamilly);
   text-align: left;
 }
 

@@ -79,12 +79,12 @@ export default {
           } else {
             _tarnsArea.classList.remove('force-step')
           }
-          if (self.progress > 0.6) {
+          if (self.progress > 0.7) {
             _tarnsArea.classList.add("five-step")
           } else {
             _tarnsArea.classList.remove('five-step')
           }
-          if (self.progress > 0.8) {
+          if (self.progress > 0.9) {
             _tarnsArea.classList.add("six-step")
           } else {
             _tarnsArea.classList.remove('six-step')
