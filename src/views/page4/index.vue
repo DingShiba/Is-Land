@@ -5,11 +5,11 @@ import {ScrollTrigger} from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 export default {
   name: "index",
-  props:["language","loading"],
+  props: ["language", "loading"],
   data() {
     return {
       stArr: [],
-      timer:null,
+      timer: null,
       linksEn: "Yoshiyuki Iwase BachmannEckenstein Basel / Yoshiyuki Iwase - Japanese Master Photographer / Haenyeo - Seeing the Incredible Women Divers of Jeju Island - South Korea! - Dive O'Clock! / Ama Women Divers of Japan - Where to See & Explore this Culture - Dive O'Clock! / Culture of Jeju Haenyeo (women divers) - YouTube / Osatsu-kamado Ama Hut Experience ISESHIMA TOBA City / 海女（职业名称）_百度百科 / 这群韩国“海女”都七八十岁高龄了，还在下海捕捞 / 真实美人鱼，海女的历史与现状 / 海女的群像，那些在海里捡珍珠的人 / VisitJeju - 济州岛旅游综合信息网，济州岛自由行攻略 / 제주해녀박물관 ",
       linksZh: "Yoshiyuki Iwase BachmannEckenstein Basel / Yoshiyuki Iwase - Japanese Master Photographer / Haenyeo - Seeing the Incredible Women Divers of Jeju Island - South Korea! - Dive O'Clock! / Ama Women Divers of Japan - Where to See & Explore this Culture - Dive O'Clock! / Culture of Jeju Haenyeo (women divers) - YouTube / Osatsu-kamado Ama Hut Experience ISESHIMA TOBA City / 海女（职业名称）_百度百科 / 这群韩国“海女”都七八十岁高龄了，还在下海捕捞 / 真实美人鱼，海女的历史与现状 / 海女的群像，那些在海里捡珍珠的人 / VisitJeju - 济州岛旅游综合信息网，济州岛自由行攻略 / 제주해녀박물관",
       httpLinks: [
@@ -25,25 +25,28 @@ export default {
         "https://m.thepaper.cn/baijiahao_9306843",
         "https://www.visitjeju.net/cn",
         "http://www.jeju.go.kr/haenyeo/index.htm#english"
-      ]
+      ],
+      hoverNumber: 0,
+      selectedNumber:0,
+      textareaValue:""
     }
   },
   mounted() {
-    this.$nextTick(()=>{
+    this.$nextTick(() => {
       this.initPage()
 
     })
   },
   methods: {
-    initPage(){
-      this.timer=setTimeout(()=>{
-        if(!this.loading){
+    initPage() {
+      this.timer = setTimeout(() => {
+        if (!this.loading) {
           clearTimeout(this.timer)
           this.createTTs()
-        }else {
+        } else {
           this.initPage()
         }
-      },60)
+      }, 60)
     },
     createTTs() {
       this.createT41()
@@ -52,6 +55,7 @@ export default {
       this.createT45()
       this.createT46()
       this.createTFooter()
+      this.createTSend()
     },
     createT41() {
       const st41 = ScrollTrigger.create({
@@ -116,8 +120,8 @@ export default {
       this.stArr.push(st432)
     },
     createT44() {
-      const _height=document.querySelector(".page-4-area-4 .top-area .text-area").offsetHeight;
-      document.querySelector(".page-4-area-4 .zhanwei-fu").style.setProperty('height',_height+'px');
+      const _height = document.querySelector(".page-4-area-4 .top-area .text-area").offsetHeight;
+      document.querySelector(".page-4-area-4 .zhanwei-fu").style.setProperty('height', _height + 'px');
       const st441 = ScrollTrigger.create({
         trigger: ".page-4-area-4 .top-area .text-area",
         pin: true,
@@ -172,79 +176,125 @@ export default {
               .to(".page-4-area-5 .content-container", {
                 width: "100vw",
               })
-              .to(".page-4-area-5 .content-container .base-video",{
-                opacity:1,
-                onStart:()=>{
+              .to(".page-4-area-5 .content-container .base-video", {
+                opacity: 1,
+                onStart: () => {
                   document.querySelector('.page-4-area-5 .content-container .base-video').play()
                 }
               })
-              .to(".page-4-area-5 .content-container .float-video",{
-                opacity:1,
-                delay:8
+              .to(".page-4-area-5 .content-container .float-video", {
+                opacity: 1,
+                delay: 8
               })
+
         }
       })
       const st46 = ScrollTrigger.create({
         trigger: ".page-4-area-5",
         start: 'bottom bottom',
-        end:"+=300",
-        pin:true,
+        end: "+=300",
+        pin: true,
         scrub: true,
-        animation:gsap.timeline()
-            .to(".page-4-area-5 .zhe-zhao",{
-              opacity:1
+        animation: gsap.timeline()
+            .to(".page-4-area-5 .zhe-zhao", {
+              opacity: 1
             })
+            .to(".menu-nav",{
+              opacity:0
+            },"<")
       })
       this.stArr.push(st45)
       this.stArr.push(st46)
     },
-    createT46(){
-     const st46=ScrollTrigger.create({
-        trigger:".page-4-area-6",
-        scrub:true,
-        start:"top center",
-        end:"+=300",
-        pin:true,
-        animation:gsap.timeline()
-            .to(".page-4-area-6 .describe-item1",{
-              opacity:1
+    createT46() {
+      const st46 = ScrollTrigger.create({
+        trigger: ".page-4-area-6",
+        scrub: true,
+        start: "top center",
+        end: "+=300",
+        pin: true,
+        animation: gsap.timeline()
+            .to(".page-4-area-6 .describe-item1", {
+              opacity: 1
             })
-            .to(".page-4-area-6 .describe-item2",{
-              opacity:1
+
+            .to(".page-4-area-6 .describe-item2", {
+              opacity: 1
             })
-            .to(".page-4-area-6 .describe-item3",{
-              opacity:1
+            .to(".page-4-area-6 .describe-item3", {
+              opacity: 1
             })
-            .to(".page-4-area-6 .describe-item4",{
-              opacity:1
+            .to(".page-4-area-6 .describe-item4", {
+              opacity: 1
             })
       })
       this.stArr.push(st46)
     },
-    createTFooter(){
-      const stFooter=ScrollTrigger.create({
-        trigger:".page4-footer",
-        start:"top center",
-        onEnter:()=>{
-          gsap.to(".page4-footer",{
-            opacity:1
+    createTFooter() {
+      const stFooter = ScrollTrigger.create({
+        trigger: ".page4-footer",
+        start: "top center",
+        onEnter: () => {
+          gsap.to(".page4-footer", {
+            opacity: 1
           })
         },
-        onLeaveBack:()=>{
-          gsap.to(".page4-footer",{
-            opacity:0
+        onLeaveBack: () => {
+          gsap.to(".page4-footer", {
+            opacity: 0
           })
         }
 
       })
       this.stArr.push(stFooter)
     },
+    createTSend(){
+      const stSend=ScrollTrigger.create({
+        trigger:".page4-footer .send-btn",
+        start:"top center",
+        end:"+=999999999999999999999",
+        scrub:true,
+        pin:true,
+        onEnter:()=>{
+          if(this.selectedNumber!=0 ||　textareaValue){
+            gsap.to('.page4-footer .send-btn',{
+              opacity:1
+            })
+          }
+        },
+        onLeaveBack:()=>{
+          gsap.to('.page4-footer .send-btn',{
+            opacity:0
+          })
+        }
+      })
+      this.stArr.push(stSend)
+      // JavaScript部分
+      const textarea = document.getElementById("sendMessage");
+      let _this=this
+      function handleChange() {
+        _this.textareaValue=textarea.value
+      }
+      textarea.addEventListener('input', handleChange);
+    },
+    handleEnterNum(index) {
+      this.hoverNumber = index
+    },
+    handleSelectNumber(index){
+      this.selectedNumber = index
+      this.setSendShow()
+    },
+    setSendShow(){
+      gsap.to(".page4-footer .send-btn",{
+        opacity:1
+      })
+    },
   },
   unmounted() {
     this.stArr.forEach(item => {
       item.kill()
     })
-    this.stArr=[]
+    this.stArr = []
   }
 }
 </script>
@@ -295,7 +345,8 @@ export default {
         <img src="./img/area4-8.webp" style="margin-top: 50px" alt="">
         <div class="end-describe">
           <div v-for="item in 9"
-               class="end-describe-item">{{ $t('page4.cf'+item) }}</div>
+               class="end-describe-item">{{ $t('page4.cf' + item) }}
+          </div>
         </div>
       </div>
       <div class="top-area">
@@ -320,7 +371,9 @@ export default {
     <section class="page-4-area-6">
       <div class="bg-dom"></div>
       <div class="content-container">
-        <div v-for="item in 4" class="describe-item" :class="'describe-item'+item">{{$t(`page4.score.describe${item}`)}}</div>
+        <div v-for="item in 4" class="describe-item" :class="'describe-item'+item">
+          {{ $t(`page4.score.describe${item}`) }}
+        </div>
       </div>
     </section>
     <section class="page4-footer">
@@ -379,6 +432,9 @@ export default {
             <span v-for="(item,index) in linksEn.split('/')">
               <a :href="httpLinks[index]"
                  class="link-item"
+                 :class="{
+                  'link-item-song':index>5
+                 }"
                  target="_blank">{{ item }}</a>
             <span v-if="index<httpLinks.length-1">/</span>
             </span>
@@ -398,23 +454,32 @@ export default {
         <span>cellphone24@163.com</span>
       </div>
       <div class="footer-score">
-        <div class="describe">{{$t('page4.score.describeTitle')}}</div>
+        <div class="describe">{{ $t('page4.score.describeTitle') }}</div>
         <div class="num-container">
-          <div v-for="item in 5" class="num-item">{{item}}</div>
+          <div v-for="item in 5"
+               :class="{
+                  active:item<=hoverNumber || item<=selectedNumber
+               }"
+               class="num-item"
+               @click="handleSelectNumber(item)"
+               @mouseleave="handleEnterNum(0)"
+               @mouseenter="handleEnterNum(item)">{{ item }}
+          </div>
         </div>
-
         <div class="send-btn">
           发送
         </div>
 
+
       </div>
       <div class="footer-message">
-        <div class="describe">{{$t('page4.score.message')}}</div>
-        <textarea class="message-input" style="width: 800px;" />
+        <div class="describe">{{ $t('page4.score.message') }}</div>
+        <textarea id="sendMessage" class="message-input" autofocus style="width: 800px;"/>
       </div>
 
 
     </section>
+
   </div>
 </template>
 
@@ -424,6 +489,7 @@ export default {
   background-color: #fafafa;
   font-family: var(--base-content-fontfamilly);
   text-align: left;
+  position: relative;
 }
 
 .page-header {
@@ -550,7 +616,8 @@ export default {
       opacity: 0;
       line-height: 2.5;
       text-align: left;
-      .end-describe-item:nth-child(3){
+
+      .end-describe-item:nth-child(3) {
         margin-bottom: 46px;
       }
     }
@@ -577,6 +644,7 @@ export default {
       width: 48vw;
       margin-top: 100px;
       height: max-content;
+
       .second-describe {
         margin-top: 24px;
         text-align: right;
@@ -591,6 +659,7 @@ export default {
   overflow: hidden;
   background-color: var(--content-bkcolor);
   z-index: 6;
+
   .content-container {
     width: 90vw;
     margin: auto;
@@ -604,51 +673,58 @@ export default {
       z-index: 5;
     }
   }
-  .zhe-zhao{
+
+  .zhe-zhao {
     width: 100vw;
     height: 100vh;
     background-color: #232323;
     position: absolute;
-    left:0;
+    left: 0;
     bottom: 0px;
     z-index: 5;
     opacity: 0;
   }
 }
-.page-4-area-6{
+
+.page-4-area-6 {
   width: 100vw;
   background-color: #232323;
   margin-top: 0px;
   position: relative;
   z-index: 1;
-  .bg-dom{
+
+  .bg-dom {
     width: 100vw;
     height: 2000px;
     position: absolute;
-    top:-1000px;
+    top: -1000px;
     left: 0px;
     z-index: -1;
     background-color: #232323;
   }
-  .content-container{
+
+  .content-container {
     width: 600px;
     margin: auto;
     color: var(--title-bkcolor);
     line-height: 2;
     text-align: center;
-    .describe-item{
+
+    .describe-item {
       opacity: 0;
     }
   }
 
 }
+
 .page4-footer {
   position: relative;
   z-index: 2;
   opacity: 0;
   color: #fafafa;
   background-color: #232323;
-padding-top: 200px;
+  padding-top: 200px;
+
   .lianxi {
     padding: 80px 0px;
     text-align: center;
@@ -668,6 +744,10 @@ padding-top: 200px;
         color: #fafafa;
         text-decoration: none;
         font-family: var(--base-content-fontfamilly);
+      }
+
+      .link-item.link-item-song {
+        font-family: 思源宋EL;
       }
 
       .link-item:hover {
@@ -700,19 +780,22 @@ padding-top: 200px;
     text-align: center;
     padding-bottom: 20px;
   }
-  .footer-score{
+
+  .footer-score {
     margin: 80px auto 40px;
     width: 800px;
     position: relative;
 
     text-align: center;
-    .num-container{
+
+    .num-container {
       margin-top: 30px;
       width: 800px;
       display: flex;
       justify-content: center;
       gap: 30px;
-      .num-item{
+
+      .num-item {
         width: 40px;
         height: 40px;
         border: 1px solid var(--content-bkcolor);
@@ -722,29 +805,39 @@ padding-top: 200px;
         justify-content: center;
         cursor: pointer;
       }
-      .num-item:hover{
+
+      .num-item:hover,
+      .num-item.active{
         background-image: url("@/assets/images/circle-bg.png");
         background-size: 110% 110%;
         background-position: center center;
       }
     }
-    .send-btn{
+    .send-btn {
       width: 150px;
       height: 80px;
       background-color: var(--content-bkcolor);
       color: #232323;
       position: absolute;
       right: -260px;
-      top:60px;
+      top: -500px;
       line-height: 80px;
       text-align: center;
+      opacity: 0;
     }
+    .send-btn:hover{
+      background-image: url("./img/send-bg.png");
+      background-size: 100% 100%;
+    }
+
   }
-  .footer-message{
+
+  .footer-message {
     width: 800px;
     text-align: center;
     margin: auto;
-    .message-input{
+
+    .message-input {
       width: 800px;
       vertical-align: top;
       height: 99999px;
@@ -753,5 +846,6 @@ padding-top: 200px;
       border: 1px solid var(--content-bkcolor);
     }
   }
+
 }
 </style>

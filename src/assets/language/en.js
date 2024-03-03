@@ -132,8 +132,10 @@ export default {
             describe2:"\"But I don't want to only live five years and then die.\"",
             describe3:"\"I can still catch marine life to earn money for my grandchildren,\"",
             describe4:"\"You should see their smiles.\"",
-            describeTitle:"请为island.cel24.art打分",
-            message:"请留下你的悄悄话"
+            describeTitle:"Rate island.cel24.art",
+            message:"Leave your comment",
+            rate:"Rate island.cel24.art",
+            send:"Send"
         }
     }
 

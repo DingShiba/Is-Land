@@ -132,7 +132,9 @@ export default {
             describe3:"“我还能捕捉海物赚钱给我的孙子孙女们，”",
             describe4:"“你应该看看他们的笑脸。”",
             describeTitle:"请为island.cel24.art打分",
-            message:"请留下你的悄悄话"
+            message:"请留下你的悄悄话",
+            rate:"请为island.cel24.art打分",
+            send:"发送"
         }
     }
 }
