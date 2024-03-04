@@ -15,8 +15,8 @@ export default {
       language: "zh",
       hasInit: false,
       loading: true,
-      loadedNum:0,
-      allMediaNum:0
+      loadedNum: 0,
+      allMediaNum: 0
     }
   },
   watch: {
@@ -24,7 +24,7 @@ export default {
       this.loading = true
       window.scroll(0, 0)
       document.body.style.overflow = 'hidden';
-      this.$nextTick(()=>{
+      this.$nextTick(() => {
         this.listenLoading()
       })
     },
@@ -33,35 +33,40 @@ export default {
     this.current = 0
   },
   methods: {
-    listenLoading(){
-      this.loadedNum=0
-      const _imgDoms=document.querySelectorAll(".page-component-area img"),
-          _videoDoms=document.querySelectorAll(".page-component-area video");
-      this.allMediaNum=_imgDoms.length+_videoDoms.length;
-      for(let i=0;i<_imgDoms.length;i++){
-        _imgDoms[i].onload=this.addLoadedNum
+    listenLoading() {
+      this.loadedNum = 0
+      const _imgDoms = document.querySelectorAll(".page-component-area img"),
+          _videoDoms = document.querySelectorAll(".page-component-area video");
+      this.allMediaNum = _imgDoms.length + _videoDoms.length;
+      for (let i = 0; i < _imgDoms.length; i++) {
+        _imgDoms[i].onload = this.addLoadedNum
       }
-      for(let i=0;i<_videoDoms.length;i++){
-        _videoDoms[i].onloadedmetadata=this.addLoadedNum
+      for (let i = 0; i < _videoDoms.length; i++) {
+        _videoDoms[i].onloadedmetadata = this.addLoadedNum
       }
     },
-    addLoadedNum(){
+    addLoadedNum() {
       this.loadedNum++;
-      if(this.loadedNum==this.allMediaNum){
+      if (this.loadedNum == this.allMediaNum) {
         this.setLoadingFalse()
       }
     },
     selectCurrent(item) {
       this.current = item - 1
     },
-    setLoadingFalse(){
-      gsap.to(".loading-page", {
-        opacity: 0,
-        onComplete: () => {
-          this.loading = false
-          document.body.style.overflow = 'auto';
-        }
-      })
+    setLoadingFalse() {
+
+      gsap.timeline()
+          .set(".page-footer-text", {
+            opacity: 0
+          })
+          .to(".loading-page", {
+            opacity: 0,
+            onComplete: () => {
+              this.loading = false
+              document.body.style.overflow = 'auto';
+            }
+          })
     },
     handleSetCurrentPage(current) {
       this.current = current
@@ -123,11 +128,11 @@ export default {
     </div>
     <div class="loading-page" v-if="loading">
       <div class="loading-container">
-<!--        <svg class="loading-item" viewBox="0 0 1024 1024" width="64" height="64">
-          <path
-              d="M384 128A64 64 13680 1 0 640 128 64 64 13680 1 0 384 128zM655.53 240.47A64 64 13680 1 0 911.53 240.47 64 64 13680 1 0 655.53 240.47zM832 512A32 32 13680 1 0 960 512 32 32 13680 1 0 832 512zM719.53 783.53A32 32 13680 1 0 847.53 783.53 32 32 13680 1 0 719.53 783.53zM448.002 896A32 32 13680 1 0 576.002 896 32 32 13680 1 0 448.002 896zM176.472 783.53A32 32 13680 1 0 304.472 783.53 32 32 13680 1 0 176.472 783.53zM144.472 240.47A48 48 13680 1 0 336.472 240.47 48 48 13680 1 0 144.472 240.47zM56 512A36 36 13680 1 0 200 512 36 36 13680 1 0 56 512z"
-              fill="#fff" p-id="4260"></path>
-        </svg>-->
+        <!--        <svg class="loading-item" viewBox="0 0 1024 1024" width="64" height="64">
+                  <path
+                      d="M384 128A64 64 13680 1 0 640 128 64 64 13680 1 0 384 128zM655.53 240.47A64 64 13680 1 0 911.53 240.47 64 64 13680 1 0 655.53 240.47zM832 512A32 32 13680 1 0 960 512 32 32 13680 1 0 832 512zM719.53 783.53A32 32 13680 1 0 847.53 783.53 32 32 13680 1 0 719.53 783.53zM448.002 896A32 32 13680 1 0 576.002 896 32 32 13680 1 0 448.002 896zM176.472 783.53A32 32 13680 1 0 304.472 783.53 32 32 13680 1 0 176.472 783.53zM144.472 240.47A48 48 13680 1 0 336.472 240.47 48 48 13680 1 0 144.472 240.47zM56 512A36 36 13680 1 0 200 512 36 36 13680 1 0 56 512z"
+                      fill="#fff" p-id="4260"></path>
+                </svg>-->
         <span class="loading-item">C</span>
         <span class="loading-item">e</span>
         <span class="loading-item">L</span>
@@ -165,12 +170,19 @@ export default {
     <section class="page-footer-text">
       {{ $t('page1.area7.text') }}
     </section>
+    <div class="public-blank"></div>
   </div>
 </template>
 
 <style lang="less">
 .is-land {
   overflow: hidden;
+  position: relative;
+  .public-blank{
+    position: absolute;
+    z-index: -999;
+    height: 1px;
+  }
 }
 
 @keyframes rotateLoading {
@@ -197,112 +209,118 @@ export default {
   .loading-item {
     animation: rotateLoading 1s linear infinite;
   }
-  .loading-container{
+
+  .loading-container {
     font-family: var(--base-title-fontfamilly);
     font-size: 26px;
     color: var(--title-bkcolor);
   }
-  @keyframes loading1{
-    0%{
+
+  @keyframes loading1 {
+    0% {
       opacity: 1;
     }
-    40%{
+    40% {
       opacity: 1;
     }
-    50%{
+    50% {
       opacity: 0;
     }
-    60%{
+    60% {
       opacity: 1;
     }
-    70%{
+    70% {
       opacity: 0;
     }
-    100%{
+    100% {
       opacity: 0;
     }
 
   }
-  @keyframes loading2{
-    0%{
+  @keyframes loading2 {
+    0% {
       opacity: 1;
     }
-    40%{
+    40% {
       opacity: 1;
     }
-    50%{
+    50% {
       opacity: 0;
     }
-    60%{
+    60% {
       opacity: 0;
     }
-    70%{
+    70% {
       opacity: 1;
     }
-    80%{
+    80% {
       opacity: 0;
     }
-    100%{
-      opacity: 0;
-    }
-
-  }
-  @keyframes loading3{
-    0%{
-      opacity: 1;
-    }
-    40%{
-      opacity: 1;
-    }
-    50%{
-      opacity: 0;
-    }
-
-    70%{
-      opacity: 0;
-    }
-    80%{
-      opacity: 1;
-    }
-    90%{
-      opacity: 0;
-    }
-    100%{
+    100% {
       opacity: 0;
     }
 
   }
-  @keyframes loading4{
-    0%{
+  @keyframes loading3 {
+    0% {
       opacity: 1;
     }
-    40%{
+    40% {
       opacity: 1;
     }
-    50%{
+    50% {
       opacity: 0;
     }
-    80%{
+
+    70% {
       opacity: 0;
     }
-    90%{
+    80% {
       opacity: 1;
     }
-    100%{
+    90% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+    }
+
+  }
+  @keyframes loading4 {
+    0% {
+      opacity: 1;
+    }
+    40% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+    80% {
+      opacity: 0;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
       opacity: 1;
     }
 
   }
-  .loading-item:nth-child(1){
+
+  .loading-item:nth-child(1) {
     animation: loading1 2s linear infinite;
   }
-  .loading-item:nth-child(2){
+
+  .loading-item:nth-child(2) {
     animation: loading2 2s linear infinite;
   }
-  .loading-item:nth-child(3){
+
+  .loading-item:nth-child(3) {
     animation: loading3 2s linear infinite;
   }
-  .loading-item:nth-child(4){
+
+  .loading-item:nth-child(4) {
     animation: loading4 2s linear infinite;
   }
 }
@@ -425,6 +443,7 @@ export default {
     }
   }
 }
+
 .page-footer-text {
   position: fixed;
   bottom: 12px;
@@ -433,5 +452,6 @@ export default {
   color: #fafafa;
   text-align: center;
   opacity: 0;
+  font-family: var(--base-content-fontfamilly);
 }
 </style>

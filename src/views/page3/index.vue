@@ -140,7 +140,6 @@ export default {
         scrub: true,
         start: "top top",
         end: "+=2000",
-        markers:true,
         animation: gsap.timeline()
             .to(".page-3-area-1 .left-line", {
               x: '-50vw',

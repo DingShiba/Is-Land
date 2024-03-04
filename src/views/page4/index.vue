@@ -182,20 +182,25 @@ export default {
                   document.querySelector('.page-4-area-5 .content-container .base-video').play()
                 }
               })
+
               .to(".page-4-area-5 .content-container .float-video", {
                 opacity: 1,
                 delay: 8
               })
+
 
         }
       })
       const st46 = ScrollTrigger.create({
         trigger: ".page-4-area-5",
         start: 'bottom bottom',
-        end: "+=300",
+        end: "+=800",
         pin: true,
         scrub: true,
         animation: gsap.timeline()
+            .to(".public-blank",{
+              scale:5
+            })
             .to(".page-4-area-5 .zhe-zhao", {
               opacity: 1
             })
@@ -256,7 +261,7 @@ export default {
         scrub:true,
         pin:true,
         onEnter:()=>{
-          if(this.selectedNumber!=0 ||　textareaValue){
+          if(this.selectedNumber!=0 ||　this.textareaValue!=''){
             gsap.to('.page4-footer .send-btn',{
               opacity:1
             })
@@ -274,6 +279,7 @@ export default {
       let _this=this
       function handleChange() {
         _this.textareaValue=textarea.value
+
       }
       textarea.addEventListener('input', handleChange);
     },
@@ -466,8 +472,8 @@ export default {
                @mouseenter="handleEnterNum(item)">{{ item }}
           </div>
         </div>
-        <div class="send-btn">
-          发送
+        <div class="send-btn" :class="{'active':textareaValue!='' || selectedNumber!=0}">
+          <span>{{$t('page4.score.send')}}</span>
         </div>
 
 
@@ -644,7 +650,6 @@ export default {
       width: 48vw;
       margin-top: 100px;
       height: max-content;
-
       .second-describe {
         margin-top: 24px;
         text-align: right;
@@ -814,20 +819,28 @@ export default {
       }
     }
     .send-btn {
-      width: 150px;
-      height: 80px;
+      width: 120px;
+      height: 64px;
       background-color: var(--content-bkcolor);
       color: #232323;
       position: absolute;
       right: -260px;
       top: -500px;
-      line-height: 80px;
-      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       opacity: 0;
+      font-size: 1.5em;
+      font-weight: bold;
     }
+
     .send-btn:hover{
       background-image: url("./img/send-bg.png");
       background-size: 100% 100%;
+    }
+    .send-btn.active{
+      opacity: 1;
+      transition: opacity 1s ease-in-out;
     }
 
   }

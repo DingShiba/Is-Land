@@ -546,7 +546,7 @@ export default {
       </div>
     </section>
     <section class="area-3 screen">
-      <img class="base-img" src="./img/area3/Pic1.webp" alt="">
+      <img class="base-img" width="100%" src="./img/area3/Pic1.webp" alt="">
       <img v-for="item in 154" class="area3-photo-item" :src="getImage('area3/Pic'+item+'.webp')">
     </section>
     <section class="area-4">
@@ -1126,7 +1126,7 @@ export default {
       line-height: 46px;
       text-align: center;
       width: 100vw;
-      border-bottom: 2px solid #232323;
+      border-bottom: 1px solid #232323;
       font-size: 20px;
       font-family: var(--list-label-big);
     }

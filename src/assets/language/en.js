@@ -92,7 +92,7 @@ export default {
             endDescribe:"The ama represent another potential image 7of women in East Asian society—full of strength, vitality, and robust health."
         },
         area7:{
-            text:"Continue to swipe down to the next page"
+            text:"Continue scrolling to go to the next page"
         }
     },
     page2:{
