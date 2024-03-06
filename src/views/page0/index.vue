@@ -40,7 +40,7 @@ export default {
         if(!this.loading){
           clearTimeout(this.timer)
           gsap.to(window, {
-            duration: 0.5,
+            duration: 0.1,
             scrollTo: 0,
             onComplete: () => {
               this.createTTs()
@@ -571,25 +571,29 @@ export default {
         <div class="area-5-2">
           <img src="./img/area-5-2.webp" width="100%" alt="">
         </div>
-        <div class="area-5-3">
+        <div class="area-5-3" >
           <div class="move-container">
             <img class="movies-index movies-item" src="./img/area-5-movies-index.webp" alt="">
             <div class="gifs-arr">
               <video @mouseenter="handleMouseEnter"
                      @mouseleave="handleMouseLeave"
                      @click="jumpPage(1)"
+                     muted
                      class="look1-video"
                      src="./img/Look1.webm"></video>
               <video @mouseenter="handleMouseEnter"
                      @mouseleave="handleMouseLeave"
+                     muted
                      @click="jumpPage(2)"
                      class="look2-video" src="./img/Look2.webm"></video>
               <video @mouseenter="handleMouseEnter"
                      @mouseleave="handleMouseLeave"
+                     muted
                      @click="jumpPage(3)"
                      class="look4-video" src="./img/Look4.webm"></video>
               <video @mouseenter="handleMouseEnter"
                      @mouseleave="handleMouseLeave"
+                     muted
                      @click="jumpPage(4)"
                      class="look3-video" src="./img/Look3.webm"></video>
             </div>
@@ -1226,8 +1230,7 @@ export default {
           width: max-content;
 
           video {
-            height: 744px;
-
+            height: 100%;
           }
         }
 

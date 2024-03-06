@@ -32,8 +32,15 @@ export default {
     }
   },
   mounted() {
+
     this.$nextTick(() => {
-      this.initPage()
+          gsap.to(window, {
+            duration: 0.1,
+            scrollTo: 0,
+            onComplete:()=>{
+              this.initPage()
+            }
+          })
 
     })
   },
@@ -488,7 +495,6 @@ export default {
 
 
     </section>
-
   </div>
 </template>
 

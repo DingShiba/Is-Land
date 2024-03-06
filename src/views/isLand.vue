@@ -1,12 +1,13 @@
 <script>
 import gsap from 'gsap';
+import {ScrollTrigger} from 'gsap/ScrollTrigger';
 import Page0 from "@/views/page0/index.vue";
 
 import Page1 from "@/views/page1/index.vue";
 import Page2 from "@/views/page2/index.vue";
 import Page3 from "@/views/page3/index.vue";
 import Page4 from "@/views/page4/index.vue";
-
+gsap.registerPlugin(ScrollTrigger);
 export default {
   name: "isLand",
   data() {
