@@ -60,7 +60,7 @@ export default {
               opacity: 1,
             }, "<")
             .set(".page-2-area-1 .white-collose .step1-container", {
-              opacity: 0
+              display: 'none'
             }, "<")
             .fromTo('.page-2-area-1 .step2-container .even', {
               clipPath: "inset(100% 0px 0px 0px)"
@@ -90,8 +90,11 @@ export default {
             .set(".page-2-area-1 .base-img-area .forth-2", {
               opacity: 1
             }, "<")
+            .to(".public-blank", {
+              scale: 2
+            })
             .to(".page-2-area-1 .step3-container .collose-item", {
-              y: "-25vh"
+              y: -(100 / 16) * 9 / 4 + 'vw'
             })
             .set(".page-2-area-1 .base-img-area .forth", {
               opacity: 1,
@@ -129,30 +132,45 @@ export default {
               clipPath: "inset(100% 0px 0px 0px)"
             }, {
               clipPath: "inset(0px 0px 0px 0px)",
+              onComplete: () => {
+                gsap.fromTo('.page-2-area-1 .step5-container .single', {
+                  clipPath: "inset(0px 0px 0px 0px)"
+                }, {
+                  clipPath: `inset(${(100 / 16) * 9/8}vw 0px 0px 0px)`
+                })
+              }
             }, ">")
             .set(".page-2-area-1 .white-collose .step4-container", {
               opacity: 0,
             }, ">")
-            .fromTo('.page-2-area-1 .step5-container .single', {
-              clipPath: "inset(0px 0px 0px 0px)"
-            }, {
-              clipPath: "inset(100% 0px 0px 0px)"
-            })
+
             .set(".page-2-area-1 .white-collose .step5-container", {
               opacity: 1,
             }, "<")
             .set(".page-2-area-1 .base-img-area .six", {
               opacity: 1
             }, ">")
-
-            .to('.page-2-area-1 .step5-container .even', {
-              clipPath: "inset(0px 0px 100% 0px)",
+            .to(".public-blank", {
+              scale: 3
             })
             .set(".page-2-area-1 .base-img-area .seven", {
               opacity: 1
             }, "<")
-            .to('.page-2-area-1 .step5-container .collose-item', {
+            .fromTo('.page-2-area-1 .step5-container .single', {
+              clipPath: `inset(${(100 / 16) * 9/8}vw 0px 0px 0px)`
+            },{
               clipPath: "inset(0px 0px 0px 0px)",
+            })
+            .to('.page-2-area-1 .step5-container .even', {
+              clipPath: "inset(0px 0px 100% 0px)",
+            },"<")
+            .set('.page-2-area-1  .seven .even-item', {
+              opacity:1
+            },">")
+            .fromTo('.page-2-area-1 .step5-container .single', {
+              clipPath: "inset(0px 0px 0px 0px)"
+            },{
+              clipPath: `inset(0px 0px ${(100 / 16) * 9/8}vw 0px)`,
               onComplete: () => {
                 gsap.fromTo('.page-2-area-1 .step6-container .single', {
                   clipPath: "inset(0px 0px 0px 0px)"
@@ -161,6 +179,8 @@ export default {
                 })
               }
             })
+
+
             .set(".page-2-area-1 .step6-container", {
               opacity: 1
             })
@@ -194,8 +214,8 @@ export default {
             .set(".page-2-area-1 .base-img-area .ten", {
               opacity: 1
             }, "<")
-            .to(".page-2-area-1 .step5-container .even", {
-              scale: 0.8
+            .to(".public-blank", {
+              scale: 4
             })
             .fromTo(".page-2-area-1 .step7-container", {
               y: 0
@@ -364,7 +384,13 @@ export default {
           <img class="base-item forth" src="./img/area1-4.webp" alt="">
           <img class="base-item five" src="./img/area1-5.webp" alt="">
           <img class="base-item six" src="./img/area1-6.webp" alt="">
-          <img class="base-item seven" src="./img/area1-7.webp" alt="">
+          <div class="base-item seven">
+            <img v-for="item in 8"
+                 :src="getImage(`area1-7-${item}.webp`)"
+                 :class="item%2==0?'odd-item':'even-item'"
+                 alt="">
+          </div>
+          <!--          <img class="base-item seven" src="./img/area1-7.webp" alt="">-->
           <img class="base-item eight" src="./img/area1-8.webp" alt="">
           <img class="base-item nine" src="./img/area1-9.webp" alt="">
           <div class="base-item ten">
@@ -460,6 +486,7 @@ export default {
   color: #171717;
   background-color: var(--content-bkcolor);
   font-family: var(--base-content-fontfamilly);
+  --img-true-height: calc((100vw / 16) * 9);
 }
 
 .page-2-area-1 {
@@ -499,7 +526,6 @@ export default {
     .base-item {
       opacity: 0;
       width: 100%;
-
     }
 
     .second, .third, .forth, .forth-1, .forth-2, .five,
@@ -527,6 +553,24 @@ export default {
         width: 200vw;
         height: 1px;
         background-color: #171717;
+      }
+    }
+
+    .seven {
+      img {
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 3;
+        width: 100vw;
+      }
+
+      img.odd-item {
+        opacity: 1;
+      }
+
+      img.even-item {
+        opacity: 0;
       }
     }
 
@@ -581,37 +625,37 @@ export default {
       opacity: 1;
 
       .collose-item {
-        height: 50vh;
+        height: calc(var(--img-true-height) / 2);
       }
     }
 
     .step2-container {
       .collose-item {
-        height: 25vh;
+        height: calc(var(--img-true-height) / 4);
       }
     }
 
     .step3-container {
       .collose-item {
-        height: calc(100vh / 4);
+        height: calc(var(--img-true-height) / 4);
       }
     }
 
     .step4-container {
       .collose-item {
-        height: calc(100vh / 8);
+        height: calc(var(--img-true-height) / 8);
       }
     }
 
     .step5-container {
       .collose-item {
-        height: calc(100vh / 8);
+        height: calc(var(--img-true-height) / 8);
       }
     }
 
     .step6-container {
       .collose-item {
-        height: calc(100vh / 16);
+        height: calc(var(--img-true-height) / 16);
       }
     }
 

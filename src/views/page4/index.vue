@@ -357,8 +357,11 @@ export default {
       </div>
       <div class="top-area">
         <div class="text-area">
-          <div class="first-describe">{{ $t('page4.describe3') }}</div>
-          <div class="second-describe">{{ $t('page4.describe4') }}</div>
+          <div class="add-bao">
+            <div class="first-describe">{{ $t('page4.describe3') }}</div>
+            <div class="second-describe">{{ $t('page4.describe4') }}</div>
+          </div>
+
         </div>
       </div>
     </section>
@@ -650,10 +653,14 @@ export default {
       width: 48vw;
       margin-top: 100px;
       height: max-content;
-      .second-describe {
-        margin-top: 24px;
-        text-align: right;
+      .add-bao{
+        height: max-content;
+        .second-describe {
+          margin-top: 24px;
+          text-align: right;
+        }
       }
+
     }
   }
 }
