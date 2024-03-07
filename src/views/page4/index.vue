@@ -1,4 +1,6 @@
 <script>
+import axios from 'axios'
+import moment from 'moment'
 import gsap from 'gsap'
 import {ScrollTrigger} from 'gsap/ScrollTrigger';
 
@@ -281,14 +283,7 @@ export default {
         }
       })
       this.stArr.push(stSend)
-      // JavaScript部分
-      const textarea = document.getElementById("sendMessage");
-      let _this=this
-      function handleChange() {
-        _this.textareaValue=textarea.value
 
-      }
-      textarea.addEventListener('input', handleChange);
     },
     handleEnterNum(index) {
       this.hoverNumber = index
@@ -302,6 +297,23 @@ export default {
         opacity:1
       })
     },
+    handleSave(){
+      const _data={
+       content:this.textareaValue,
+        score:this.selectedNumber
+      }
+      axios.request({
+        url:"http://island.cel24.art:3000/save",
+        method:"post",
+        data:_data
+      }).then(res=>{
+        console.log("哈怂",res)
+        if(res.data.status==200){
+          this.selectedNumber=0
+          this.textareaValue=undefined
+        }
+      })
+    }
   },
   unmounted() {
     this.stArr.forEach(item => {
@@ -482,7 +494,9 @@ export default {
                @mouseenter="handleEnterNum(item)">{{ item }}
           </div>
         </div>
-        <div class="send-btn" :class="{'active':textareaValue!='' || selectedNumber!=0}">
+        <div class="send-btn"
+             @click="handleSave"
+             :class="{'active':textareaValue!='' || selectedNumber!=0}">
           <span>{{$t('page4.score.send')}}</span>
         </div>
 
@@ -490,10 +504,8 @@ export default {
       </div>
       <div class="footer-message">
         <div class="describe">{{ $t('page4.score.message') }}</div>
-        <textarea id="sendMessage" class="message-input" autofocus style="width: 800px;"/>
+        <textarea v-model="textareaValue" id="sendMessage" class="message-input" autofocus style="width: 800px;"/>
       </div>
-
-
     </section>
   </div>
 </template>
@@ -742,7 +754,9 @@ export default {
   color: #fafafa;
   background-color: #232323;
   padding-top: 200px;
-
+  h2{
+    color: #fafafa;
+  }
   .lianxi {
     padding: 80px 0px;
     text-align: center;

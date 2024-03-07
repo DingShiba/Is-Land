@@ -1,14 +1,17 @@
 import { createRouter, createWebHistory,createWebHashHistory } from 'vue-router'
 // import HomeView from '../views/isLand.vue'
 import HomeView from '../views/isLand.vue'
+import ListView from '../views/list.vue'
 const router = createRouter({
-  history: createWebHashHistory(import.meta.env.VITE_PUBLIC_PATH),
+  // history: createWebHashHistory(import.meta.env.VITE_PUBLIC_PATH),
+  history: createWebHistory(import.meta.env.VITE_PUBLIC_PATH),
   scrollBehavior(to,from,savedPosition){
-    if (savedPosition) {
+   /* if (savedPosition) {
       return savedPosition
     } else {
       return { top: 0 }
-    }
+    }*/
+    return { top: 0 }
   },
   routes: [
     {
@@ -20,6 +23,10 @@ const router = createRouter({
       path: '/index',
       name: 'index',
       component:HomeView
+    },{
+      path: '/list',
+      name: 'list',
+      component:ListView
     }
   ]
 })
