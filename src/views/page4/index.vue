@@ -864,6 +864,7 @@ export default {
     .send-btn:hover{
       background-image: url("./img/send-bg.png");
       background-size: 100% 100%;
+      cursor: pointer;
     }
     .send-btn.active{
       opacity: 1;
