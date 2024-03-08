@@ -512,7 +512,7 @@ export default {
         </div>
       </div>
       <div class="area-2-1 area-2-item">
-        <img src="./img/area-2-1.webp" width="90%" alt="">
+        <img src="./img/area-2-1.webp" width="100%" alt="">
       </div>
 
       <div class="area-2-2 area-2-item ">
