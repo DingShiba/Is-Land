@@ -303,11 +303,10 @@ export default {
         score:this.selectedNumber
       }
       axios.request({
-        url:"http://island.cel24.art:3000/save",
+        url:"/zuul/save",
         method:"post",
         data:_data
       }).then(res=>{
-        console.log("哈怂",res)
         if(res.data.status==200){
           this.selectedNumber=0
           this.textareaValue=undefined

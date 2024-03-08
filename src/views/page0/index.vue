@@ -152,20 +152,20 @@ export default {
         trigger: ".area-2",
         pin: true,
         start: "top top",
-        end: "+=2000",
+        end: "+=3000",
         scrub: true,
         animation: gsap.timeline()
             .to('.area-2-1', {
               scale: 1.2,
-              x: -100,
-              y: 100,
-              duration: 1.5
+              duration: 2
             })
             .to(".area-2 .beizhu", {
-              opacity: 1
-            })
+              opacity: 1,
+              duration: 2
+            },'<')
             .to(".area-2-2", {
-              y: '-50vh'
+              y: '-50vh',
+              duration: 2
             }, "<")
             .to(".area-2-3", {
               clipPath: "inset(0px 0px 100% 0px)"
@@ -1032,6 +1032,7 @@ export default {
       justify-content: flex-end;
       left: 0;
       top: 0;
+      transform-origin: top right;
 
       img {
         margin: auto;
@@ -1231,6 +1232,7 @@ export default {
 
           video {
             height: 100%;
+            display: block;
           }
         }
 

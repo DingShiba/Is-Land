@@ -12,7 +12,7 @@ export default {
   name: "isLand",
   data() {
     return {
-      current: -1,
+      current: 0,
       language: "zh",
       hasInit: false,
       loading: true,
@@ -31,7 +31,11 @@ export default {
     },
   },
   mounted() {
-    this.current = 0
+    this.loading = true
+    window.onload=()=>{
+      this.loading = false
+      this.setLoadingFalse()
+    }
   },
   methods: {
     listenLoading() {

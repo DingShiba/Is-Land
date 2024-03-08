@@ -10,11 +10,11 @@ export default defineConfig({
       overlay:true
     },
     proxy:{
-      '/zuul/':{
+      '/zuul':{
         target:"http://island.cel24.art:3000",
         ws:true,
         changeOrigin:true,
-        rewrite:path => path.replace(RegExp('^zuul'),'')
+        rewrite:path => path.replace(/^\/zuul/,'')
       }
     }
   },

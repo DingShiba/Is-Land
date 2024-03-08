@@ -3,6 +3,9 @@ body{
     scroll-behavior: smooth;
     line-height: 1.2;
 }
+img,video{
+    display: block;
+}
 body::-webkit-scrollbar{
     width: 0px;
 }

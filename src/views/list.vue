@@ -1,9 +1,38 @@
+<style scoped lang="less">
+.search-area {
+  padding:24px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+
+  .search-item {
+    display: flex;
+    align-items: center;
+  }
+}
+.result-area{
+  padding:0px 12px;
+}
+
+</style>
 <script>
+
 import axios from 'axios'
 import moment from "moment";
+import { Button,Space,Table,RangePicker,Input,Tooltip } from 'ant-design-vue';
+import "@/assets/css/antd.css";
+
 
 export default {
   name: "list",
+  components:{
+    ATooltip:Tooltip,
+    AInput:Input,
+    AButton:Button,
+    ASpace:Space,
+    ATable:Table,
+    ARangePicker:RangePicker
+  },
   data() {
     return {
       content: undefined,
@@ -41,8 +70,8 @@ export default {
     handleQuery() {
       this.loading = true
       axios.request({
-        url:"http://island.cel24.art:3000/leaveMessageByPage",
-        // url: "http://localhost:3000/leaveMessageByPage",
+        // url:"http://island.cel24.art:3000/leaveMessageByPage",
+        url: "/zuul/leaveMessageByPage",
         method: 'get',
         params: {
           startTime: this.rangeDate[0],
@@ -54,6 +83,7 @@ export default {
         if (res.status == 200) {
           this.dataSource = res.data.map(item => {
             item.key = item.id;
+            item.score=item.score==0?'~':item.score;
             item.createTime = moment(item.create_time).format('YYYY-MM-DD HH:mm:ss')
             return item;
           })
@@ -117,19 +147,3 @@ export default {
   </div>
 </template>
 
-<style scoped lang="less">
-.search-area {
-  padding:24px;
-  display: flex;
-  align-items: center;
-  gap: 24px;
-
-  .search-item {
-    display: flex;
-    align-items: center;
-  }
-}
-.result-area{
-  padding:0px 12px;
-}
-</style>
